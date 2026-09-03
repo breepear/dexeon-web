@@ -24,3 +24,13 @@ Replace the `href="#..."` placeholders marked `TODO-LINK` in `index.html` with t
 ---
 
 Dexeon is a fan-made project and is not affiliated with Nintendo, Game Freak, Creatures Inc., or The Pokémon Company. Card data and pricing courtesy of pokemontcg.io and TCGplayer.
+
+## App Store screenshots
+
+`assets/appstore/` holds three 1242×2688 marketing screens (iPhone 6.5" size). They are generated from the landing page's own CSS and phone mockups:
+
+```bash
+python3 marketing/build.py
+```
+
+Edit the copy or sticker positions in `marketing/build.py` and re-run to regenerate.
