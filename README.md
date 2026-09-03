@@ -27,7 +27,7 @@ Dexeon is a fan-made project and is not affiliated with Nintendo, Game Freak, Cr
 
 ## App Store screenshots
 
-`assets/appstore/` holds three 1242×2688 marketing screens (iPhone 6.5" size). They are generated from the landing page's own CSS and phone mockups:
+`assets/appstore/` holds three 1242×2688 marketing screens (iPhone 6.5" size) and `assets/appstore/ipad-13/` holds the same three at 2064×2752 (iPad 13" size). They are generated from the landing page's own CSS and phone mockups:
 
 ```bash
 python3 marketing/build.py

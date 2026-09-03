@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="light"><head><meta charset="utf-8"><title>Dexeon App Store screen</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Bangers&family=M+PLUS+Rounded+1c:wght@400;500;700;800;900&display=swap"><style>
+<html lang="en" data-theme="dark"><head><meta charset="utf-8"><title>Dexeon App Store screen</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Bangers&family=M+PLUS+Rounded+1c:wght@400;500;700;800;900&display=swap"><style>
   /* ───────────── Tokens ───────────── */
   :root{
     --paper:#F2F3EF;        /* newsprint white */
@@ -424,19 +424,22 @@
   .btile b{font-size:10px; font-weight:800; margin-top:3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
   .btile small{font-size:8.5px; font-weight:600}
 
-html,body{margin:0;width:1242px;height:2688px;overflow:hidden}
+html,body{margin:0;overflow:hidden}
 body{background:var(--paper);position:relative;font-family:var(--body)}
 .shot{position:absolute;inset:0;overflow:hidden}
 .halft{position:absolute;inset:0;background-image:radial-gradient(var(--tone) 2.4px, transparent 3px);background-size:18px 18px;opacity:.9}
-.kana-bg{position:absolute;top:-40px;left:-30px;font-size:560px;line-height:1;color:transparent;-webkit-text-stroke:4px var(--tone);opacity:.5;white-space:nowrap;letter-spacing:.02em;font-weight:900}
-.head{position:absolute;left:80px;right:80px;top:170px;text-align:center;z-index:3}
+.kana-bg{position:absolute;line-height:1;color:transparent;-webkit-text-stroke:4px var(--tone);opacity:.5;white-space:nowrap;letter-spacing:.02em;font-weight:900}
+.head{position:absolute;z-index:3}
 .head .eyebrow{font-size:34px;letter-spacing:.22em;gap:22px}
 .head .eyebrow::before{width:70px;height:8px}
-.head h1{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:196px;line-height:.9;margin:40px 0 0;transform:skewX(-6deg);text-shadow:10px 10px 0 var(--paper),18px 18px 0 var(--ink)}
+.head h1{font-family:var(--display);font-weight:400;text-transform:uppercase;line-height:.9;margin:40px 0 0;transform:skewX(-6deg);text-shadow:10px 10px 0 var(--paper),18px 18px 0 var(--ink)}
 .head h1 .red{color:var(--red)}
-.head p{font-size:46px;line-height:1.3;color:var(--ink-soft);font-weight:700;margin:56px auto 0;max-width:1000px}
-.stage{position:absolute;left:50%;transform-origin:top center;z-index:2}
-.speed{position:absolute;inset:0;pointer-events:none;background:repeating-conic-gradient(from 0deg at 50% var(--cy), var(--ink) 0deg .35deg, transparent .35deg 3deg);-webkit-mask:radial-gradient(ellipse 70% 40% at 50% var(--cy), transparent 40%, #000 62%, transparent 100%);mask:radial-gradient(ellipse 70% 40% at 50% var(--cy), transparent 40%, #000 62%, transparent 100%);opacity:.3;z-index:1}
+.head p{font-size:46px;line-height:1.3;color:var(--ink-soft);font-weight:700}
+.stage{position:absolute;z-index:2}
+.speed{position:absolute;inset:0;pointer-events:none;z-index:1;opacity:.3;
+  background:repeating-conic-gradient(from 0deg at var(--cx) var(--cy), var(--ink) 0deg .35deg, transparent .35deg 3deg);
+  -webkit-mask:radial-gradient(ellipse 70% 40% at var(--cx) var(--cy), transparent 40%, #000 62%, transparent 100%);
+          mask:radial-gradient(ellipse 70% 40% at var(--cx) var(--cy), transparent 40%, #000 62%, transparent 100%)}
 .sfx{position:absolute;z-index:4;font-size:96px;padding:18px 42px 12px;border-width:8px;box-shadow:14px 14px 0 var(--ink)}
 .stat-tag{position:absolute;left:auto;top:auto;z-index:4;background:var(--paper-2);border:8px solid var(--ink);box-shadow:14px 14px 0 var(--ink);padding:26px 38px;font-weight:900;font-size:36px;line-height:1.1}
 .stat-tag b{display:block;font-family:var(--display);font-weight:400;font-size:96px;color:var(--red)}
@@ -459,74 +462,49 @@ body{background:var(--paper);position:relative;font-family:var(--body)}
 .cd-actions .b{color:#2E5AAC;background:rgba(46,90,172,.12)}
 .cd-actions .o{color:#F08A24;background:rgba(240,138,36,.12)} .cd-actions .o.on{background:#F08A24;color:#fff}
 .cd-link{font-size:10px;font-weight:700;margin-top:2px}
-</style></head><body><div class="shot"><div class="halft"></div><div class="kana-bg" aria-hidden="true">デクセオン</div>
-  <div class="head"><span class="eyebrow">Free · No account needed</span>
-    <h1>Track all<br><span class="red">1025.</span></h1>
-    <p>Every species from Kanto to Paldea. Tap to catch, star your favorites, and pick the card that represents each one.</p></div>
-  <div class="speed" style="--cy:70%"></div>
-  <span class="sfx" style="right:60px;top:1010px;transform:rotate(8deg)">GOTCHA!</span>
-  <div class="stat-tag" style="left:60px;top:2200px;transform:rotate(-4deg)"><b>42%</b>431 of 1025 caught</div>
-  <div class="stage" style="top:900px;transform:translateX(-50%) scale(3)"><div class="phone" role="img" aria-label="Dexeon home screen showing collection progress, filters and a grid of Pokémon tiles with showcase cards">
+</style><style>html,body{width:1242px;height:2688px}
+          .kana-bg{font-size:560px;top:-40px;left:-30px}
+          .head{left:80px;right:80px;top:170px;text-align:center}
+          .head h1{font-size:196px} .head p{max-width:1000px;margin:56px auto 0}
+          .stage{left:50%;top:900px;transform:translateX(-50%) scale(3);transform-origin:top center}
+          .speed{--cx:50%;--cy:70%}</style></head><body><div class="shot"><div class="halft"></div><div class="kana-bg" aria-hidden="true">デクセオン</div><div class="head"><span class="eyebrow">Binders · 2×2 or 3×3</span><h1>Page like<br><span class="red">a binder.</span></h1><p>Real pocket pages for any card from any set. Tap to place, drag to swap, add pages as you grow.</p></div><div class="speed"></div><span class="sfx" style="right:60px;top:870px;transform:rotate(7deg)">SNAP!</span><div class="stat-tag" style="left:60px;top:2330px;transform:rotate(-4deg)"><b>3×3</b>drag &amp; drop pockets</div><div class="stage"><div class="phone" role="img" aria-label="Dexeon binder page in dark mode: a 3×3 grid of Charizard cards with one card being dragged into an empty pocket">
         <div class="island"></div>
-        <div class="screen">
+        <div class="screen dark">
           <div class="status"><span>9:41</span><span class="r">
-            <svg viewBox="0 0 14 11"><rect x="0" y="7" width="2.5" height="4" fill="#121114"/><rect x="3.8" y="5" width="2.5" height="6" fill="#121114"/><rect x="7.6" y="2.5" width="2.5" height="8.5" fill="#121114"/><rect x="11.4" y="0" width="2.5" height="11" fill="#121114"/></svg>
-            <svg viewBox="0 0 24 11"><rect x="0.5" y="0.5" width="20" height="10" rx="3" fill="none" stroke="#121114"/><rect x="2" y="2" width="16" height="7" rx="1.5" fill="#121114"/><rect x="21.5" y="3.5" width="2" height="4" rx="1" fill="#121114"/></svg>
+            <svg viewBox="0 0 14 11"><rect x="0" y="7" width="2.5" height="4" fill="#F1F0EA"/><rect x="3.8" y="5" width="2.5" height="6" fill="#F1F0EA"/><rect x="7.6" y="2.5" width="2.5" height="8.5" fill="#F1F0EA"/><rect x="11.4" y="0" width="2.5" height="11" fill="#F1F0EA"/></svg>
+            <svg viewBox="0 0 24 11"><rect x="0.5" y="0.5" width="20" height="10" rx="3" fill="none" stroke="#F1F0EA"/><rect x="2" y="2" width="16" height="7" rx="1.5" fill="#F1F0EA"/><rect x="21.5" y="3.5" width="2" height="4" rx="1" fill="#F1F0EA"/></svg>
           </span></div>
-
-          <div class="hdr">
-            <div class="prog surface"><b>42%</b><span class="bar"><i></i></span><small class="sec">431/1025</small></div>
-            <div class="circ surface" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg>
-              <span class="badge">7</span>
-            </div>
-            <div class="avatar"><img src="../assets/icon.png" alt=""></div>
+          <div class="navbar">
+            <span class="acc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>Account</span>
+            <span class="t">Charizard Collection</span>
+            <span class="acc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="7.5" cy="12" r="1.2" fill="currentColor"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/><circle cx="16.5" cy="12" r="1.2" fill="currentColor"/></svg></span>
           </div>
-
-          <div class="fbar" aria-hidden="true">
-            <span class="fchip"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/><rect x="13" y="13" width="8" height="8" rx="2"/></svg>All<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M5 9l7 7 7-7"/></svg></span>
-            <span class="fchip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z M9 4v14 M15 6v14"/></svg>Gen<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M5 9l7 7 7-7"/></svg></span>
-            <span class="sp"></span>
-            <span class="ficon"><svg viewBox="0 0 24 24" fill="#121114"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></span>
-            <span class="seg"><span class="on"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/><rect x="13" y="13" width="8" height="8" rx="2"/></svg></span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><path d="M8 6h13M8 12h13M8 18h13M3.5 6h.01M3.5 12h.01M3.5 18h.01"/></svg></span></span>
-          </div>
-
-          <div class="grid2">
-            <div class="tile">
-              <div class="card-img"><img src="../assets/cards/sv7-143.jpg" alt=""><span class="dex">#0001</span><svg class="fav" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.6 7 .9-5.2 4.9 1.4 7.1L12 18l-6.2 3.5 1.4-7.1L2 9.5l7-.9z"/></svg><span class="caught yes"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M7.5 12.5l3 3 6-6.5" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
-              <span class="name">Bulbasaur</span>
+          <div class="pad">
+            <div class="plabel sec">Page 1</div>
+            <div class="page surface">
+              <div class="slots">
+                <div class="slot"><img src="../assets/cards/base1-4.jpg" alt=""></div>
+                <div class="slot"><img src="../assets/cards/sv3pt5-199.jpg" alt=""></div>
+                <div class="slot"><img src="../assets/cards/swsh45sv-SV107.jpg" alt=""></div>
+                <div class="slot"><img src="../assets/cards/xy12-11.jpg" alt=""></div>
+                <div class="slot"><img src="../assets/cards/sv3-223.jpg" alt=""></div>
+                <div class="slot"><img src="../assets/cards/sv3pt5-6.jpg" alt=""></div>
+                <div class="slot empty target"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></div>
+                <div class="slot drag"><img src="../assets/cards/base1-46.jpg" alt=""></div>
+                <div class="slot empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></div>
+              </div>
             </div>
-            <div class="tile">
-              <div class="card-img art" style="background:rgba(229,108,63,.14)"><img src="../assets/art/4.png" alt=""><span class="dex">#0004</span><span class="caught"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="2"/></svg></span></div>
-              <span class="name">Charmander</span>
+            <div class="plabel sec" style="margin-top:18px">Page 2</div>
+            <div class="page surface">
+              <div class="slots">
+                <div class="slot"><img src="../assets/cards/base1-44.jpg" alt=""></div>
+                <div class="slot"><img src="../assets/cards/base1-63.jpg" alt=""></div>
+                <div class="slot empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></div>
+              </div>
             </div>
-            <div class="tile">
-              <div class="card-img"><img src="../assets/cards/sv3pt5-199.jpg" alt=""><span class="dex">#0006</span><svg class="fav" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.6 7 .9-5.2 4.9 1.4 7.1L12 18l-6.2 3.5 1.4-7.1L2 9.5l7-.9z"/></svg><span class="caught yes"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M7.5 12.5l3 3 6-6.5" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
-              <span class="name">Charizard</span>
-            </div>
-            <div class="tile">
-              <div class="card-img"><img src="../assets/cards/sv8-238.jpg" alt=""><span class="dex">#0025</span><span class="caught yes"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M7.5 12.5l3 3 6-6.5" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
-              <span class="name">Pikachu</span>
-            </div>
-            <div class="tile">
-              <div class="card-img gray"><img src="../assets/cards/sv3pt5-150.jpg" alt=""><span class="dex">#0150</span><span class="caught"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="2"/></svg></span></div>
-              <span class="name">Mewtwo</span>
-            </div>
-            <div class="tile">
-              <div class="card-img"><img src="../assets/cards/sv4pt5-232.jpg" alt=""><span class="dex">#0151</span><span class="caught yes"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M7.5 12.5l3 3 6-6.5" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
-              <span class="name">Mew</span>
-            </div>
-            <div class="tile">
-              <div class="card-img art" style="background:rgba(81,133,197,.14)"><img src="../assets/art/7.png" alt=""><span class="dex">#0007</span><span class="caught"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="2"/></svg></span></div>
-              <span class="name">Squirtle</span>
-            </div>
-            <div class="tile">
-              <div class="card-img art" style="background:rgba(148,148,149,.14)"><img src="../assets/art/133.png" alt=""><span class="dex">#0133</span><span class="caught"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="2"/></svg></span></div>
-              <span class="name">Eevee</span>
-            </div>
+            <div class="addpage"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Add Page</div>
           </div>
           <div class="fade"></div>
-          <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>Search name or number</div>
           <div class="home-bar"></div>
         </div>
       </div></div></div></body></html>
