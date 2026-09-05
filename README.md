@@ -34,3 +34,5 @@ python3 marketing/build.py
 ```
 
 Edit the copy or sticker positions in `marketing/build.py` and re-run to regenerate.
+
+The same script also renders the social share image `assets/og.png` (1200×630) used by the Open Graph and Twitter card tags in `index.html`. Favicons (`assets/favicon.png`, `assets/favicon-32.png`, `assets/apple-touch-icon.png`) are downscaled from the app icon.

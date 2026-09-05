@@ -202,3 +202,40 @@ try:
             print('rendered', sname, name)
 finally:
     srv.terminate()
+
+# ── Social share image (Open Graph / Twitter card), 1200 x 630 ──────────────
+OG_CSS = '''
+html,body{width:1200px;height:630px}
+.kana-bg{font-size:360px;top:-30px;left:-20px;-webkit-text-stroke:2.5px var(--tone)}
+.brand{position:absolute;left:72px;top:54px;z-index:3;display:flex;align-items:center;gap:16px}
+.brand img{width:60px;height:60px;border-radius:15px;border:3px solid var(--ink)}
+.brand b{font-family:var(--display);font-weight:400;font-size:46px;letter-spacing:.02em;line-height:1;display:block}
+.brand small{display:block;font-size:14px;font-weight:900;letter-spacing:.3em;color:var(--red);line-height:1;margin-top:4px}
+.head{left:72px;top:176px;width:680px;text-align:left}
+.head .eyebrow{font-size:20px;letter-spacing:.2em;gap:14px} .head .eyebrow::before{width:44px;height:5px}
+.head h1{font-size:80px;margin-top:24px;text-shadow:5px 5px 0 var(--paper),9px 9px 0 var(--ink)}
+.head p{font-size:26px;line-height:1.35;margin:30px 0 0;max-width:600px}
+.stage{left:745px;top:64px;transform:scale(1.5);transform-origin:top left}
+.speed{--cx:83%;--cy:62%;opacity:.28}
+.sfx{font-size:46px;padding:10px 22px 6px;border-width:5px;box-shadow:8px 8px 0 var(--ink)}
+'''
+og_body = (
+    '<div class="shot"><div class="halft"></div><div class="kana-bg" aria-hidden="true">デクセオン</div>'
+    '<div class="brand"><img src="../assets/icon.png" alt=""><span><b>DEXEON</b><small>デクセオン</small></span></div>'
+    '<div class="head"><span class="eyebrow">Free on iPhone</span>'
+    '<h1>Track all 1025.<br><span class="red">Sleeve every card.</span></h1>'
+    '<p>A free Pokédex, card and binder tracker with live market prices. No account needed.</p></div>'
+    '<div class="speed"></div>'
+    '<span class="sfx" style="right:44px;top:40px;transform:rotate(7deg)">GOTCHA!</span>'
+    f'<div class="stage">{home}</div></div>')
+open('marketing/og.html', 'w').write(
+    f'<!doctype html>\n<html lang="en" data-theme="light"><head>{HEAD}<style>{OG_CSS}</style></head><body>{og_body}</body></html>')
+srv = subprocess.Popen([sys.executable, '-m', 'http.server', '8765'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+time.sleep(1)
+try:
+    subprocess.run([CHROME, '--headless=new', '--disable-gpu', '--hide-scrollbars', '--force-device-scale-factor=1',
+                    '--window-size=1200,630', '--virtual-time-budget=8000', '--screenshot=assets/og.png',
+                    'http://localhost:8765/marketing/og.html'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    print('rendered og 1200x630 -> assets/og.png')
+finally:
+    srv.terminate()

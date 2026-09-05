@@ -1,37 +1,5 @@
-<!--
-  Dexeon landing page
-  ───────────────────
-  Single-file page. Images live in ./assets (real card art from pokemontcg.io and
-  official artwork from PokeAPI). Before shipping, replace the two placeholder
-  hrefs marked TODO-LINK with the App Store URL.
--->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dexeon</title>
-<meta name="description" content="Dexeon is a free Pokédex and Pokémon TCG collection tracker for iPhone. Track all 1025 species, every card printing with live prices, and build digital binders.">
-<!-- TODO-LINK: replace the site URL below with the final deployed domain (absolute URLs are required for share previews) -->
-<link rel="canonical" href="https://breepear.github.io/dexeon-web/">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Dexeon">
-<meta property="og:title" content="Dexeon — Track all 1025. Sleeve every card.">
-<meta property="og:description" content="A free Pokédex, card and binder tracker for iPhone with live market prices. No account needed.">
-<meta property="og:url" content="https://breepear.github.io/dexeon-web/">
-<meta property="og:image" content="https://breepear.github.io/dexeon-web/assets/og.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Dexeon: a manga-styled poster with the app's Pokédex grid on an iPhone">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Dexeon — Track all 1025. Sleeve every card.">
-<meta name="twitter:description" content="A free Pokédex, card and binder tracker for iPhone with live market prices. No account needed.">
-<meta name="twitter:image" content="https://breepear.github.io/dexeon-web/assets/og.png">
-<link rel="icon" type="image/png" sizes="64x64" href="assets/favicon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
-<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
-<meta name="theme-color" content="#C8322E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Bangers&family=M+PLUS+Rounded+1c:wght@400;500;700;800;900&display=swap">
-<style>
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><title>Dexeon App Store screen</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Bangers&family=M+PLUS+Rounded+1c:wght@400;500;700;800;900&display=swap"><style>
   /* ───────────── Tokens ───────────── */
   :root{
     --paper:#F2F3EF;        /* newsprint white */
@@ -455,61 +423,60 @@
   .thumb i img{width:100%; height:100%; object-fit:cover}
   .btile b{font-size:10px; font-weight:800; margin-top:3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
   .btile small{font-size:8.5px; font-weight:600}
-</style>
 
-<!-- ───────────── NAV ───────────── -->
-<header class="nav">
-  <div class="wrap">
-    <a class="logo" href="#top" aria-label="Dexeon home">
-      <img src="assets/icon.png" alt="" width="38" height="38">
-      <span><b>DEXEON</b><small>デクセオン</small></span>
-    </a>
-    <nav aria-label="Sections">
-      <a href="#features">Features</a>
-      <a href="#binders">Binders</a>
-      <a href="#sync">Sync</a>
-      <a href="#about">About</a>
-    </nav>
-    <!-- TODO-LINK: App Store URL -->
-    <a class="btn" href="#get">Get it free</a>
-  </div>
-</header>
-
-<!-- ───────────── HERO ───────────── -->
-<section class="hero tone" id="top">
-  <div class="kana-bg kana" aria-hidden="true">デクセオン</div>
-  <div class="wrap">
-    <div class="hero-copy">
-      <span class="eyebrow">Free on iPhone</span>
-      <h1 class="display">
-        <span class="line">Track all</span>
-        <span class="line red">1025.</span>
-        <span class="line">Sleeve every card.</span>
-      </h1>
-      <p class="lede">Dexeon is a free Pokédex and card tracker for Pokémon TCG collectors. Mark what you've caught across nine generations, browse every printing of every Pokémon with live market prices, and file your favorites in digital binders that page like the real thing.</p>
-      <div class="cta">
-        <!-- TODO-LINK: App Store URL -->
-        <a class="btn" href="#get">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13M6 10l6 6 6-6M4 21h16"/></svg>
-          Get Dexeon
-        </a>
-        <a class="btn ghost" href="#features">See what's inside</a>
-      </div>
-      <div class="meta">
-        <span><i></i>No account required</span>
-        <span><i></i>No ads, no paywall</span>
-        <span><i></i>Works offline</span>
-      </div>
-    </div>
-
-    <div class="hero-stage">
-      <div class="speed" aria-hidden="true"></div>
-      <span class="sfx hero-sfx" aria-hidden="true">GOTCHA!</span>
-      <span class="sfx y hero-sfx2" aria-hidden="true">ドン!</span>
-      <div class="stat-tag" aria-hidden="true"><b>1025</b>species · Gen I–IX</div>
-
-      <!-- ───── Mockup 1: Home / Pokédex (light) ───── -->
-      <div class="phone" id="heroPhone" role="img" aria-label="Dexeon home screen showing collection progress, filters and a grid of Pokémon tiles with showcase cards">
+html,body{margin:0;overflow:hidden}
+body{background:var(--paper);position:relative;font-family:var(--body)}
+.shot{position:absolute;inset:0;overflow:hidden}
+.halft{position:absolute;inset:0;background-image:radial-gradient(var(--tone) 2.4px, transparent 3px);background-size:18px 18px;opacity:.9}
+.kana-bg{position:absolute;line-height:1;color:transparent;-webkit-text-stroke:4px var(--tone);opacity:.5;white-space:nowrap;letter-spacing:.02em;font-weight:900}
+.head{position:absolute;z-index:3}
+.head .eyebrow{font-size:34px;letter-spacing:.22em;gap:22px}
+.head .eyebrow::before{width:70px;height:8px}
+.head h1{font-family:var(--display);font-weight:400;text-transform:uppercase;line-height:.9;margin:40px 0 0;transform:skewX(-6deg);text-shadow:10px 10px 0 var(--paper),18px 18px 0 var(--ink)}
+.head h1 .red{color:var(--red)}
+.head p{font-size:46px;line-height:1.3;color:var(--ink-soft);font-weight:700}
+.stage{position:absolute;z-index:2}
+.speed{position:absolute;inset:0;pointer-events:none;z-index:1;opacity:.3;
+  background:repeating-conic-gradient(from 0deg at var(--cx) var(--cy), var(--ink) 0deg .35deg, transparent .35deg 3deg);
+  -webkit-mask:radial-gradient(ellipse 70% 40% at var(--cx) var(--cy), transparent 40%, #000 62%, transparent 100%);
+          mask:radial-gradient(ellipse 70% 40% at var(--cx) var(--cy), transparent 40%, #000 62%, transparent 100%)}
+.sfx{position:absolute;z-index:4;font-size:96px;padding:18px 42px 12px;border-width:8px;box-shadow:14px 14px 0 var(--ink)}
+.stat-tag{position:absolute;left:auto;top:auto;z-index:4;background:var(--paper-2);border:8px solid var(--ink);box-shadow:14px 14px 0 var(--ink);padding:26px 38px;font-weight:900;font-size:36px;line-height:1.1}
+.stat-tag b{display:block;font-family:var(--display);font-weight:400;font-size:96px;color:var(--red)}
+.phone{box-shadow:0 14px 30px -10px rgba(0,0,0,.5),0 0 0 2px #2b2b30 inset,0 0 0 3px #121114}
+.cd{display:flex;flex-direction:column;align-items:center;gap:9px}
+.cd-img{width:176px;border-radius:13px;overflow:hidden;box-shadow:0 12px 22px rgba(0,0,0,.25)}
+.cd-title{text-align:center}
+.cd-title b{font-size:12px;font-weight:800;display:block}
+.cd-tags{display:flex;gap:5px;justify-content:center;margin-top:4px}
+.cd-tags span{font-size:8.5px;font-weight:700;color:#6e6e73;background:rgba(0,0,0,.06);padding:2px 8px;border-radius:99px}
+.cd-price{width:100%;border-radius:15px;padding:10px 12px;text-align:center}
+.cd-price small{font-size:8.5px;font-weight:700;display:block}
+.cd-big{font-size:26px;font-weight:900;color:#34C759;line-height:1.1;font-variant-numeric:tabular-nums}
+.cd-row{display:flex;justify-content:space-around;margin-top:8px}
+.cd-row b{display:block;font-size:11px;font-weight:800;font-variant-numeric:tabular-nums}
+.cd-actions{display:flex;gap:7px;width:100%}
+.cd-actions span{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:8.5px;font-weight:800;padding:8px 2px;border-radius:9px}
+.cd-actions svg{width:15px;height:15px}
+.cd-actions .g{color:#34C759;background:rgba(52,199,89,.12)} .cd-actions .g.on{background:#34C759;color:#fff}
+.cd-actions .b{color:#2E5AAC;background:rgba(46,90,172,.12)}
+.cd-actions .o{color:#F08A24;background:rgba(240,138,36,.12)} .cd-actions .o.on{background:#F08A24;color:#fff}
+.cd-link{font-size:10px;font-weight:700;margin-top:2px}
+</style><style>
+html,body{width:1200px;height:630px}
+.kana-bg{font-size:360px;top:-30px;left:-20px;-webkit-text-stroke:2.5px var(--tone)}
+.brand{position:absolute;left:72px;top:54px;z-index:3;display:flex;align-items:center;gap:16px}
+.brand img{width:60px;height:60px;border-radius:15px;border:3px solid var(--ink)}
+.brand b{font-family:var(--display);font-weight:400;font-size:46px;letter-spacing:.02em;line-height:1;display:block}
+.brand small{display:block;font-size:14px;font-weight:900;letter-spacing:.3em;color:var(--red);line-height:1;margin-top:4px}
+.head{left:72px;top:176px;width:680px;text-align:left}
+.head .eyebrow{font-size:20px;letter-spacing:.2em;gap:14px} .head .eyebrow::before{width:44px;height:5px}
+.head h1{font-size:80px;margin-top:24px;text-shadow:5px 5px 0 var(--paper),9px 9px 0 var(--ink)}
+.head p{font-size:26px;line-height:1.35;margin:30px 0 0;max-width:600px}
+.stage{left:745px;top:64px;transform:scale(1.5);transform-origin:top left}
+.speed{--cx:83%;--cy:62%;opacity:.28}
+.sfx{font-size:46px;padding:10px 22px 6px;border-width:5px;box-shadow:8px 8px 0 var(--ink)}
+</style></head><body><div class="shot"><div class="halft"></div><div class="kana-bg" aria-hidden="true">デクセオン</div><div class="brand"><img src="../assets/icon.png" alt=""><span><b>DEXEON</b><small>デクセオン</small></span></div><div class="head"><span class="eyebrow">Free on iPhone</span><h1>Track all 1025.<br><span class="red">Sleeve every card.</span></h1><p>A free Pokédex, card and binder tracker with live market prices. No account needed.</p></div><div class="speed"></div><span class="sfx" style="right:44px;top:40px;transform:rotate(7deg)">GOTCHA!</span><div class="stage"><div class="phone" role="img" aria-label="Dexeon home screen showing collection progress, filters and a grid of Pokémon tiles with showcase cards">
         <div class="island"></div>
         <div class="screen">
           <div class="status"><span>9:41</span><span class="r">
@@ -523,7 +490,7 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg>
               <span class="badge">7</span>
             </div>
-            <div class="avatar"><img src="assets/icon.png" alt=""></div>
+            <div class="avatar"><img src="../assets/icon.png" alt=""></div>
           </div>
 
           <div class="fbar" aria-hidden="true">
@@ -536,35 +503,35 @@
 
           <div class="grid2">
             <div class="tile">
-              <div class="card-img"><img src="assets/cards/sv7-143.jpg" alt=""><span class="dex">#0001</span><svg class="fav" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.6 7 .9-5.2 4.9 1.4 7.1L12 18l-6.2 3.5 1.4-7.1L2 9.5l7-.9z"/></svg><span class="caught yes"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M7.5 12.5l3 3 6-6.5" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+              <div class="card-img"><img src="../assets/cards/sv7-143.jpg" alt=""><span class="dex">#0001</span><svg class="fav" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.6 7 .9-5.2 4.9 1.4 7.1L12 18l-6.2 3.5 1.4-7.1L2 9.5l7-.9z"/></svg><span class="caught yes"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M7.5 12.5l3 3 6-6.5" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
               <span class="name">Bulbasaur</span>
             </div>
             <div class="tile">
-              <div class="card-img art" style="background:rgba(229,108,63,.14)"><img src="assets/art/4.png" alt=""><span class="dex">#0004</span><span class="caught"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="2"/></svg></span></div>
+              <div class="card-img art" style="background:rgba(229,108,63,.14)"><img src="../assets/art/4.png" alt=""><span class="dex">#0004</span><span class="caught"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="2"/></svg></span></div>
               <span class="name">Charmander</span>
             </div>
             <div class="tile">
-              <div class="card-img"><img src="assets/cards/sv3pt5-199.jpg" alt=""><span class="dex">#0006</span><svg class="fav" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.6 7 .9-5.2 4.9 1.4 7.1L12 18l-6.2 3.5 1.4-7.1L2 9.5l7-.9z"/></svg><span class="caught yes"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M7.5 12.5l3 3 6-6.5" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+              <div class="card-img"><img src="../assets/cards/sv3pt5-199.jpg" alt=""><span class="dex">#0006</span><svg class="fav" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.6 7 .9-5.2 4.9 1.4 7.1L12 18l-6.2 3.5 1.4-7.1L2 9.5l7-.9z"/></svg><span class="caught yes"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M7.5 12.5l3 3 6-6.5" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
               <span class="name">Charizard</span>
             </div>
             <div class="tile">
-              <div class="card-img"><img src="assets/cards/sv8-238.jpg" alt=""><span class="dex">#0025</span><span class="caught yes"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M7.5 12.5l3 3 6-6.5" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+              <div class="card-img"><img src="../assets/cards/sv8-238.jpg" alt=""><span class="dex">#0025</span><span class="caught yes"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M7.5 12.5l3 3 6-6.5" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
               <span class="name">Pikachu</span>
             </div>
             <div class="tile">
-              <div class="card-img gray"><img src="assets/cards/sv3pt5-150.jpg" alt=""><span class="dex">#0150</span><span class="caught"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="2"/></svg></span></div>
+              <div class="card-img gray"><img src="../assets/cards/sv3pt5-150.jpg" alt=""><span class="dex">#0150</span><span class="caught"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="2"/></svg></span></div>
               <span class="name">Mewtwo</span>
             </div>
             <div class="tile">
-              <div class="card-img"><img src="assets/cards/sv4pt5-232.jpg" alt=""><span class="dex">#0151</span><span class="caught yes"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M7.5 12.5l3 3 6-6.5" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+              <div class="card-img"><img src="../assets/cards/sv4pt5-232.jpg" alt=""><span class="dex">#0151</span><span class="caught yes"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M7.5 12.5l3 3 6-6.5" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
               <span class="name">Mew</span>
             </div>
             <div class="tile">
-              <div class="card-img art" style="background:rgba(81,133,197,.14)"><img src="assets/art/7.png" alt=""><span class="dex">#0007</span><span class="caught"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="2"/></svg></span></div>
+              <div class="card-img art" style="background:rgba(81,133,197,.14)"><img src="../assets/art/7.png" alt=""><span class="dex">#0007</span><span class="caught"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="2"/></svg></span></div>
               <span class="name">Squirtle</span>
             </div>
             <div class="tile">
-              <div class="card-img art" style="background:rgba(148,148,149,.14)"><img src="assets/art/133.png" alt=""><span class="dex">#0133</span><span class="caught"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="2"/></svg></span></div>
+              <div class="card-img art" style="background:rgba(148,148,149,.14)"><img src="../assets/art/133.png" alt=""><span class="dex">#0133</span><span class="caught"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="2"/></svg></span></div>
               <span class="name">Eevee</span>
             </div>
           </div>
@@ -572,297 +539,4 @@
           <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>Search name or number</div>
           <div class="home-bar"></div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ───────────── TICKER ───────────── -->
-<div class="ticker" aria-hidden="true">
-  <div class="track">
-    <span>1025 species</span><span>9 generations</span><span>Every TCG printing</span><span>Live market prices</span><span>2×2 &amp; 3×3 binders</span><span>Chase list</span><span>No account needed</span><span>Free forever</span>
-    <span>1025 species</span><span>9 generations</span><span>Every TCG printing</span><span>Live market prices</span><span>2×2 &amp; 3×3 binders</span><span>Chase list</span><span>No account needed</span><span>Free forever</span>
-  </div>
-</div>
-
-<!-- ───────────── FEATURES ───────────── -->
-<section class="block" id="features">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="rv">
-        <span class="eyebrow">The kit</span>
-        <h2 class="display">A Pokédex that knows your cards.</h2>
-      </div>
-      <p class="lede rv d1">Most trackers stop at "caught." Dexeon goes to the card level: every printing, its price, and the one you want to show off, all wired back to the species grid.</p>
-    </div>
-
-    <div class="feat">
-      <article class="panel f-dex rv">
-        <span class="tag kana">図鑑 · Pokédex</span>
-        <h3>Catch 'em all, literally.</h3>
-        <p>All 1025 species from Kanto to Paldea in one grid. Tap the circle to mark a Pokémon caught, star your favorites, and watch the completion bar climb. Filter by status or generation, search by name or number, switch between thumbnails and a compact list.</p>
-        <div class="ui-progress" aria-hidden="true"><b>42%</b><span class="bar"><i></i></span><small>431/1025</small></div>
-        <div class="chips" aria-hidden="true">
-          <span class="chip on">Caught</span><span class="chip">Uncaught</span><span class="chip">Favorite</span><span class="chip">Chasing</span><span class="chip">Gen I</span><span class="chip">Gen IX</span>
-        </div>
-      </article>
-
-      <article class="panel f-cards rv d1">
-        <span class="tag">Every printing</span>
-        <h3>Open a Pokémon, get every card.</h3>
-        <p>Each species page lists every card ever printed for it, newest set first, pulled from the pokemontcg.io database. Search by set, rarity or card number, or flip on "Collected only" to see just what you own.</p>
-        <div class="mini-cards" aria-hidden="true">
-          <img src="assets/cards/base1-4.jpg" alt=""><img src="assets/cards/xy12-11.jpg" alt=""><img src="assets/cards/sv3-223.jpg" alt=""><img src="assets/cards/swsh45sv-SV107.jpg" alt="">
-        </div>
-      </article>
-
-      <article class="panel f-price rv d2">
-        <span class="tag">Prices</span>
-        <h3>Know what it's worth.</h3>
-        <p>Every card carries TCGplayer market pricing with low, mid and high, refreshed daily and cached so it loads instantly on the second look.</p>
-        <div class="price-mock" aria-hidden="true">
-          <img src="assets/cards/sv3pt5-199.jpg" alt="">
-          <div>
-            <div class="lbl">Market price</div>
-            <div class="big">$178.43</div>
-            <div class="lbl" style="margin-top:4px">Holofoil · TCGplayer</div>
-            <div class="row"><span><small>Low</small>$150.00</span><span><small>Mid</small>$180.00</span><span><small>High</small>$349.99</span></div>
-          </div>
-        </div>
-        <div class="actions" aria-hidden="true"><span class="c">✓ Collected</span><span class="h">◎ Chase</span><span class="s">★ Showcase</span></div>
-      </article>
-
-      <article class="panel f-chase rv d1">
-        <span class="tag">Chase list</span>
-        <h3>Hunt with a target.</h3>
-        <p>Tap Chase on any card you're after. Your chase board totals the estimated value of the hunt, and chased Pokémon show up in grey on the home grid until you land them. Collect the card and the chase completes itself.</p>
-      </article>
-
-      <article class="panel f-show rv d2">
-        <span class="tag">Showcase</span>
-        <h3>Pick the face of each Pokémon.</h3>
-        <p>Mark one collected card as the showcase and it becomes that species' tile on your home grid. Your Pokédex slowly turns into a wall of the exact cards you own.</p>
-      </article>
-
-      <article class="panel f-fast rv d2">
-        <span class="tag">Offline</span>
-        <h3>Fast on the train.</h3>
-        <p>Collected and showcased card art is stored on your device permanently. The rest is cached generously, so scrolling all 1025 tiles stays smooth and revisits are instant.</p>
-      </article>
-
-      <article class="panel f-theme rv d3">
-        <span class="tag">Appearance</span>
-        <h3>Day and night.</h3>
-        <p>Light and dark modes, thumbnails or list, one tap from the filter bar. Built natively for iPhone.</p>
-        <div class="swatch-row" aria-hidden="true"><span class="swatch l"><i style="background:#AC322F"></i>Light</span><span class="swatch d"><i style="background:#E0463F"></i>Dark</span></div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ───────────── BINDERS ───────────── -->
-<section class="night" id="binders">
-  <div class="tone-bg" aria-hidden="true"></div>
-  <div class="wrap">
-    <div class="rv">
-      <span class="eyebrow">Binders</span>
-      <h2 class="display" style="font-size:clamp(46px,5.8vw,88px); margin-top:14px; transform:skewX(-6deg)">Binders that page like binders.</h2>
-      <p class="lede" style="margin-top:22px">Build as many as you like. Each page is a real 2×2 or 3×3 sheet of pockets, so what you lay out on screen matches what sits on your shelf. Any card from any set can go in a pocket, whether you own it yet or not.</p>
-      <ol class="steps">
-        <li><b>Name it and pick a layout.</b><span>"Charizard Collection," 3×3. Or 2×2 for oversized full arts.</span></li>
-        <li><b>Tap an empty pocket, search any card.</b><span>Type a name, tap the printing you want. It's placed and saved instantly.</span></li>
-        <li><b>Drag to rearrange, add pages as you go.</b><span>Drop a card on another pocket to swap them. Tap a filled pocket to open it with live pricing.</span></li>
-      </ol>
-    </div>
-
-    <div class="binder-stage rv d1">
-      <span class="sfx" aria-hidden="true">SNAP!</span>
-
-      <!-- ───── Mockup 2: Account sheet with the binders gallery (light) ───── -->
-      <div class="phone back" role="img" aria-label="Dexeon account screen listing four binders with page thumbnails">
-        <div class="island"></div>
-        <div class="screen">
-          <div class="status"><span>9:41</span><span class="r">
-            <svg viewBox="0 0 14 11"><rect x="0" y="7" width="2.5" height="4" fill="#121114"/><rect x="3.8" y="5" width="2.5" height="6" fill="#121114"/><rect x="7.6" y="2.5" width="2.5" height="8.5" fill="#121114"/><rect x="11.4" y="0" width="2.5" height="11" fill="#121114"/></svg>
-            <svg viewBox="0 0 24 11"><rect x="0.5" y="0.5" width="20" height="10" rx="3" fill="none" stroke="#121114"/><rect x="2" y="2" width="16" height="7" rx="1.5" fill="#121114"/><rect x="21.5" y="3.5" width="2" height="4" rx="1" fill="#121114"/></svg>
-          </span></div>
-          <div class="navbar"><span></span><span class="t">Account</span><span class="acc">Done</span></div>
-          <div class="acct">
-            <div class="avatar"><img src="assets/icon.png" alt=""><span class="pencil"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 17.3V21h3.7L17.8 9.9l-3.7-3.7L3 17.3zM20.7 7a1 1 0 0 0 0-1.4l-2.3-2.3a1 1 0 0 0-1.4 0l-1.8 1.8 3.7 3.7L20.7 7z"/></svg></span></div>
-            <b>Bree</b><small class="sec">Tap to change photo</small>
-          </div>
-          <div class="row-card surface">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 18a4.5 4.5 0 0 1-.6-9 6 6 0 0 1 11.6 1.5A3.8 3.8 0 0 1 18 18H7z"/><path d="M9 13l2.2 2.2L15.5 11"/></svg>
-            <div><b>Sync</b><small class="sec">Up to date</small></div>
-          </div>
-          <div class="bhead"><b>Binders</b><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><path d="M12 4v16M4 12h16"/></svg>New</span></div>
-          <div class="btiles">
-            <div class="btile surface">
-              <div class="thumb g3">
-                <i><img src="assets/cards/base1-4.jpg" alt=""></i><i><img src="assets/cards/sv3pt5-199.jpg" alt=""></i><i><img src="assets/cards/swsh45sv-SV107.jpg" alt=""></i>
-                <i><img src="assets/cards/xy12-11.jpg" alt=""></i><i><img src="assets/cards/sv3-223.jpg" alt=""></i><i><img src="assets/cards/sv3pt5-6.jpg" alt=""></i>
-                <i><img src="assets/cards/base1-46.jpg" alt=""></i><i></i><i></i>
-              </div>
-              <b>Charizard Collection</b><small class="sec">3×3 · 7 cards</small>
-            </div>
-            <div class="btile surface">
-              <div class="thumb g2">
-                <i><img src="assets/cards/base2-12.jpg" alt=""></i><i><img src="assets/cards/base2-4.jpg" alt=""></i>
-                <i><img src="assets/cards/base2-3.jpg" alt=""></i><i></i>
-              </div>
-              <b>Eeveelutions</b><small class="sec">2×2 · 3 cards</small>
-            </div>
-            <div class="btile surface">
-              <div class="thumb g3">
-                <i><img src="assets/cards/base1-2.jpg" alt=""></i><i><img src="assets/cards/base1-15.jpg" alt=""></i><i><img src="assets/cards/base1-10.jpg" alt=""></i>
-                <i><img src="assets/cards/base1-58.jpg" alt=""></i><i><img src="assets/cards/base1-16.jpg" alt=""></i><i><img src="assets/cards/base3-4.jpg" alt=""></i>
-                <i><img src="assets/cards/neo1-9.jpg" alt=""></i><i><img src="assets/cards/base3-12.jpg" alt=""></i><i><img src="assets/cards/base3-2.jpg" alt=""></i>
-              </div>
-              <b>Vintage WOTC</b><small class="sec">3×3 · 9 cards</small>
-            </div>
-            <div class="btile surface">
-              <div class="thumb g2">
-                <i><img src="assets/cards/sv6-207.jpg" alt=""></i><i><img src="assets/cards/sv1-245.jpg" alt=""></i>
-                <i><img src="assets/cards/sv4pt5-232.jpg" alt=""></i><i></i>
-              </div>
-              <b>Full Arts</b><small class="sec">2×2 · 3 cards</small>
-            </div>
-          </div>
-          <div class="fade"></div>
-          <div class="home-bar"></div>
-        </div>
-      </div>
-
-      <!-- ───── Mockup 3: Binder detail, mid-drag (dark) ───── -->
-      <div class="phone front" role="img" aria-label="Dexeon binder page in dark mode: a 3×3 grid of Charizard cards with one card being dragged into an empty pocket">
-        <div class="island"></div>
-        <div class="screen dark">
-          <div class="status"><span>9:41</span><span class="r">
-            <svg viewBox="0 0 14 11"><rect x="0" y="7" width="2.5" height="4" fill="#F1F0EA"/><rect x="3.8" y="5" width="2.5" height="6" fill="#F1F0EA"/><rect x="7.6" y="2.5" width="2.5" height="8.5" fill="#F1F0EA"/><rect x="11.4" y="0" width="2.5" height="11" fill="#F1F0EA"/></svg>
-            <svg viewBox="0 0 24 11"><rect x="0.5" y="0.5" width="20" height="10" rx="3" fill="none" stroke="#F1F0EA"/><rect x="2" y="2" width="16" height="7" rx="1.5" fill="#F1F0EA"/><rect x="21.5" y="3.5" width="2" height="4" rx="1" fill="#F1F0EA"/></svg>
-          </span></div>
-          <div class="navbar">
-            <span class="acc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>Account</span>
-            <span class="t">Charizard Collection</span>
-            <span class="acc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="7.5" cy="12" r="1.2" fill="currentColor"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/><circle cx="16.5" cy="12" r="1.2" fill="currentColor"/></svg></span>
-          </div>
-          <div class="pad">
-            <div class="plabel sec">Page 1</div>
-            <div class="page surface">
-              <div class="slots">
-                <div class="slot"><img src="assets/cards/base1-4.jpg" alt=""></div>
-                <div class="slot"><img src="assets/cards/sv3pt5-199.jpg" alt=""></div>
-                <div class="slot"><img src="assets/cards/swsh45sv-SV107.jpg" alt=""></div>
-                <div class="slot"><img src="assets/cards/xy12-11.jpg" alt=""></div>
-                <div class="slot"><img src="assets/cards/sv3-223.jpg" alt=""></div>
-                <div class="slot"><img src="assets/cards/sv3pt5-6.jpg" alt=""></div>
-                <div class="slot empty target"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></div>
-                <div class="slot drag"><img src="assets/cards/base1-46.jpg" alt=""></div>
-                <div class="slot empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></div>
-              </div>
-            </div>
-            <div class="plabel sec" style="margin-top:18px">Page 2</div>
-            <div class="page surface">
-              <div class="slots">
-                <div class="slot"><img src="assets/cards/base1-44.jpg" alt=""></div>
-                <div class="slot"><img src="assets/cards/base1-63.jpg" alt=""></div>
-                <div class="slot empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></div>
-              </div>
-            </div>
-            <div class="addpage"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Add Page</div>
-          </div>
-          <div class="fade"></div>
-          <div class="home-bar"></div>
-        </div>
-      </div>
-
-      <div class="panel note" aria-hidden="true"><b>Drag &amp; drop.</b> Drop a card on any pocket to swap. Long-press to replace or remove.</div>
-    </div>
-  </div>
-</section>
-
-<!-- ───────────── SYNC + ABOUT ───────────── -->
-<section class="block" id="sync">
-  <div class="wrap duo">
-    <article class="panel rv">
-      <span class="eyebrow">Accounts · optional</span>
-      <h3>Sign in only if you want to.</h3>
-      <p>Dexeon is fully usable as a guest: your Pokédex, chase list and binders live on your device. Sign in with email or Google when you want your collection backed up and waiting on your next iPhone, and everything you've already collected comes with you.</p>
-      <ul>
-        <li>Guest mode with no sign-up wall</li>
-        <li>Backed up and synced when you sign in</li>
-        <li>Guest data is claimed by your account on first sign-in</li>
-        <li class="no">No ads, no tracking, no subscriptions</li>
-      </ul>
-    </article>
-
-    <article class="panel bubble rv d1" id="about">
-      <span class="eyebrow">Solo dev</span>
-      <h3>Built by one trainer.</h3>
-      <p>Dexeon is a solo project by Bree Pear, a collector who wanted the binder on the shelf and the Pokédex on the phone to finally agree with each other. It's free, and it stays free. No pro tier, no unlock, no "premium binders."</p>
-      <p style="margin-top:14px">Card data and pricing come from pokemontcg.io and TCGplayer. Official artwork comes from PokéAPI. The rest was designed on a golden-ratio grid, one Fibonacci spacing step at a time.</p>
-      <div class="author"><img src="assets/icon.png" alt=""><div><b>Bree Pear</b><span>Designer &amp; developer of Dexeon</span></div></div>
-    </article>
-  </div>
-</section>
-
-<!-- ───────────── FINAL CTA ───────────── -->
-<section class="final tone" id="get">
-  <div class="burst" aria-hidden="true"></div>
-  <div class="wrap rv">
-    <span class="eyebrow" style="justify-content:center">Free on iPhone</span>
-    <h2 class="display">Ready to<br>catch up?</h2>
-    <p class="lede">Open Dexeon, tap your first caught circle, and start filling pockets. No account needed.</p>
-    <div class="cta">
-      <!-- TODO-LINK: App Store URL -->
-      <a class="btn" href="#">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6 0-3.1 1-4 2.4-1.7 3-.4 7.3 1.2 9.7.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.2-.8s1.9.8 3.2.8c1.3 0 2.2-1.2 3-2.4.9-1.3 1.3-2.6 1.3-2.7 0 0-2.6-1-2.6-3.9zM14 5.4c.7-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.9 1.1.1 2.2-.6 2.8-1.4z"/></svg>
-        Download on the App Store
-      </a>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="wrap">
-    <div>
-      <div class="mark">DEXEON <span style="color:var(--red)">デクセオン</span></div>
-      <p>Dexeon is a fan-made project and is not affiliated with, endorsed by, or sponsored by Nintendo, Game Freak, Creatures Inc., or The Pokémon Company. Pokémon names, artwork and card images are the property of their respective owners and are shown for identification. Card data and market pricing courtesy of pokemontcg.io and TCGplayer.</p>
-    </div>
-    <div class="fl">
-      <a href="#features">Features</a><a href="#binders">Binders</a><a href="#sync">Sync</a><a href="#about">About</a>
-    </div>
-  </div>
-</footer>
-
-<script>
-  // Scroll reveal
-  (function(){
-    var els = document.querySelectorAll('.rv');
-    if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      els.forEach(function(e){ e.classList.add('in'); }); return;
-    }
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(en){ if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
-    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.08 });
-    els.forEach(function(e){ io.observe(e); });
-  })();
-
-  // Gentle tilt on the hero phone (pointer devices only)
-  (function(){
-    var phone = document.getElementById('heroPhone');
-    if (!phone || matchMedia('(prefers-reduced-motion: reduce)').matches || !matchMedia('(pointer:fine)').matches) return;
-    var stage = phone.parentElement;
-    stage.addEventListener('pointermove', function(e){
-      var r = phone.getBoundingClientRect();
-      var x = (e.clientX - (r.left + r.width/2)) / r.width;
-      var y = (e.clientY - (r.top + r.height/2)) / r.height;
-      phone.style.transition = 'transform .15s ease';
-      phone.style.transform = 'perspective(1200px) rotateY(' + (x*10) + 'deg) rotateX(' + (-y*8) + 'deg)';
-    });
-    stage.addEventListener('pointerleave', function(){
-      phone.style.transition = 'transform .6s cubic-bezier(.2,.8,.2,1)';
-      phone.style.transform = '';
-    });
-  })();
-</script>
+      </div></div></div></body></html>
