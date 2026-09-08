@@ -164,7 +164,8 @@ SIZES = {
         }),
 }
 
-for f in glob.glob('marketing/*.html'):
+# Remove only generated pages; icon.html and icon-pokeball.html are hand-written sources.
+for f in glob.glob('marketing/iphone-*.html') + glob.glob('marketing/ipad-*.html') + glob.glob('marketing/og.html'):
     os.remove(f)
 
 for sname, sz in SIZES.items():
@@ -223,7 +224,7 @@ og_body = (
     '<div class="shot"><div class="halft"></div><div class="kana-bg" aria-hidden="true">デクセオン</div>'
     '<div class="brand"><img src="../assets/icon.png" alt=""><span><b>DEXEON</b><small>デクセオン</small></span></div>'
     '<div class="head"><span class="eyebrow">Free on iPhone</span>'
-    '<h1>Track all 1025.<br><span class="red">Sleeve every card.</span></h1>'
+    '<h1>Track all<br><span class="red">1025.</span></h1>'
     '<p>A free Pokédex, card and binder tracker with live market prices. No account needed.</p></div>'
     '<div class="speed"></div>'
     '<span class="sfx" style="right:44px;top:40px;transform:rotate(7deg)">GOTCHA!</span>'
