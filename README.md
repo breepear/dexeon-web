@@ -36,3 +36,11 @@ python3 marketing/build.py
 Edit the copy or sticker positions in `marketing/build.py` and re-run to regenerate.
 
 The same script also renders the social share image `assets/og.png` (1200×630) used by the Open Graph and Twitter card tags in `index.html`. Favicons (`assets/favicon.png`, `assets/favicon-32.png`, `assets/apple-touch-icon.png`) are downscaled from the app icon.
+
+## App icon
+
+`assets/app-icon.png` is a 1024×1024 square app icon in the site's manga style (source: `marketing/icon.html`, rendered with headless Chrome). `assets/app-icon-preview.png` shows it masked at home-screen sizes. To regenerate:
+
+```bash
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --disable-gpu --hide-scrollbars --window-size=1024,1024 --screenshot=assets/app-icon.png "file://$PWD/marketing/icon.html"
+```
