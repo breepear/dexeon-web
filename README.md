@@ -39,7 +39,7 @@ The same script also renders the social share image `assets/og.png` (1200×630) 
 
 ## App icon
 
-`assets/app-icon.png` is a 1024×1024 square app icon in the site's manga style (source: `marketing/icon.html`, rendered with headless Chrome). `assets/app-icon-preview.png` shows it masked at home-screen sizes. To regenerate:
+`assets/app-icon.png` is a 1024×1024 square app icon in the site's manga style: a red Anton "D" with a hard ink shadow over faint outlined katakana (source: `marketing/icon.html`, rendered with headless Chrome). `assets/app-icon-preview.png` shows it masked at home-screen sizes. An earlier Pokéball variant is kept as `assets/app-icon-pokeball.png` (source: `marketing/icon-pokeball.html`). To regenerate:
 
 ```bash
 "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --disable-gpu --hide-scrollbars --window-size=1024,1024 --screenshot=assets/app-icon.png "file://$PWD/marketing/icon.html"
