@@ -2,27 +2,28 @@
   Dexeon landing page
   ───────────────────
   Single-file page. Images live in ./assets (real card art from pokemontcg.io and
-  official artwork from PokeAPI). Before shipping, replace the two placeholder
-  hrefs marked TODO-LINK with the App Store URL.
+  official artwork from PokeAPI). The beta form at the bottom writes to Firestore
+  (collection `beta_signups`, rules in the Dexeon app repo) and then sends the
+  visitor to TestFlight. Before shipping, fix the TODO-LINK site URL below.
 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Dexeon</title>
-<meta name="description" content="Dexeon is a free Pokédex and Pokémon TCG collection tracker for iPhone. Track all 1025 species, every card printing with live prices, and build digital binders.">
+<meta name="description" content="Dexeon is a free Pokédex and Pokémon TCG collection tracker for iPhone, now in beta on TestFlight. Track all 1025 species, every card printing with live prices, and build digital binders.">
 <!-- TODO-LINK: replace the site URL below with the final deployed domain (absolute URLs are required for share previews) -->
 <link rel="canonical" href="https://breepear.github.io/dexeon-web/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Dexeon">
-<meta property="og:title" content="Dexeon — Track all 1025. Sleeve every card.">
-<meta property="og:description" content="A free Pokédex, card and binder tracker for iPhone with live market prices. No account needed.">
+<meta property="og:title" content="Dexeon — Join the iPhone beta">
+<meta property="og:description" content="A free Pokédex, card and binder tracker for iPhone with live market prices. Now in beta on TestFlight. No account needed.">
 <meta property="og:url" content="https://breepear.github.io/dexeon-web/">
 <meta property="og:image" content="https://breepear.github.io/dexeon-web/assets/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Dexeon: a manga-styled poster with the app's Pokédex grid on an iPhone">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Dexeon — Track all 1025. Sleeve every card.">
-<meta name="twitter:description" content="A free Pokédex, card and binder tracker for iPhone with live market prices. No account needed.">
+<meta name="twitter:title" content="Dexeon — Join the iPhone beta">
+<meta name="twitter:description" content="A free Pokédex, card and binder tracker for iPhone with live market prices. Now in beta on TestFlight. No account needed.">
 <meta name="twitter:image" content="https://breepear.github.io/dexeon-web/assets/og.png">
 <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
@@ -324,6 +325,25 @@
   footer .mark{font-family:var(--display); font-size:22px; letter-spacing:.04em; margin-bottom:10px}
   @media (max-width:820px){ footer .wrap{grid-template-columns:1fr} footer .fl{justify-content:flex-start} }
 
+  /* ───────────── Beta form ───────────── */
+  .beta-form{display:flex; gap:12px; justify-content:center; align-items:stretch; margin:36px auto 0; max-width:640px}
+  .beta-form input[type=email]{
+    flex:1; min-width:0; font:inherit; font-weight:700; font-size:17px; padding:14px 18px;
+    color:var(--ink); background:var(--paper-2); border:3px solid var(--ink); box-shadow:var(--shadow-ink-sm);
+    border-radius:0; outline-offset:3px;
+  }
+  .beta-form input[type=email]::placeholder{color:var(--tone); font-weight:600}
+  .beta-form input[type=email]:focus-visible{outline:3px solid var(--yellow)}
+  .beta-form .btn{white-space:nowrap}
+  .beta-form .btn[disabled]{opacity:.7; cursor:progress; transform:none}
+  .beta-form .hp{position:absolute; left:-9999px; width:1px; height:1px; opacity:0}
+  .sr-only{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap}
+  .beta-status{min-height:1.6em; margin-top:14px; font-weight:800; font-size:15px; color:var(--red)}
+  .beta-status.ok{color:var(--green)}
+  .beta-fine{margin-top:10px; font-size:13px; font-weight:600; color:var(--ink-soft); line-height:1.6}
+  .beta-fine a{color:var(--red); font-weight:800}
+  @media (max-width:560px){ .beta-form{flex-direction:column} .beta-form .btn{justify-content:center} }
+
   /* ───────────── Reveal motion ───────────── */
   .rv{opacity:0; transform:translateY(22px)}
   .rv.in{opacity:1; transform:none; transition:opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1)}
@@ -470,8 +490,7 @@
       <a href="#sync">Sync</a>
       <a href="#about">About</a>
     </nav>
-    <!-- TODO-LINK: App Store URL -->
-    <a class="btn" href="#get">Get it free</a>
+    <a class="btn" href="#beta">Join the beta</a>
   </div>
 </header>
 
@@ -480,7 +499,7 @@
   <div class="kana-bg kana" aria-hidden="true">デクセオン</div>
   <div class="wrap">
     <div class="hero-copy">
-      <span class="eyebrow">Free on iPhone</span>
+      <span class="eyebrow">Now in beta · Free on iPhone</span>
       <h1 class="display">
         <span class="line">Track all</span>
         <span class="line red">1025.</span>
@@ -488,10 +507,9 @@
       </h1>
       <p class="lede">Dexeon is a free Pokédex and card tracker for Pokémon TCG collectors. Mark what you've caught across nine generations, browse every printing of every Pokémon with live market prices, and file your favorites in digital binders that page like the real thing.</p>
       <div class="cta">
-        <!-- TODO-LINK: App Store URL -->
-        <a class="btn" href="#get">
+        <a class="btn" href="#beta">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13M6 10l6 6 6-6M4 21h16"/></svg>
-          Get Dexeon
+          Join the beta
         </a>
         <a class="btn ghost" href="#features">See what's inside</a>
       </div>
@@ -499,6 +517,7 @@
         <span><i></i>No account required</span>
         <span><i></i>No ads, no paywall</span>
         <span><i></i>Works offline</span>
+        <span><i></i>Beta via TestFlight</span>
       </div>
     </div>
 
@@ -580,8 +599,8 @@
 <!-- ───────────── TICKER ───────────── -->
 <div class="ticker" aria-hidden="true">
   <div class="track">
-    <span>1025 species</span><span>9 generations</span><span>Every TCG printing</span><span>Live market prices</span><span>2×2 &amp; 3×3 binders</span><span>Chase list</span><span>No account needed</span><span>Free forever</span>
-    <span>1025 species</span><span>9 generations</span><span>Every TCG printing</span><span>Live market prices</span><span>2×2 &amp; 3×3 binders</span><span>Chase list</span><span>No account needed</span><span>Free forever</span>
+    <span>1025 species</span><span>9 generations</span><span>Every TCG printing</span><span>Live market prices</span><span>2×2 &amp; 3×3 binders</span><span>Chase list</span><span>No account needed</span><span>Now in beta on TestFlight</span>
+    <span>1025 species</span><span>9 generations</span><span>Every TCG printing</span><span>Live market prices</span><span>2×2 &amp; 3×3 binders</span><span>Chase list</span><span>No account needed</span><span>Now in beta on TestFlight</span>
   </div>
 </div>
 
@@ -807,19 +826,27 @@
 </section>
 
 <!-- ───────────── FINAL CTA ───────────── -->
-<section class="final tone" id="get">
+<section class="final tone" id="beta">
   <div class="burst" aria-hidden="true"></div>
   <div class="wrap rv">
-    <span class="eyebrow" style="justify-content:center">Free on iPhone</span>
-    <h2 class="display">Ready to<br>catch up?</h2>
-    <p class="lede">Open Dexeon, tap your first caught circle, and start filling pockets. No account needed.</p>
-    <div class="cta">
-      <!-- TODO-LINK: App Store URL -->
-      <a class="btn" href="#">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6 0-3.1 1-4 2.4-1.7 3-.4 7.3 1.2 9.7.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.2-.8s1.9.8 3.2.8c1.3 0 2.2-1.2 3-2.4.9-1.3 1.3-2.6 1.3-2.7 0 0-2.6-1-2.6-3.9zM14 5.4c.7-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.9 1.1.1 2.2-.6 2.8-1.4z"/></svg>
-        Download on the App Store
-      </a>
-    </div>
+    <span class="eyebrow" style="justify-content:center">Beta program · iPhone</span>
+    <h2 class="display">Test it<br>first.</h2>
+    <p class="lede">Dexeon is in beta on TestFlight and I want collectors kicking the tyres. Leave your email so I can send you release notes and hear what breaks, and you'll go straight to the download.</p>
+
+    <form class="beta-form" id="betaForm" novalidate>
+      <label class="sr-only" for="betaEmail">Email address</label>
+      <input id="betaEmail" name="email" type="email" inputmode="email" autocomplete="email" required
+             placeholder="you@example.com" spellcheck="false">
+      <!-- honeypot: real people never see or fill this -->
+      <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button class="btn" type="submit" id="betaSubmit">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13M6 10l6 6 6-6M4 21h16"/></svg>
+        <span>Get the beta</span>
+      </button>
+    </form>
+    <p class="beta-status" id="betaStatus" role="status" aria-live="polite"></p>
+    <p class="beta-fine">You'll be sent to TestFlight, Apple's free beta app. iPhone only for now. One email at launch, nothing else.<br>
+      Already on the list? <a href="https://testflight.apple.com/join/awvMwjC7">Open TestFlight</a>.</p>
   </div>
 </section>
 
@@ -846,6 +873,8 @@
       entries.forEach(function(en){ if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
     }, { rootMargin: '0px 0px -10% 0px', threshold: 0.08 });
     els.forEach(function(e){ io.observe(e); });
+    // Safety net: never leave content hidden if the observer is slow or skipped (e.g. direct anchor jumps).
+    setTimeout(function(){ els.forEach(function(e){ e.classList.add('in'); }); }, 2500);
   })();
 
   // Gentle tilt on the hero phone (pointer devices only)
@@ -865,4 +894,72 @@
       phone.style.transform = '';
     });
   })();
+</script>
+
+<script type="module">
+  // Beta signup: store the email in Firestore, then send the visitor to TestFlight.
+  // If the SDK is blocked or the write fails, they still get to TestFlight.
+  const TESTFLIGHT = 'https://testflight.apple.com/join/awvMwjC7';
+  const form   = document.getElementById('betaForm');
+  const email  = document.getElementById('betaEmail');
+  const button = document.getElementById('betaSubmit');
+  const status = document.getElementById('betaStatus');
+  const label  = button.querySelector('span');
+
+  const firebaseConfig = {
+    apiKey: 'AIzaSyC60uY2OuVQOyd6SBIXGE6qkmOp6oQNWCE',
+    projectId: 'dexeontcg',
+    appId: '1:590478070593:ios:30873291dcbaba3eab87c0'
+  };
+
+  let saveEmail = null;
+  try {
+    const [{ initializeApp }, { getFirestore, collection, addDoc, serverTimestamp }] = await Promise.all([
+      import('https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js'),
+      import('https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js'),
+    ]);
+    const db = getFirestore(initializeApp(firebaseConfig));
+    saveEmail = (value) => addDoc(collection(db, 'beta_signups'), {
+      email: value,
+      createdAt: serverTimestamp(),
+      source: 'dexeon-web',
+      referrer: document.referrer || '',
+      userAgent: navigator.userAgent.slice(0, 512),
+    });
+  } catch (err) {
+    console.warn('Firestore unavailable, will redirect without saving.', err);
+  }
+
+  const looksLikeEmail = (v) => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v);
+  const go = () => window.location.assign(TESTFLIGHT);
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (form.website.value) { go(); return; }          // honeypot tripped: skip the save
+    const value = email.value.trim().toLowerCase();
+    if (!looksLikeEmail(value)) {
+      status.className = 'beta-status';
+      status.textContent = 'That email doesn\u2019t look right. Check it and try again.';
+      email.focus();
+      return;
+    }
+    button.disabled = true; email.readOnly = true;
+    label.textContent = 'Saving\u2026';
+    status.className = 'beta-status ok';
+    status.textContent = '';
+
+    if (saveEmail) {
+      try {
+        await Promise.race([saveEmail(value), new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), 4000))]);
+        status.textContent = 'You\u2019re on the list. Opening TestFlight\u2026';
+      } catch (err) {
+        console.warn('Could not save signup:', err);
+        status.textContent = 'Opening TestFlight\u2026';
+      }
+    } else {
+      status.textContent = 'Opening TestFlight\u2026';
+    }
+    label.textContent = 'Opening TestFlight\u2026';
+    setTimeout(go, 500);
+  });
 </script>

@@ -17,9 +17,18 @@ python3 -m http.server 8765
 
 Then open http://localhost:8765.
 
+## Beta signup form
+
+The form at the bottom of the page stores the visitor's email in Firestore (project `dexeontcg`, collection `beta_signups`) and then redirects to the TestFlight invite (`https://testflight.apple.com/join/awvMwjC7`). If Firestore is unreachable or refuses the write, the visitor is still redirected.
+
+The Firebase web API key in `index.html` is a public identifier by design; access is controlled by the Firestore security rules, which live in the Dexeon app repo (`firestore.rules`). Those rules allow the public site to *create* well-formed `beta_signups` documents only. Nothing client-side can read, list, edit, or delete them.
+
+To read the list later, open the Firebase console → Firestore → `beta_signups`, or export it with the Firebase CLI.
+
 ## Before shipping
 
-Replace the `href="#..."` placeholders marked `TODO-LINK` in `index.html` with the App Store URL.
+- Deploy the Firestore rules from the Dexeon app repo (`npx firebase-tools deploy --only firestore:rules`), otherwise signups are refused and only the redirect happens.
+- Replace the site URL marked `TODO-LINK` in `index.html` with the final deployed domain so share previews resolve.
 
 ---
 
