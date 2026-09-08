@@ -221,7 +221,7 @@ html,body{width:1200px;height:630px}
 '''
 og_body = (
     '<div class="shot"><div class="halft"></div><div class="kana-bg" aria-hidden="true">デクセオン</div>'
-    '<div class="brand"><img src="../assets/icon.png" alt=""><span><b>DEXEON</b><small>デクセオン</small></span></div>'
+    '<div class="brand"><img src="../assets/logo-mark.png" alt=""><span><b>DEXEON</b><small>デクセオン</small></span></div>'
     '<div class="head"><span class="eyebrow">Free on iPhone</span>'
     '<h1>Track<br><span class="red">\u2019Em All.</span></h1></div>'
     '<div class="speed"></div>'
