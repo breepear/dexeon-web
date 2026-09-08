@@ -268,6 +268,34 @@
   .swatch.l{background:#fff; color:#121114} .swatch.d{background:#0B0B0D; color:#F1F0EA}
   .swatch i{width:14px; height:14px; border-radius:50%; display:inline-block; background:currentColor}
 
+  /* ───────────── Japanese sets ───────────── */
+  .jp{padding:clamp(72px,9vw,120px) 0; border-top:3px solid var(--ink); background:var(--paper-2); position:relative; overflow:hidden}
+  .jp .wrap{position:relative; display:grid; grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr); gap:clamp(28px,5vw,72px); align-items:center}
+  .jp .kana-big{font-family:var(--body); font-weight:900; font-size:clamp(44px,5.4vw,82px); line-height:1; white-space:nowrap; color:var(--red); letter-spacing:.04em; margin-top:14px; transform:skewX(-6deg); text-shadow:4px 4px 0 var(--paper-2), 7px 7px 0 var(--ink)}
+  .jp h2{font-size:clamp(40px,5vw,72px); margin-top:8px; transform:skewX(-6deg); text-shadow:3px 3px 0 var(--paper-2), 5px 5px 0 var(--ink)}
+  .jp .lede{margin-top:22px}
+  .jp-list{margin:24px 0 0; padding:0; list-style:none; display:grid; gap:10px}
+  .jp-list li{display:flex; gap:12px; align-items:flex-start; font-weight:700; font-size:15px}
+  .jp-list li::before{content:"JA"; flex:none; font-size:10px; font-weight:900; letter-spacing:.08em; padding:3px 7px; margin-top:3px; background:var(--red); color:#fff; border:2px solid var(--ink)}
+  .fan{position:relative; height:clamp(320px,36vw,460px)}
+  .fan figure{position:absolute; margin:0; width:clamp(140px,16vw,210px); transition:transform .3s ease}
+  .fan figure:hover{z-index:9; transform:translateY(-10px) rotate(0deg) !important}
+  .fan img{width:100%; border-radius:10px; border:3px solid var(--ink); box-shadow:var(--shadow-ink-sm); display:block}
+  .fan .ja{position:absolute; top:-10px; right:-10px; background:var(--red); color:#fff; font-size:11px; font-weight:900; letter-spacing:.08em; padding:4px 8px; border:2px solid var(--ink); box-shadow:2px 2px 0 var(--ink)}
+  .fan .c1{left:0%;  top:14%; transform:rotate(-12deg); z-index:1}
+  .fan .c2{left:17%; top:4%;  transform:rotate(-6deg);  z-index:2}
+  .fan .c3{left:35%; top:0%;  transform:rotate(-1deg);  z-index:3}
+  .fan .c4{left:53%; top:3%;  transform:rotate(5deg);   z-index:4}
+  .fan .c5{left:70%; top:12%; transform:rotate(11deg);  z-index:5}
+  .fan .c6{left:28%; top:36%; transform:rotate(-4deg);  z-index:6}
+  .jp .sfx{position:absolute; right:0; top:-18px; z-index:7; transform:rotate(7deg)}
+  @media (max-width:900px){
+    .jp .wrap{grid-template-columns:1fr}
+    .fan{height:min(72vw,420px); margin-top:20px}
+    .fan figure{width:min(30vw,170px)}
+    .fan .c6{left:34%; top:40%}
+  }
+
   /* ───────────── Binders (night spread) ───────────── */
   .night{
     background:var(--ink); color:var(--paper); position:relative;
@@ -505,6 +533,7 @@
     </a>
     <nav aria-label="Sections">
       <a href="#features">Features</a>
+      <a href="#japan">Japan</a>
       <a href="#binders">Binders</a>
       <a href="#sync">Sync</a>
       <a href="#about">About</a>
@@ -710,6 +739,33 @@
         <h3>Not in the catalog? Add it anyway.</h3>
         <p>Photograph a card the database doesn't know, a promo, a misprint or something homemade, and slot it into your binders like any other card. It stays yours, on your device and in your sync.</p>
       </article>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────── JAPANESE SETS ───────────── -->
+<section class="jp" id="japan">
+  <div class="wrap">
+    <div class="rv">
+      <span class="eyebrow">Japanese sets</span>
+      <div class="kana-big" aria-hidden="true">日本語も。</div>
+      <h2 class="display">Every Japanese set. Every card.</h2>
+      <p class="lede">The full Japanese catalog sits right beside the English one: the same species pages, the same search, the same market prices, the same binder pockets. Pokémon Card 151, Terastal Festival, the promos, all of it.</p>
+      <ul class="jp-list">
+        <li>Browse sets by language, or search across both at once</li>
+        <li>A JA badge on every Japanese printing so nothing gets mixed up</li>
+        <li>Scan a Japanese card and it matches like any other</li>
+        <li>Mix English and Japanese in the same binder page</li>
+      </ul>
+    </div>
+    <div class="fan rv d1" aria-hidden="true">
+      <span class="sfx y">全部!</span>
+      <figure class="c1"><img src="assets/cards/ja/SV2a-166.jpg" alt=""><span class="ja">JA</span></figure>
+      <figure class="c2"><img src="assets/cards/ja/SV2a-173.jpg" alt=""><span class="ja">JA</span></figure>
+      <figure class="c3"><img src="assets/cards/ja/SV2a-201.jpg" alt=""><span class="ja">JA</span></figure>
+      <figure class="c4"><img src="assets/cards/ja/SV2a-208.jpg" alt=""><span class="ja">JA</span></figure>
+      <figure class="c5"><img src="assets/cards/ja/SV8a-236.jpg" alt=""><span class="ja">JA</span></figure>
+      <figure class="c6"><img src="assets/cards/ja/SV3-139.jpg" alt=""><span class="ja">JA</span></figure>
     </div>
   </div>
 </section>

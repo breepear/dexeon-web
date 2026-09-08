@@ -6,6 +6,7 @@ Single static page, no build step.
 
 - `index.html` — the whole page (markup, CSS, and a few lines of JS)
 - `assets/cards/` — card art from pokemontcg.io
+- `assets/cards/ja/` — Japanese card art from TCGdex
 - `assets/art/` — official Pokémon artwork from PokéAPI
 - `assets/icon.png` — app icon
 
