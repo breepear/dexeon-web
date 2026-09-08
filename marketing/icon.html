@@ -4,10 +4,16 @@
 <meta charset="utf-8">
 <title>Dexeon app icon</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=M+PLUS+Rounded+1c:wght@900&display=swap">
+<script>
+  // Render the dark variant with ?theme=dark (used by the build command).
+  if (location.search.indexOf('dark') !== -1) document.documentElement.dataset.theme = 'dark';
+</script>
 <style>
   /* 1024 x 1024, square. iOS applies its own corner mask, so nothing important
-     sits within ~90px of a corner. Palette matches the landing page. */
+     sits within ~90px of a corner. Palette matches the landing page: light and
+     dark themes swap paper and ink, the red shifts a step brighter on night. */
   :root{ --paper:#F2F3EF; --ink:#121114; --red:#C8322E; --tone:#B9BCB5; }
+  :root[data-theme="dark"]{ --paper:#131316; --ink:#F1F0EA; --red:#E0463F; --tone:#3A3A40; }
   html,body{margin:0;width:1024px;height:1024px;overflow:hidden}
   body{background:var(--paper);position:relative}
   .halft{position:absolute;inset:0;
@@ -16,8 +22,12 @@
   svg{position:absolute;left:0;top:0}
   .kana{font-family:"M PLUS Rounded 1c",sans-serif;font-weight:900;font-size:330px;
     fill:none;stroke:var(--tone);stroke-width:5px;letter-spacing:.02em;opacity:.75}
+  :root[data-theme="dark"] .kana{opacity:1;stroke-width:6px}
   .d{font-family:"Anton","Impact",sans-serif;font-size:760px;text-anchor:middle;
     paint-order:stroke fill;stroke-linejoin:round}
+  .shadow{fill:var(--ink);stroke:var(--ink);stroke-width:40px}
+  .face{fill:var(--red);stroke:var(--ink);stroke-width:40px}
+  .rule{fill:none;stroke:var(--paper);stroke-width:11px}
 </style>
 </head>
 <body>
@@ -33,12 +43,11 @@
     </g>
 
     <!-- The D: skewed like the site's headlines, hard ink drop shadow, red fill
-         with an ink outline. -->
+         with an ink outline and a paper inner rule (the manga double outline). -->
     <g transform="translate(512 512) skewX(-8) translate(-512 -512)">
-      <text class="d" x="546" y="822" fill="#121114" stroke="#121114" stroke-width="40">D</text>
-      <text class="d" x="512" y="788" fill="#C8322E" stroke="#121114" stroke-width="40">D</text>
-      <!-- paper inner rule, the manga "double outline" -->
-      <text class="d" x="512" y="788" fill="none" stroke="#F2F3EF" stroke-width="11">D</text>
+      <text class="d shadow" x="546" y="822">D</text>
+      <text class="d face" x="512" y="788">D</text>
+      <text class="d rule" x="512" y="788">D</text>
     </g>
   </svg>
 </body>
