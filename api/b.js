@@ -68,7 +68,8 @@ function renderGrid(binder) {
       const cell = slot.imageURL
         ? `<img src="${esc(slot.imageURL)}" alt="${esc(slot.name || "Card")}" loading="lazy"/>${price}`
         : `<span class="dash"></span>`;
-      html += `<div class="slot">${cell}</div>`;
+      const cls = slot.isChase ? "slot chase" : "slot";
+      html += `<div class="${cls}">${cell}</div>`;
     }
     html += `</div></div>`;
   }
@@ -177,6 +178,8 @@ module.exports = async (req, res) => {
   .slots{display:grid; gap:12px}
   .slot{position:relative; aspect-ratio:0.716}
   .slot img{width:100%; height:100%; object-fit:contain; border-radius:8px}
+  /* Chase (wishlist) cards render in black & white to read as "want, not have". */
+  .slot.chase img{filter:grayscale(1); opacity:.9}
   .slot .dash{position:absolute; inset:0; border:2px dashed var(--tone); border-radius:8px}
   .slot .price{display:none; position:absolute; bottom:6px; left:6px; padding:2px 7px; border-radius:999px; background:var(--ink); color:var(--paper-2); font-size:12px; font-weight:800}
   body.show-prices .slot .price{display:inline-block}
