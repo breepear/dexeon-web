@@ -28,11 +28,11 @@ To read the list later, open the Firebase console → Firestore → `beta_signup
 ## Before shipping
 
 - Deploy the Firestore rules from the Dexeon app repo (`npx firebase-tools deploy --only firestore:rules`), otherwise signups are refused and only the redirect happens.
-- Replace the site URL marked `TODO-LINK` in `index.html` with the final deployed domain so share previews resolve.
+- The site is deployed on Vercel at https://dexeontcg.com; `vercel.json` rewrites `/b/:id` to the shared-binder function in `api/b.js`.
 
 ---
 
-Dexeon is a fan-made project and is not affiliated with Nintendo, Game Freak, Creatures Inc., or The Pokémon Company. Card data and pricing courtesy of pokemontcg.io and TCGplayer.
+Dexeon is a fan-made project and is not affiliated with Nintendo, Game Freak, Creatures Inc., or The Pokémon Company. Card data, images and pricing courtesy of Scrydex and TCGplayer.
 
 ## App Store screenshots
 

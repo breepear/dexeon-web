@@ -4,27 +4,26 @@
   Single-file page. Images live in ./assets (real card art from pokemontcg.io and
   official artwork from PokeAPI). The beta form at the bottom writes to Firestore
   (collection `beta_signups`, rules in the Dexeon app repo) and then sends the
-  visitor to TestFlight. Before shipping, fix the TODO-LINK site URL below.
+  visitor to TestFlight. Shared binders are served by api/b.js at /b/:id.
 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Dexeon</title>
-<meta name="description" content="Dexeon is a free Pokédex and Pokémon TCG collection tracker for iPhone, now in beta on TestFlight. Track all 1025 species, every card printing with live prices, and build digital binders.">
-<!-- TODO-LINK: replace the site URL below with the final deployed domain (absolute URLs are required for share previews) -->
-<link rel="canonical" href="https://breepear.github.io/dexeon-web/">
+<meta name="description" content="Dexeon is a free Pokédex and Pokémon TCG collection tracker for iPhone, now in beta on TestFlight. Track all 1025 species, scan cards to identify them, follow prices, and build binders you can share and print.">
+<link rel="canonical" href="https://dexeontcg.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Dexeon">
 <meta property="og:title" content="Dexeon — Join the iPhone beta">
 <meta property="og:description" content="A free Pokédex, card and binder tracker for iPhone with live market prices. Now in beta on TestFlight. No account needed.">
-<meta property="og:url" content="https://breepear.github.io/dexeon-web/">
-<meta property="og:image" content="https://breepear.github.io/dexeon-web/assets/og.png">
+<meta property="og:url" content="https://dexeontcg.com/">
+<meta property="og:image" content="https://dexeontcg.com/assets/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Dexeon: a manga-styled poster with the app's Pokédex grid on an iPhone">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Dexeon — Join the iPhone beta">
 <meta name="twitter:description" content="A free Pokédex, card and binder tracker for iPhone with live market prices. Now in beta on TestFlight. No account needed.">
-<meta name="twitter:image" content="https://breepear.github.io/dexeon-web/assets/og.png">
+<meta name="twitter:image" content="https://dexeontcg.com/assets/og.png">
 <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
@@ -200,8 +199,9 @@
     display:grid; gap:26px; grid-template-columns:repeat(6,minmax(0,1fr));
     grid-template-areas:
       "dex dex dex cards cards cards"
-      "price price chase chase show show"
-      "price price fast fast theme theme";
+      "scan scan price price chase chase"
+      "scan scan price price show show"
+      "value value value custom custom custom";
   }
   .feat .panel{padding:48px 28px 28px; display:flex; flex-direction:column; gap:14px; min-height:220px}
   .feat .panel h3{font-family:var(--display); font-weight:400; font-size:30px; letter-spacing:.01em; line-height:1; text-transform:uppercase}
@@ -210,20 +210,37 @@
     position:absolute; top:-3px; left:-3px; background:var(--ink); color:var(--paper); font-size:11px; font-weight:900;
     letter-spacing:.2em; padding:5px 10px; text-transform:uppercase;
   }
-  .feat .panel .tag.kana{letter-spacing:.2em}
-  .f-dex{grid-area:dex} .f-cards{grid-area:cards} .f-price{grid-area:price} .f-chase{grid-area:chase}
-  .f-show{grid-area:show} .f-fast{grid-area:fast} .f-theme{grid-area:theme}
-  .f-dex{background:var(--paper-2)}
+  .f-dex{grid-area:dex} .f-cards{grid-area:cards} .f-scan{grid-area:scan} .f-price{grid-area:price} .f-chase{grid-area:chase}
+  .f-show{grid-area:show} .f-value{grid-area:value} .f-custom{grid-area:custom}
   .feat .f-chase{background:var(--blue); color:#fff} .feat .f-chase p,.feat .f-chase h3{color:#fff}
   .f-chase .tag{background:#fff; color:var(--ink)}
+  .feat .f-scan{background:var(--ink); color:var(--paper)} .feat .f-scan p,.feat .f-scan h3{color:var(--paper)}
+  .f-scan .tag{background:var(--red); color:#fff}
   .f-price{justify-content:flex-start}
   @media (max-width:980px){
-    .feat{grid-template-columns:repeat(2,minmax(0,1fr)); grid-template-areas:"dex dex" "cards price" "chase price" "show fast" "theme theme"}
+    .feat{grid-template-columns:repeat(2,minmax(0,1fr)); grid-template-areas:"dex dex" "cards cards" "scan price" "scan price" "chase show" "value custom"}
   }
   @media (max-width:640px){
-    .feat{grid-template-columns:1fr; grid-template-areas:"dex" "cards" "price" "chase" "show" "fast" "theme"; gap:22px}
+    .feat{grid-template-columns:1fr; grid-template-areas:"dex" "cards" "scan" "price" "chase" "show" "value" "custom"; gap:22px}
     .feat .panel{padding:42px 22px 22px}
   }
+
+  /* Scanner mock */
+  .scan-mock{position:relative; margin-top:auto; aspect-ratio:4/3; background:#1C1C20; border:3px solid var(--paper); overflow:hidden; display:grid; place-items:center}
+  .scan-mock img{width:46%; transform:rotate(-7deg); border-radius:6px; box-shadow:0 14px 28px rgba(0,0,0,.6)}
+  .scan-mock i{position:absolute; width:22px; height:22px; border:3px solid var(--yellow)}
+  .scan-mock i:nth-child(1){top:10px; left:10px; border-right:0; border-bottom:0}
+  .scan-mock i:nth-child(2){top:10px; right:10px; border-left:0; border-bottom:0}
+  .scan-mock i:nth-child(3){bottom:10px; left:10px; border-right:0; border-top:0}
+  .scan-mock i:nth-child(4){bottom:10px; right:10px; border-left:0; border-top:0}
+  .scan-mock .match{position:absolute; left:50%; bottom:14px; transform:translateX(-50%); white-space:nowrap; background:var(--green); color:#fff; font-size:12px; font-weight:900; padding:6px 12px; border-radius:99px; border:2px solid #fff}
+  .spark{margin-top:auto; width:100%; height:72px; display:block}
+  .spark path{fill:none; stroke:var(--green); stroke-width:3; stroke-linejoin:round; stroke-linecap:round}
+  .spark .fill{fill:color-mix(in srgb, var(--green) 14%, transparent); stroke:none}
+  .spark circle{fill:var(--green); stroke:var(--paper-2); stroke-width:2}
+  .value-row{display:flex; justify-content:space-between; font-weight:900; font-variant-numeric:tabular-nums; font-size:14px}
+  .value-row small{display:block; font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-soft); font-weight:800}
+  .value-row .up{color:var(--green)}
 
   /* Small in-panel UI bits (light/dark aware through tokens) */
   .ui-progress{display:flex; align-items:center; gap:12px; background:var(--paper); border:2px solid var(--tone-2); border-radius:16px; padding:10px 16px; font-weight:900; font-variant-numeric:tabular-nums}
@@ -426,6 +443,8 @@
   .tile .card-img.gray img{filter:grayscale(1); opacity:.85}
   .search{position:absolute; left:15px; right:15px; bottom:18px; height:38px; border-radius:99px; background:#fff; border:1px solid #E6EAF1; box-shadow:0 4px 12px rgba(0,0,0,.14); display:flex; align-items:center; gap:9px; padding:0 15px; font-size:11px; font-weight:600; color:#8a8a8f}
   .search svg{width:13px; height:13px}
+  .cam{position:absolute; right:15px; bottom:64px; width:35px; height:35px; border-radius:50%; background:#fff; border:1px solid #E6EAF1; box-shadow:0 4px 10px rgba(0,0,0,.14); display:grid; place-items:center; z-index:2}
+  .cam svg{width:16px; height:16px; color:#AC322F}
   .fade{position:absolute; left:0; right:0; bottom:0; height:90px; background:linear-gradient(transparent, #EEF1F6 70%); pointer-events:none}
   .screen.dark .fade{background:linear-gradient(transparent, #161619 70%)}
 
@@ -505,7 +524,7 @@
         <span class="line red">1025.</span>
         <span class="line">Sleeve every card.</span>
       </h1>
-      <p class="lede">Dexeon is a free Pokédex and card tracker for Pokémon TCG collectors. Mark what you've caught across nine generations, browse every printing of every Pokémon with live market prices, and file your favorites in digital binders that page like the real thing.</p>
+      <p class="lede">Dexeon is a free Pokédex and card tracker for Pokémon TCG collectors. Mark what you've caught across nine generations, scan a card to identify it in seconds, browse every English and Japanese printing with live prices, and file your favorites in binders you can share and print.</p>
       <div class="cta">
         <a class="btn" href="#beta">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13M6 10l6 6 6-6M4 21h16"/></svg>
@@ -587,6 +606,7 @@
             </div>
           </div>
           <div class="fade"></div>
+          <div class="cam" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 3l-1.7 2H4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-3.3L15 3H9zm3 5.5a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9zm0 2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z"/></svg></div>
           <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>Search name or number</div>
           <div class="home-bar"></div>
         </div>
@@ -598,8 +618,8 @@
 <!-- ───────────── TICKER ───────────── -->
 <div class="ticker" aria-hidden="true">
   <div class="track">
-    <span>1025 species</span><span>9 generations</span><span>Every TCG printing</span><span>Live market prices</span><span>2×2 &amp; 3×3 binders</span><span>Chase list</span><span>No account needed</span><span>Now in beta on TestFlight</span>
-    <span>1025 species</span><span>9 generations</span><span>Every TCG printing</span><span>Live market prices</span><span>2×2 &amp; 3×3 binders</span><span>Chase list</span><span>No account needed</span><span>Now in beta on TestFlight</span>
+    <span>1025 species</span><span>9 generations</span><span>Every TCG printing</span><span>Live market prices</span><span>2×2 &amp; 3×3 binders</span><span>Scan to identify</span><span>Chase list</span><span>Share &amp; print binders</span><span>English + Japanese sets</span><span>No account needed</span><span>Now in beta on TestFlight</span>
+    <span>1025 species</span><span>9 generations</span><span>Every TCG printing</span><span>Live market prices</span><span>2×2 &amp; 3×3 binders</span><span>Scan to identify</span><span>Chase list</span><span>Share &amp; print binders</span><span>English + Japanese sets</span><span>No account needed</span><span>Now in beta on TestFlight</span>
   </div>
 </div>
 
@@ -618,7 +638,7 @@
       <article class="panel f-dex rv">
         <span class="tag kana">図鑑 · Pokédex</span>
         <h3>Catch 'em all, literally.</h3>
-        <p>All 1025 species from Kanto to Paldea in one grid. Tap the circle to mark a Pokémon caught, star your favorites, and watch the completion bar climb. Filter by status or generation, search by name or number, switch between thumbnails and a compact list.</p>
+        <p>All 1025 species from Kanto to Paldea in one grid. Tap the circle to mark a Pokémon caught, star your favorites, and watch the completion bar climb. Filter by status or generation, search by name or number, switch between thumbnails and a compact list, light or dark.</p>
         <div class="ui-progress" aria-hidden="true"><b>42%</b><span class="bar"><i></i></span><small>431/1025</small></div>
         <div class="chips" aria-hidden="true">
           <span class="chip on">Caught</span><span class="chip">Uncaught</span><span class="chip">Favorite</span><span class="chip">Chasing</span><span class="chip">Gen I</span><span class="chip">Gen IX</span>
@@ -628,16 +648,27 @@
       <article class="panel f-cards rv d1">
         <span class="tag">Every printing</span>
         <h3>Open a Pokémon, get every card.</h3>
-        <p>Each species page lists every card ever printed for it, newest set first, pulled from the pokemontcg.io database. Search by set, rarity or card number, or flip on "Collected only" to see just what you own.</p>
+        <p>Each species page lists every card ever printed for it, English and Japanese, newest set first. Search within a species by set, rarity or number, browse whole sets, or dig through the entire catalog with Advanced Search.</p>
         <div class="mini-cards" aria-hidden="true">
           <img src="assets/cards/base1-4.jpg" alt=""><img src="assets/cards/xy12-11.jpg" alt=""><img src="assets/cards/sv3-223.jpg" alt=""><img src="assets/cards/swsh45sv-SV107.jpg" alt="">
+        </div>
+      </article>
+
+      <article class="panel f-scan rv d1">
+        <span class="tag">Camera</span>
+        <h3>Point. Shoot. Matched.</h3>
+        <p>Snap a card or pick a photo and Dexeon identifies the exact printing, then opens it so you can collect, chase or showcase it. The camera comes straight back up for the next one, so a whole stack goes in fast.</p>
+        <div class="scan-mock" aria-hidden="true">
+          <i></i><i></i><i></i><i></i>
+          <img src="assets/cards/base1-4.jpg" alt="">
+          <span class="match">✓ Charizard · Base Set 4/102</span>
         </div>
       </article>
 
       <article class="panel f-price rv d2">
         <span class="tag">Prices</span>
         <h3>Know what it's worth.</h3>
-        <p>Every card carries TCGplayer market pricing with low, mid and high, refreshed daily and cached so it loads instantly on the second look.</p>
+        <p>TCGplayer market pricing with low, mid and high for every printing, plus 1-day to 90-day trends and a price history chart. Refreshed daily and cached so it loads instantly on the second look.</p>
         <div class="price-mock" aria-hidden="true">
           <img src="assets/cards/sv3pt5-199.jpg" alt="">
           <div>
@@ -645,6 +676,7 @@
             <div class="big">$178.43</div>
             <div class="lbl" style="margin-top:4px">Holofoil · TCGplayer</div>
             <div class="row"><span><small>Low</small>$150.00</span><span><small>Mid</small>$180.00</span><span><small>High</small>$349.99</span></div>
+            <div class="row"><span><small>7D</small><span style="color:var(--green)">+4.2%</span></span><span><small>30D</small><span style="color:var(--green)">+11.8%</span></span><span><small>90D</small><span style="color:var(--red)">−3.1%</span></span></div>
           </div>
         </div>
         <div class="actions" aria-hidden="true"><span class="c">✓ Collected</span><span class="h">◎ Chase</span><span class="s">★ Showcase</span></div>
@@ -653,7 +685,7 @@
       <article class="panel f-chase rv d1">
         <span class="tag">Chase list</span>
         <h3>Hunt with a target.</h3>
-        <p>Tap Chase on any card you're after. Your chase board totals the estimated value of the hunt, and chased Pokémon show up in gray on the home grid until you land them. Collect the card and the chase completes itself.</p>
+        <p>Tap Chase on any card you're after. Your chase board totals the estimated value of the hunt, sorts and filters it, and chased Pokémon show up in gray on the home grid until you land them. Collect the card and the chase completes itself.</p>
       </article>
 
       <article class="panel f-show rv d2">
@@ -662,17 +694,22 @@
         <p>Mark one collected card as the showcase and it becomes that species' tile on your home grid. Your Pokédex slowly turns into a wall of the exact cards you own.</p>
       </article>
 
-      <article class="panel f-fast rv d2">
-        <span class="tag">Speed</span>
-        <h3>Smooth at 1025.</h3>
-        <p>Card art is cached generously, so scrolling every tile stays smooth and Pokémon you've already opened come back instantly.</p>
+      <article class="panel f-value rv d2">
+        <span class="tag">Collection value</span>
+        <h3>Watch it grow.</h3>
+        <p>Your profile totals the market value of every unique card you own and charts it over time, refreshed once a day, so you can see what a good month of hunting did.</p>
+        <div class="value-row" aria-hidden="true"><span><small>Total value</small>$2,418.60</span><span class="up"><small>30 days</small>+$212.15</span></div>
+        <svg class="spark" viewBox="0 0 300 72" preserveAspectRatio="none" aria-hidden="true">
+          <path class="fill" d="M0 58 L30 52 L60 54 L90 44 L120 46 L150 36 L180 38 L210 26 L240 28 L270 16 L300 12 L300 72 L0 72 Z"/>
+          <path d="M0 58 L30 52 L60 54 L90 44 L120 46 L150 36 L180 38 L210 26 L240 28 L270 16 L300 12"/>
+          <circle cx="300" cy="12" r="5"/>
+        </svg>
       </article>
 
-      <article class="panel f-theme rv d3">
-        <span class="tag">Appearance</span>
-        <h3>Day and night.</h3>
-        <p>Light and dark modes, thumbnails or list, one tap from the filter bar. Built natively for iPhone.</p>
-        <div class="swatch-row" aria-hidden="true"><span class="swatch l"><i style="background:#AC322F"></i>Light</span><span class="swatch d"><i style="background:#E0463F"></i>Dark</span></div>
+      <article class="panel f-custom rv d3">
+        <span class="tag">Custom cards</span>
+        <h3>Not in the catalog? Add it anyway.</h3>
+        <p>Photograph a card the database doesn't know, a promo, a misprint or something homemade, and slot it into your binders like any other card. It stays yours, on your device and in your sync.</p>
       </article>
     </div>
   </div>
@@ -685,11 +722,12 @@
     <div class="rv">
       <span class="eyebrow">Binders</span>
       <h2 class="display" style="font-size:clamp(46px,5.8vw,88px); margin-top:14px; transform:skewX(-6deg)">Binders that page like binders.</h2>
-      <p class="lede" style="margin-top:22px">Build as many as you like. Each page is a real 2×2 or 3×3 sheet of pockets, so what you lay out on screen matches what sits on your shelf. Any card from any set can go in a pocket, whether you own it yet or not.</p>
+      <p class="lede" style="margin-top:22px">Build as many as you like. Each page is a real 2×2 or 3×3 sheet of pockets, so what you lay out on screen matches what sits on your shelf. Any card from any set can go in a pocket, whether you own it yet or not. When it's ready, hand it to a friend or put it on paper.</p>
       <ol class="steps">
         <li><b>Name it and pick a layout.</b><span>"Charizard Collection," 3×3. Or 2×2 for oversized full arts.</span></li>
         <li><b>Tap an empty pocket, search any card.</b><span>Type a name, tap the printing you want. It's placed and saved instantly.</span></li>
         <li><b>Drag to rearrange, add pages as you go.</b><span>Drop a card on another pocket to swap them. Tap a filled pocket to open it with live pricing.</span></li>
+        <li><b>Share it or print it.</b><span>Publish a link anyone can open in a browser, with chase cards shown in black and white until you land them. Or export the binder as a printable PDF or a CSV.</span></li>
       </ol>
     </div>
 
@@ -794,7 +832,7 @@
         </div>
       </div>
 
-      <div class="panel note" aria-hidden="true"><b>Drag &amp; drop.</b> Drop a card on any pocket to swap. Long-press to replace or remove.</div>
+      <div class="panel note" aria-hidden="true"><b>Share &amp; print.</b> Send friends a link they can open in any browser, or export a printable PDF.</div>
     </div>
   </div>
 </section>
@@ -810,6 +848,7 @@
         <li>Guest mode with no sign-up wall</li>
         <li>Backed up and synced when you sign in</li>
         <li>Guest data is claimed by your account on first sign-in</li>
+        <li>Delete your account and everything in it whenever you like</li>
         <li class="no">No ads, no tracking, no subscriptions</li>
       </ul>
     </article>
@@ -818,7 +857,7 @@
       <span class="eyebrow">Solo dev</span>
       <h3>Built by one trainer.</h3>
       <p>Dexeon is a solo project by Bree Pear, a collector who wanted the binder on the shelf and the Pokédex on the phone to finally agree with each other. It's free, and it stays free. No pro tier, no unlock, no "premium binders."</p>
-      <p style="margin-top:14px">Card data and pricing come from pokemontcg.io and TCGplayer. Official artwork comes from PokéAPI. The rest was designed on a golden-ratio grid, one Fibonacci spacing step at a time.</p>
+      <p style="margin-top:14px">Card data, images and pricing come from Scrydex and TCGplayer, covering English and Japanese sets. Official artwork comes from PokéAPI. The rest was designed on a golden-ratio grid, one Fibonacci spacing step at a time.</p>
       <div class="author"><img src="assets/icon.png" alt=""><div><b>Bree Pear</b><span>Designer &amp; developer of Dexeon</span></div></div>
     </article>
   </div>
@@ -853,7 +892,7 @@
   <div class="wrap">
     <div>
       <div class="mark">DEXEON <span style="color:var(--red)">デクセオン</span></div>
-      <p>Dexeon is a fan-made project and is not affiliated with, endorsed by, or sponsored by Nintendo, Game Freak, Creatures Inc., or The Pokémon Company. Pokémon names, artwork and card images are the property of their respective owners and are shown for identification. Card data and market pricing courtesy of pokemontcg.io and TCGplayer.</p>
+      <p>Dexeon is a fan-made project and is not affiliated with, endorsed by, or sponsored by Nintendo, Game Freak, Creatures Inc., or The Pokémon Company. Pokémon names, artwork and card images are the property of their respective owners and are shown for identification. Card data, images and market pricing courtesy of Scrydex and TCGplayer.</p>
     </div>
     <div class="fl">
       <a href="#features">Features</a><a href="#binders">Binders</a><a href="#sync">Sync</a><a href="#about">About</a>
@@ -906,7 +945,7 @@
   const label  = button.querySelector('span');
 
   const firebaseConfig = {
-    apiKey: 'AIzaSyC60uY2OuVQOyd6SBIXGE6qkmOp6oQNWCE',
+    apiKey: 'AIzaSyC60umpwGL77wiBuXuENyHDQEB_AmQ9_BA',
     projectId: 'dexeontcg',
     appId: '1:590478070593:ios:30873291dcbaba3eab87c0'
   };
