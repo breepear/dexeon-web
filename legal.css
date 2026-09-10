@@ -1,0 +1,65 @@
+/* Shared styling for the legal pages (privacy.html, terms.html). Same tokens
+   as index.html, dialed down to a readable document treatment. */
+:root{
+  --paper:#F2F3EF; --paper-2:#FFFFFF; --ink:#121114; --ink-soft:#4A484E; --tone:#B9BCB5; --tone-2:#DDDFD8;
+  --red:#C8322E; --yellow:#F7C728; --green:#2FA44F;
+  --display:"Anton","Impact","Arial Narrow",sans-serif;
+  --body:"M PLUS Rounded 1c","Nunito","Hiragino Maru Gothic ProN","SF Pro Rounded",system-ui,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){ --paper:#131316; --paper-2:#1B1B1F; --ink:#F1F0EA; --ink-soft:#B8B6BE; --tone:#3A3A40; --tone-2:#2A2A2F; --red:#E0463F; --green:#43C06A; color-scheme:dark }
+}
+:root[data-theme="dark"]{ --paper:#131316; --paper-2:#1B1B1F; --ink:#F1F0EA; --ink-soft:#B8B6BE; --tone:#3A3A40; --tone-2:#2A2A2F; --red:#E0463F; --green:#43C06A; color-scheme:dark }
+
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--body); font-size:17px; line-height:1.65; font-weight:500; -webkit-font-smoothing:antialiased}
+a{color:var(--red); font-weight:700}
+.nav{position:sticky; top:0; z-index:50; background:var(--paper); border-bottom:3px solid var(--ink)}
+.nav .wrap{display:flex; align-items:center; justify-content:space-between; height:68px; gap:20px}
+.wrap{width:min(1180px, calc(100% - 48px)); margin-inline:auto}
+.logo{display:flex; align-items:center; gap:12px; text-decoration:none; color:inherit}
+.logo img{width:38px; height:38px; border-radius:10px; border:2px solid var(--ink); display:block}
+.logo b{font-family:var(--display); font-weight:400; font-size:26px; letter-spacing:.02em; line-height:1}
+.logo small{display:block; font-size:10px; font-weight:900; letter-spacing:.3em; color:var(--red); line-height:1; margin-top:2px}
+.nav nav{display:flex; gap:28px}
+.nav nav a{text-decoration:none; font-weight:800; font-size:14px; letter-spacing:.04em; text-transform:uppercase; color:inherit}
+.nav nav a:hover,.nav nav a[aria-current]{color:var(--red)}
+@media (max-width:640px){ .wrap{width:calc(100% - 32px)} .nav nav{gap:16px} }
+
+.doc{display:grid; grid-template-columns:240px minmax(0,1fr); gap:56px; padding:56px 0 96px}
+@media (max-width:900px){ .doc{grid-template-columns:1fr; gap:32px} }
+.toc{position:sticky; top:96px; align-self:start; font-size:13.5px}
+.toc b{display:block; font-size:11px; font-weight:900; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:10px}
+.toc ol{list-style:none; margin:0; padding:0; display:grid; gap:6px}
+.toc a{color:var(--ink); text-decoration:none; font-weight:700}
+.toc a:hover{color:var(--red)}
+@media (max-width:900px){ .toc{position:static; padding:18px 20px; border:3px solid var(--ink); background:var(--paper-2)} }
+
+.eyebrow{display:inline-flex; align-items:center; gap:10px; font-size:12px; font-weight:900; letter-spacing:.18em; text-transform:uppercase}
+.eyebrow::before{content:""; width:28px; height:3px; background:var(--red)}
+h1{font-family:var(--display); font-weight:400; text-transform:uppercase; font-size:clamp(44px,5.4vw,72px); line-height:.95; margin:12px 0 10px; transform:skewX(-6deg); text-shadow:3px 3px 0 var(--paper), 5px 5px 0 var(--ink); text-wrap:balance}
+.meta{font-size:14px; font-weight:700; color:var(--ink-soft); margin-bottom:28px}
+.summary{background:var(--paper-2); border:3px solid var(--ink); box-shadow:6px 6px 0 var(--ink); padding:22px 26px; margin:0 0 40px}
+.summary h2{margin-top:0}
+.summary ul{margin:10px 0 0; padding-left:20px}
+.summary li{margin:6px 0}
+article{max-width:72ch}
+article h2{font-family:var(--display); font-weight:400; text-transform:uppercase; font-size:30px; line-height:1; letter-spacing:.01em; margin:44px 0 12px; scroll-margin-top:90px}
+article h3{font-size:17px; font-weight:900; margin:26px 0 8px}
+article p{margin:0 0 14px}
+article ul,article ol{margin:0 0 14px; padding-left:22px}
+article li{margin:5px 0}
+article li b{font-weight:900}
+table{width:100%; border-collapse:collapse; font-size:15px; margin:12px 0 18px}
+th,td{text-align:left; vertical-align:top; padding:10px 12px; border:2px solid var(--ink)}
+th{background:var(--ink); color:var(--paper); font-size:12px; letter-spacing:.12em; text-transform:uppercase; font-weight:900}
+td b{font-weight:900}
+.tablewrap{overflow-x:auto}
+.callout{border-left:6px solid var(--red); background:var(--paper-2); padding:14px 18px; margin:18px 0 22px; font-size:15.5px}
+.callout b{font-weight:900}
+footer{background:var(--ink); color:var(--paper); padding:36px 0 44px; font-size:13px}
+footer .wrap{display:flex; flex-wrap:wrap; gap:14px 28px; align-items:center; justify-content:space-between}
+footer a{color:var(--paper); text-decoration:none; font-weight:800; text-transform:uppercase; letter-spacing:.08em; font-size:12px; margin-right:18px}
+footer a:hover{color:var(--yellow)}
+footer .mark{font-family:var(--display); font-size:20px; letter-spacing:.04em}

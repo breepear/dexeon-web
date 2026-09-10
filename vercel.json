@@ -1,11 +1,20 @@
 {
   "rewrites": [
-    { "source": "/b/:id", "destination": "/api/b?id=:id" }
+    {
+      "source": "/b/:id",
+      "destination": "/api/b?id=:id"
+    }
   ],
   "headers": [
     {
       "source": "/.well-known/apple-app-site-association",
-      "headers": [{ "key": "Content-Type", "value": "application/json" }]
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/json"
+        }
+      ]
     }
-  ]
+  ],
+  "cleanUrls": true
 }

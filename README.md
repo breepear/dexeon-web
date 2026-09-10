@@ -18,6 +18,10 @@ python3 -m http.server 8765
 
 Then open http://localhost:8765.
 
+## Legal pages
+
+`privacy.html` and `terms.html` (styled by `legal.css`) are served at `/privacy` and `/terms` via Vercel `cleanUrls`. Both carry `TODO` comments for the contact mailboxes and the governing-law state; fill those in before pointing App Store Connect at `https://dexeontcg.com/privacy`.
+
 ## Beta signup form
 
 The form at the bottom of the page stores the visitor's email in Firestore (project `dexeontcg`, collection `beta_signups`) and then redirects to the TestFlight invite (`https://testflight.apple.com/join/awvMwjC7`). If Firestore is unreachable or refuses the write, the visitor is still redirected.
