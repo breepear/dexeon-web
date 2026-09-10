@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Dexeon wordmark</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=M+PLUS+Rounded+1c:wght@900&display=swap">
+<script>
+  // Render the on-dark variant with ?theme=dark (used by the build command).
+  if (location.search.indexOf('dark') !== -1) document.documentElement.dataset.theme = 'dark';
+</script>
+<style>
+  /* Transparent canvas; render with --default-background-color=00000000.
+     Same palette as the app icon: light = ink outline on paper rule,
+     dark = off-white outline with a near-black rule, red one step brighter. */
+  :root{ --paper:#F2F3EF; --ink:#121114; --red:#C8322E; }
+  :root[data-theme="dark"]{ --paper:#131316; --ink:#F1F0EA; --red:#E0463F; }
+  html,body{margin:0;width:2000px;height:760px;overflow:hidden;background:transparent}
+  svg{display:block}
+  .word{font-family:"Anton","Impact",sans-serif;font-size:470px;text-anchor:middle;
+    paint-order:stroke fill;stroke-linejoin:round;letter-spacing:.01em}
+  .shadow{fill:var(--ink);stroke:var(--ink);stroke-width:30px}
+  .face{fill:var(--red);stroke:var(--ink);stroke-width:30px}
+  .rule{fill:none;stroke:var(--paper);stroke-width:8px}
+  .kana{font-family:"M PLUS Rounded 1c",sans-serif;font-weight:900;font-size:92px;text-anchor:middle;
+    letter-spacing:.28em;fill:var(--ink)}
+</style>
+</head>
+<body>
+  <svg width="2000" height="760" viewBox="0 0 2000 760" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(1000 0) skewX(-8) translate(-1000 0)">
+      <text class="word shadow" x="1024" y="488">DEXEON</text>
+      <text class="word face"   x="1000" y="464">DEXEON</text>
+      <text class="word rule"   x="1000" y="464">DEXEON</text>
+    </g>
+    <text class="kana" x="1000" y="690">デクセオン</text>
+  </svg>
+</body>
+</html>
