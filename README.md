@@ -5,7 +5,7 @@ Marketing site for [Dexeon](https://github.com/breepear), a free Pokédex and Po
 Single static page, no build step.
 
 - `index.html` — the whole page (markup, CSS, and a few lines of JS)
-- `assets/cards/` — card art from pokemontcg.io
+- `assets/cards/` — English card art (JPG)
 - `assets/cards/ja/` — Japanese card art from TCGdex
 - `assets/art/` — official Pokémon artwork from PokéAPI
 - `assets/icon.png` — app icon
@@ -37,7 +37,7 @@ Dexeon is a fan-made project and is not affiliated with Nintendo, Game Freak, Cr
 
 ## App Store screenshots
 
-`assets/appstore/` holds three 1242×2688 marketing screens (iPhone 6.5" size) and `assets/appstore/ipad-13/` holds the same three at 2064×2752 (iPad 13" size). They are generated from the landing page's own CSS and phone mockups:
+`assets/appstore/` holds five 1242×2688 marketing screens (iPhone 6.5" size: Full Dex, cards & prices, binders, social/leaderboard, messages) and `assets/appstore/ipad-13/` holds the same five at 2064×2752 (iPad 13" size). They are generated from the landing page's own CSS and phone mockups:
 
 ```bash
 python3 marketing/build.py

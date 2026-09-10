@@ -35,10 +35,12 @@ def grab_phone(marker):
 
 home = grab_phone('Mockup 1:')
 binder = grab_phone('Mockup 3:')
+leaderboard = grab_phone('Mockup 5:')
+chat = grab_phone('Mockup 6:')
 
 STATUS_LIGHT = '''<div class="status"><span>9:41</span><span class="r">
-<svg viewBox="0 0 14 11"><rect x="0" y="7" width="2.5" height="4" fill="#121114"/><rect x="3.8" y="5" width="2.5" height="6" fill="#121114"/><rect x="7.6" y="2.5" width="2.5" height="8.5" fill="#121114"/><rect x="11.4" y="0" width="2.5" height="11" fill="#121114"/></svg>
-<svg viewBox="0 0 24 11"><rect x="0.5" y="0.5" width="20" height="10" rx="3" fill="none" stroke="#121114"/><rect x="2" y="2" width="16" height="7" rx="1.5" fill="#121114"/><rect x="21.5" y="3.5" width="2" height="4" rx="1" fill="#121114"/></svg>
+<svg viewBox="0 0 14 11"><rect x="0" y="7" width="2.5" height="4"/><rect x="3.8" y="5" width="2.5" height="6"/><rect x="7.6" y="2.5" width="2.5" height="8.5"/><rect x="11.4" y="0" width="2.5" height="11"/></svg>
+<svg viewBox="0 0 24 11"><rect class="bat" x="0.5" y="0.5" width="20" height="10" rx="3"/><rect x="2" y="2" width="16" height="7" rx="1.5"/><rect x="21.5" y="3.5" width="2" height="4" rx="1"/></svg>
 </span></div>'''
 
 # The card detail sheet isn't on the landing page, so it's built here.
@@ -50,7 +52,7 @@ carddetail = f'''<div class="phone">
 <div class="pad cd">
   <div class="cd-img"><img src="../assets/cards/sv3pt5-199.jpg" alt=""></div>
   <div class="cd-title"><b>151</b><div class="cd-tags"><span>Special Illustration Rare</span><span>#199</span></div></div>
-  <div class="cd-price surface">
+  <div class="cd-price mp">
     <small class="sec">Market Price</small>
     <div class="cd-big">$178.43</div>
     <small class="sec">Holofoil · TCGplayer</small>
@@ -60,6 +62,7 @@ carddetail = f'''<div class="phone">
     <span class="on g"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M7.5 12.5l3 3 6-6.5" fill="none" stroke="#34C759" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Collected</span>
     <span class="b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg>Chase</span>
     <span class="on o"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.6 7 .9-5.2 4.9 1.4 7.1L12 18l-6.2 3.5 1.4-7.1L2 9.5l7-.9z"/></svg>Showcasing</span>
+    <span class="k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13l-3-3M20 16H7l3 3"/></svg>Trade</span>
   </div>
   <div class="cd-link sec">↗ View on TCGplayer</div>
 </div>
@@ -90,24 +93,7 @@ body{background:var(--paper);position:relative;font-family:var(--body)}
 .stat-tag{position:absolute;left:auto;top:auto;z-index:4;background:var(--paper-2);border:8px solid var(--ink);box-shadow:14px 14px 0 var(--ink);padding:26px 38px;font-weight:900;font-size:36px;line-height:1.1}
 .stat-tag b{display:block;font-family:var(--display);font-weight:400;font-size:96px;color:var(--red)}
 .phone{box-shadow:0 14px 30px -10px rgba(0,0,0,.5),0 0 0 2px #2b2b30 inset,0 0 0 3px #121114}
-.cd{display:flex;flex-direction:column;align-items:center;gap:9px}
-.cd-img{width:176px;border-radius:13px;overflow:hidden;box-shadow:0 12px 22px rgba(0,0,0,.25)}
-.cd-title{text-align:center}
-.cd-title b{font-size:12px;font-weight:800;display:block}
-.cd-tags{display:flex;gap:5px;justify-content:center;margin-top:4px}
-.cd-tags span{font-size:8.5px;font-weight:700;color:#6e6e73;background:rgba(0,0,0,.06);padding:2px 8px;border-radius:99px}
-.cd-price{width:100%;border-radius:15px;padding:10px 12px;text-align:center}
-.cd-price small{font-size:8.5px;font-weight:700;display:block}
-.cd-big{font-size:26px;font-weight:900;color:#34C759;line-height:1.1;font-variant-numeric:tabular-nums}
-.cd-row{display:flex;justify-content:space-around;margin-top:8px}
-.cd-row b{display:block;font-size:11px;font-weight:800;font-variant-numeric:tabular-nums}
-.cd-actions{display:flex;gap:7px;width:100%}
-.cd-actions span{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:8.5px;font-weight:800;padding:8px 2px;border-radius:9px}
-.cd-actions svg{width:15px;height:15px}
-.cd-actions .g{color:#34C759;background:rgba(52,199,89,.12)} .cd-actions .g.on{background:#34C759;color:#fff}
-.cd-actions .b{color:#2E5AAC;background:rgba(46,90,172,.12)}
-.cd-actions .o{color:#F08A24;background:rgba(240,138,36,.12)} .cd-actions .o.on{background:#F08A24;color:#fff}
-.cd-link{font-size:10px;font-weight:700;margin-top:2px}
+.cd-link{font-size:10px;font-weight:700;margin-top:2px;color:var(--is)}
 '''
 
 HEAD = ('<meta charset="utf-8"><title>Dexeon App Store screen</title>'
@@ -119,18 +105,28 @@ SCREENS = {
     'screen-1-pokedex': dict(
         theme='light', eyebrow='Free · No account needed',
         h1='Track all<br><span class="red">1025.</span>',
-        p='Every species from Kanto to Paldea. Tap to catch, star your favorites, and pick the card that represents each one.',
+        p='All 1025 species across nine generations. Tap to catch, star your favorites, and pick the card that represents each one.',
         sfx=('sfx', 'GOTCHA!'), tag='<b>42%</b>431 of 1025 caught', phone=home),
     'screen-2-cards': dict(
         theme='light', eyebrow='Every printing · Live prices',
         h1='Every card.<br><span class="red">Every price.</span>',
-        p='Every card ever printed for a species, with TCGplayer market pricing. Collect it, chase it, or showcase it.',
+        p='Every card ever printed for a species, with TCGplayer market pricing. Collect it, chase it, trade it, or showcase it.',
         sfx=('sfx y', 'ドン!'), tag='<b>Daily</b>TCGplayer market prices', phone=carddetail),
     'screen-3-binders': dict(
         theme='dark', eyebrow='Binders · 2×2 or 3×3',
         h1='Page like<br><span class="red">a binder.</span>',
         p='Real pocket pages for any card from any set. Tap to place, drag to swap, add pages as you grow.',
         sfx=('sfx', 'SNAP!'), tag='<b>3×3</b>drag &amp; drop pockets', phone=binder),
+    'screen-4-social': dict(
+        theme='light', eyebrow='Trainers · Gym Leaders · Trades',
+        h1='Trade. Chat.<br><span class="red">Compete.</span>',
+        p='Message other trainers with cards attached, list what you\'d trade, and climb a leaderboard of every collector on the app.',
+        sfx=('sfx', 'DEAL!'), tag='<b>#7</b>of 214 trainers', phone=leaderboard),
+    'screen-5-messages': dict(
+        theme='light', eyebrow='Direct messages',
+        h1='Send the<br><span class="red">card itself.</span>',
+        p='Cards and binders travel as attachments that open in the app on tap, price and all.',
+        sfx=('sfx y', 'やった!'), tag='<b>DM</b>cards &amp; binders', phone=chat),
 }
 
 # Per-size layout: canvas CSS plus (sticker, tag) positions for each screen.
@@ -147,6 +143,8 @@ SIZES = {
             'screen-1-pokedex': ('right:60px;top:1010px;transform:rotate(8deg)', 'left:60px;top:2200px;transform:rotate(-4deg)'),
             'screen-2-cards':   ('left:60px;top:1130px;transform:rotate(-8deg)', 'right:60px;top:1320px;transform:rotate(4deg)'),
             'screen-3-binders': ('right:60px;top:870px;transform:rotate(7deg)', 'left:60px;top:2330px;transform:rotate(-4deg)'),
+            'screen-4-social':  ('right:60px;top:870px;transform:rotate(7deg)', 'left:60px;top:2470px;transform:rotate(-4deg)'),
+            'screen-5-messages':('right:60px;top:1010px;transform:rotate(7deg)', 'right:60px;top:2400px;transform:rotate(4deg)'),
         }),
     'ipad-13': dict(
         w=2064, h=2752, out='assets/appstore/ipad-13',
@@ -161,6 +159,8 @@ SIZES = {
             'screen-1-pokedex': ('right:40px;top:300px;transform:rotate(8deg)', 'left:120px;top:1560px;transform:rotate(-4deg)'),
             'screen-2-cards':   ('left:980px;top:560px;transform:rotate(-8deg)', 'left:120px;top:1560px;transform:rotate(-3deg)'),
             'screen-3-binders': ('right:40px;top:300px;transform:rotate(7deg)', 'left:120px;top:1560px;transform:rotate(-4deg)'),
+            'screen-4-social':  ('right:40px;top:300px;transform:rotate(7deg)', 'left:120px;top:1560px;transform:rotate(-4deg)'),
+            'screen-5-messages':('left:980px;top:560px;transform:rotate(-8deg)', 'left:120px;top:1560px;transform:rotate(-3deg)'),
         }),
 }
 
