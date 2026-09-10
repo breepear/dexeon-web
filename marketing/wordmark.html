@@ -7,6 +7,7 @@
 <script>
   // Render the on-dark variant with ?theme=dark (used by the build command).
   if (location.search.indexOf('dark') !== -1) document.documentElement.dataset.theme = 'dark';
+  if (location.search.indexOf('mono') !== -1) document.documentElement.dataset.theme = 'mono';
 </script>
 <style>
   /* Transparent canvas; render with --default-background-color=00000000.
@@ -14,6 +15,10 @@
      dark = off-white outline with a near-black rule, red one step brighter. */
   :root{ --paper:#F2F3EF; --ink:#121114; --red:#C8322E; }
   :root[data-theme="dark"]{ --paper:#131316; --ink:#F1F0EA; --red:#E0463F; }
+  /* mono: one colour; the inner rule becomes a transparent knockout via mask */
+  :root[data-theme="mono"]{ --paper:#000; --ink:#121114; --red:#121114; }
+  :root[data-theme="mono"] .art{mask:url(#cut)}
+  :root[data-theme="mono"] .rule{visibility:hidden}
   html,body{margin:0;width:2000px;height:760px;overflow:hidden;background:transparent}
   svg{display:block}
   .word{font-family:"Anton","Impact",sans-serif;font-size:470px;text-anchor:middle;
@@ -27,7 +32,15 @@
 </head>
 <body>
   <svg width="2000" height="760" viewBox="0 0 2000 760" xmlns="http://www.w3.org/2000/svg">
-    <g transform="translate(1000 0) skewX(-8) translate(-1000 0)">
+    <defs>
+      <mask id="cut" maskUnits="userSpaceOnUse" x="0" y="0" width="2000" height="760">
+        <rect width="2000" height="760" fill="#fff"/>
+        <g transform="translate(1000 0) skewX(-8) translate(-1000 0)">
+          <text class="word" x="1000" y="464" fill="none" stroke="#000" stroke-width="16">DEXEON</text>
+        </g>
+      </mask>
+    </defs>
+    <g class="art" transform="translate(1000 0) skewX(-8) translate(-1000 0)">
       <text class="word shadow" x="1024" y="488">DEXEON</text>
       <text class="word face"   x="1000" y="464">DEXEON</text>
       <text class="word rule"   x="1000" y="464">DEXEON</text>

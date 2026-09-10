@@ -49,7 +49,7 @@ The same script also renders the social share image `assets/og.png` (1200×630) 
 
 ## Wordmark
 
-`assets/logo/` holds the full DEXEON wordmark as transparent 4000×1520 PNGs in the app-icon style: `dexeon-wordmark-on-light.png` (ink outline and shadow, for light backgrounds) and `dexeon-wordmark-on-dark.png` (off-white outline and shadow, for dark backgrounds). `preview.png` shows both in place. Source: `marketing/wordmark.html`; render with
+`assets/logo/` holds the full DEXEON wordmark as transparent 4000×1520 PNGs in the app-icon style: `dexeon-wordmark-on-light.png` (ink outline and shadow, for light backgrounds) and `dexeon-wordmark-on-dark.png` (off-white outline and shadow, for dark backgrounds). `dexeon-wordmark-black.png` is a one-colour version for light backgrounds, with the inner rule cut out as a transparent gap (`?theme=mono`). `preview.png` shows the colour pair in place. Source: `marketing/wordmark.html`; render with
 
 ```bash
 "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --disable-gpu --hide-scrollbars --force-device-scale-factor=2 --window-size=2000,760 --default-background-color=00000000 --screenshot=assets/logo/dexeon-wordmark-on-light.png "file://$PWD/marketing/wordmark.html"
