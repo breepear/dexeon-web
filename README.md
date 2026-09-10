@@ -20,7 +20,7 @@ Then open http://localhost:8765.
 
 ## Legal pages
 
-`privacy.html` and `terms.html` (styled by `legal.css`) are served at `/privacy` and `/terms` via Vercel `cleanUrls`. Both carry `TODO` comments for the contact mailboxes and the governing-law state; fill those in before pointing App Store Connect at `https://dexeontcg.com/privacy`.
+`privacy.html` and `terms.html` (styled by `legal.css`) are served at `/privacy` and `/terms` via Vercel `cleanUrls`. The terms carry a `TODO` for the governing-law state; fill those in before pointing App Store Connect at `https://dexeontcg.com/privacy`.
 
 ## Beta signup form
 

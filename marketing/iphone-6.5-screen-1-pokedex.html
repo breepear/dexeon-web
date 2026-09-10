@@ -195,14 +195,18 @@
   .chips{display:flex; flex-wrap:wrap; gap:8px}
   .chip{display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:800; padding:6px 12px; border-radius:99px; border:2px solid var(--ink); background:var(--paper); box-shadow:2px 2px 0 var(--ink)}
   .chip.on{background:var(--red-deep); color:#fff}
-  .price-mock{display:grid; grid-template-columns:96px 1fr; gap:16px; align-items:start; margin-top:6px}
-  .price-mock img{border-radius:8px; border:2px solid var(--ink); width:96px}
-  .price-mock .big{font-size:30px; font-weight:900; color:var(--green); line-height:1; font-variant-numeric:tabular-nums}
-  .price-mock .lbl{font-size:11px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-soft)}
-  .price-mock .row{display:flex; gap:14px; margin-top:10px; font-size:13px; font-weight:800; font-variant-numeric:tabular-nums}
-  .price-mock .row small{display:block; font-size:10px; color:var(--ink-soft); letter-spacing:.06em; text-transform:uppercase}
-  .actions{display:flex; gap:8px; margin-top:auto}
-  .actions span{flex:1; text-align:center; font-size:11px; font-weight:900; padding:10px 4px; border-radius:10px; line-height:1.2}
+  .price-mock{display:grid; grid-template-columns:82px minmax(0,1fr); gap:14px; align-items:start; margin-top:6px}
+  .price-mock img{border-radius:8px; border:2px solid var(--ink); width:82px}
+  .price-mock .big{font-size:28px; font-weight:900; color:var(--green); line-height:1; font-variant-numeric:tabular-nums}
+  .price-mock .lbl{font-size:10.5px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-soft)}
+  .price-mock .row{display:flex; flex-wrap:wrap; gap:8px 12px; margin-top:8px; font-size:12px; font-weight:800; font-variant-numeric:tabular-nums}
+  .price-mock .row small{display:block; font-size:9.5px; color:var(--ink-soft); letter-spacing:.06em; text-transform:uppercase}
+  .price-hist{margin-top:auto}
+  .price-hist .lbl{font-size:10.5px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-soft); display:flex; justify-content:space-between}
+  .price-hist .lbl span{color:var(--green)}
+  .price-hist .spark{margin-top:6px; height:64px}
+  .actions{display:flex; gap:6px; margin-top:14px}
+  .actions span{flex:1; text-align:center; font-size:10px; font-weight:900; padding:9px 2px; border-radius:10px; line-height:1.2; white-space:nowrap}
   .actions .c{background:var(--green); color:#fff} .actions .h{background:color-mix(in srgb, var(--blue) 14%, transparent); color:var(--blue)} .actions .s{background:color-mix(in srgb, #F08A24 14%, transparent); color:#D97A1A} .actions .t{background:color-mix(in srgb, var(--ink) 8%, transparent); color:var(--ink)}
   .mini-cards{display:flex; gap:10px; margin-top:auto}
   .mini-cards img{width:calc(25% - 8px); border-radius:6px; border:2px solid var(--ink)}
@@ -229,7 +233,7 @@
   .trio .sfx{position:absolute; z-index:5}
   .trio .sfx.s1{left:calc(50% - 560px); top:0; transform:rotate(-8deg)}
   .trio .sfx.s2{right:calc(50% - 560px); top:40px; transform:rotate(7deg)}
-  .social-grid{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:22px; margin-top:clamp(48px,6vw,84px); align-items:start}
+  .social-grid{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:22px; margin-top:clamp(48px,6vw,84px)}
   .social-grid .panel{background:var(--paper); color:var(--ink); border-color:var(--paper); box-shadow:8px 8px 0 var(--red); padding:26px 22px 22px; display:flex; flex-direction:column; gap:12px}
   .social-grid h3{font-family:var(--display); font-weight:400; text-transform:uppercase; font-size:26px; line-height:1}
   .social-grid p{color:var(--ink-soft); font-size:14.5px}
@@ -249,19 +253,6 @@
     .social-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   }
   @media (max-width:620px){ .social-grid{grid-template-columns:1fr} }
-
-  /* Trainer card mock (in a social panel) */
-  .tcard{margin-top:auto; position:relative; overflow:hidden; border:3px solid var(--ink); border-radius:16px; background:linear-gradient(135deg, color-mix(in srgb, var(--blue) 18%, var(--paper-2)), var(--paper-2)); padding:14px; color:var(--ink)}
-  .tcard .top{display:flex; gap:10px; align-items:center} .tcard .top>div{padding-right:52px; min-width:0}
-  .tcard .av{width:40px; height:40px; font-size:15px}
-  .tcard b{display:block; font-family:var(--display); font-weight:400; font-size:20px; line-height:1}
-  .tcard small{display:block; font-size:11px; font-weight:700; color:var(--ink-soft)}
-  .tcard .stats{display:flex; margin-top:12px}
-  .tcard .stats span{flex:1; text-align:center; font-family:var(--display); font-size:17px; line-height:1}
-  .tcard .stats span i{display:block; font-style:normal; font-family:var(--body); font-size:8.5px; font-weight:900; letter-spacing:.06em; color:var(--ink-soft); margin-top:2px}
-  .tcard img{position:absolute; right:-8px; top:-6px; width:64px; transform:rotate(9deg); border-radius:5px; box-shadow:0 6px 12px rgba(0,0,0,.25)}
-  .tcard .links{display:flex; gap:6px; margin-top:10px}
-  .tcard .links i{width:18px; height:18px; border-radius:50%; border:2px solid var(--ink); background:var(--paper-2); display:block}
 
   /* ───────────── Binders ───────────── */
   .binders{padding:clamp(72px,9vw,128px) 0; position:relative; overflow:hidden}
@@ -604,7 +595,7 @@ body{background:var(--paper);position:relative;font-family:var(--body)}
           .head{left:80px;right:80px;top:170px;text-align:center}
           .head h1{font-size:196px} .head p{max-width:1000px;margin:56px auto 0}
           .stage{left:50%;top:900px;transform:translateX(-50%) scale(3);transform-origin:top center}
-          .speed{--cx:50%;--cy:70%}</style></head><body><div class="shot"><div class="halft"></div><div class="kana-bg" aria-hidden="true">デクセオン</div><div class="head"><span class="eyebrow">Free · No account needed</span><h1>Track all<br><span class="red">1025.</span></h1><p>All 1025 species across nine generations. Tap to catch, star your favorites, and pick the card that represents each one.</p></div><div class="speed"></div><span class="sfx" style="right:60px;top:1010px;transform:rotate(8deg)">GOTCHA!</span><div class="stat-tag" style="left:60px;top:2200px;transform:rotate(-4deg)"><b>42%</b>431 of 1025 caught</div><div class="stage"><div class="phone" role="img" aria-label="Dexeon home screen showing collection progress, filters, and a grid of card tiles">
+          .speed{--cx:50%;--cy:70%}</style></head><body><div class="shot"><div class="halft"></div><div class="kana-bg" aria-hidden="true">デクセオン</div><div class="head"><span class="eyebrow">Free during beta · No account needed</span><h1>Track all<br><span class="red">1025.</span></h1><p>All 1025 species across nine generations. Tap to catch, star your favorites, and pick the card that represents each one.</p></div><div class="speed"></div><span class="sfx" style="right:60px;top:1010px;transform:rotate(8deg)">GOTCHA!</span><div class="stat-tag" style="left:60px;top:2200px;transform:rotate(-4deg)"><b>42%</b>431 of 1025 caught</div><div class="stage"><div class="phone" role="img" aria-label="Dexeon home screen showing collection progress, filters, and a grid of card tiles">
         <div class="island"></div>
         <div class="screen">
           <div class="status"><span>9:41</span><span class="r">

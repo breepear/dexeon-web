@@ -103,7 +103,7 @@ HEAD = ('<meta charset="utf-8"><title>Dexeon App Store screen</title>'
 # Screen content, shared by every size.
 SCREENS = {
     'screen-1-pokedex': dict(
-        theme='light', eyebrow='Free · No account needed',
+        theme='light', eyebrow='Free during beta · No account needed',
         h1='Track all<br><span class="red">1025.</span>',
         p='All 1025 species across nine generations. Tap to catch, star your favorites, and pick the card that represents each one.',
         sfx=('sfx', 'GOTCHA!'), tag='<b>42%</b>431 of 1025 caught', phone=home),
@@ -222,7 +222,7 @@ html,body{width:1200px;height:630px}
 og_body = (
     '<div class="shot"><div class="halft"></div><div class="kana-bg" aria-hidden="true">デクセオン</div>'
     '<div class="brand"><img src="../assets/logo-mark.png" alt=""><span><b>DEXEON</b><small>デクセオン</small></span></div>'
-    '<div class="head"><span class="eyebrow">Free on iPhone</span>'
+    '<div class="head"><span class="eyebrow">Now in beta · iPhone</span>'
     '<h1>Track<br><span class="red">\u2019Em All.</span></h1></div>'
     '<div class="speed"></div>'
     '<span class="sfx" style="right:44px;top:40px;transform:rotate(7deg)">GOTCHA!</span>'
