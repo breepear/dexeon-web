@@ -114,10 +114,9 @@
 
   /* ───────────── Nav ───────────── */
   .nav{position:sticky; top:0; z-index:50; background:var(--paper); border-bottom:3px solid var(--ink)}
-  .nav .wrap{display:flex; align-items:center; justify-content:space-between; height:68px; gap:20px}
+  .nav .wrap{display:flex; align-items:center; justify-content:space-between; height:80px; gap:20px}
   .logo{display:flex; align-items:center; gap:12px; text-decoration:none}
-  .logo img{width:38px; height:38px; border-radius:10px; border:2px solid var(--ink)}
-  .logo .wm{height:46px; width:auto; border:0; border-radius:0}
+    .logo .wm{height:58px; width:auto; display:block}
   .logo .wm-dark{display:none}
   @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]) .logo .wm-light{display:none} :root:not([data-theme="light"]) .logo .wm-dark{display:block} }
   :root[data-theme="dark"] .logo .wm-light{display:none} :root[data-theme="dark"] .logo .wm-dark{display:block}
@@ -636,8 +635,7 @@
 <header class="nav">
   <div class="wrap">
     <a class="logo" href="#top" aria-label="Dexeon home">
-      <img src="assets/logo-mark.png" alt="" width="38" height="38">
-      <img class="wm wm-light" src="assets/logo/wordmark-nav-light.png" alt="Dexeon" height="46"><img class="wm wm-dark" src="assets/logo/wordmark-nav-dark.png" alt="Dexeon" height="46">
+      <img class="wm wm-light" src="assets/logo/dexeon-wordmark-nav.png" alt="Dexeon" height="58"><img class="wm wm-dark" src="assets/logo/dexeon-wordmark-nav-dark.png" alt="Dexeon" height="58">
     </a>
     <nav aria-label="Sections">
       <a href="#features">Features</a>
