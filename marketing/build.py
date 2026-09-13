@@ -196,7 +196,7 @@ SIZES = {
 }
 
 # Remove only generated pages; icon.html and icon-pokeball.html are hand-written sources.
-for f in glob.glob('marketing/iphone-*.html') + glob.glob('marketing/ipad-*.html') + glob.glob('marketing/instagram-*.html') + glob.glob('marketing/og.html'):
+for f in glob.glob('marketing/iphone-*.html') + glob.glob('marketing/ipad-*.html') + glob.glob('marketing/instagram-*.html') + glob.glob('marketing/og.html') + glob.glob('marketing/poster.html'):
     os.remove(f)
 
 for sname, sz in SIZES.items():
@@ -237,6 +237,59 @@ try:
                 f'http://localhost:8765/marketing/{sname}-{name}.html',
             ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             print('rendered', sname, name)
+finally:
+    srv.terminate()
+
+# ── "Everything" poster: 1080 x 1080 square for Instagram ────────────────────
+POSTER_CSS = """
+html,body{width:1080px;height:1080px}
+.kana-bg{font-size:400px;top:-30px;left:-20px}
+.tile-brand{position:absolute;top:36px;left:50%;transform:translateX(-50%);height:80px;width:auto;z-index:4}
+.head{left:40px;right:40px;top:136px;text-align:center}
+.head .eyebrow{font-size:19px;letter-spacing:.2em;gap:14px} .head .eyebrow::before{width:44px;height:5px}
+.head h1{font-size:112px;margin-top:14px;line-height:.9;text-shadow:5px 5px 0 var(--paper),10px 10px 0 var(--ink)}
+.head p{font-size:23px;max-width:820px;margin:16px auto 0}
+.speed{--cx:50%;--cy:84%;opacity:.26}
+.chips-row{position:absolute;left:0;right:0;display:flex;justify-content:center;gap:16px;z-index:5}
+.chip{display:inline-flex;align-items:center;gap:10px;background:var(--paper-2);color:var(--ink);border:4px solid var(--ink);box-shadow:5px 5px 0 var(--ink);padding:9px 16px;font-size:20px;font-weight:900;white-space:nowrap}
+.chip i{width:13px;height:13px;border-radius:50%;background:var(--red);border:3px solid var(--ink);display:inline-block}
+.chip.y{background:var(--yellow)} .chip.b{background:var(--blue);color:#fff} .chip.b i{background:#fff}
+.stage{left:50%;transform-origin:top center;z-index:3}
+.stage.mid{top:598px;transform:translateX(-50%) scale(1.62)}
+.stage.l{top:660px;transform:translateX(-50%) translateX(-352px) rotate(-8deg) scale(1.28);z-index:2;filter:brightness(.96)}
+.stage.r{top:660px;transform:translateX(-50%) translateX(352px) rotate(8deg) scale(1.28);z-index:2;filter:brightness(.96)}
+.sfx{font-size:52px;padding:10px 22px 6px;border-width:6px;box-shadow:9px 9px 0 var(--ink)}
+.tile-url{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);z-index:6;background:var(--ink);color:var(--paper);font-weight:900;font-size:21px;letter-spacing:.08em;padding:12px 26px;border:3px solid var(--paper);white-space:nowrap}
+.price{position:absolute;z-index:6;left:28px;bottom:120px;background:var(--paper-2);border:4px solid var(--ink);box-shadow:8px 8px 0 var(--red);padding:12px 16px;font-size:16px;font-weight:900;line-height:1.2;transform:rotate(-3deg);max-width:250px}
+.price b{display:block;font-family:var(--display);font-weight:400;font-size:40px;color:var(--green);letter-spacing:.01em}
+.price small{display:block;font-weight:700;color:var(--ink-soft);font-size:13px;margin-top:4px}
+"""
+row1 = [('', '1025 species · Full Dex', '-2deg'), ('', 'Every printing · EN + JA', '1.5deg'), ('', 'Live TCGplayer prices', '-1deg')]
+row2 = [('y', 'Scan a card to identify it', '1.5deg'), ('b', 'Trade board · DMs · Gym Leaders', '-1.5deg'), ('', 'Binders · share &amp; print', '2deg')]
+def chips(items):
+    return ''.join(f'<span class="chip {c}" style="transform:rotate({r})"><i></i>{t}</span>' for c, t, r in items)
+poster_body = (
+    '<div class="shot"><div class="halft"></div><div class="kana-bg" aria-hidden="true">デクセオン</div>'
+    '<img class="tile-brand" src="../assets/logo/dexeon-wordmark-nav.png" alt="">'
+    '<div class="head"><span class="eyebrow">Now in beta · iPhone</span>'
+    '<h1>Track <span class="red">’Em All.</span></h1>'
+    '<p>Your Full Dex, every card printing with live prices, binders that page like binders, and a whole team of trainers to trade and talk with.</p></div>'
+    '<div class="speed"></div>'
+    f'<div class="chips-row" style="top:436px">{chips(row1)}</div>'
+    f'<div class="chips-row" style="top:506px">{chips(row2)}</div>'
+    '<span class="sfx" style="right:44px;top:900px;transform:rotate(7deg)">GOTCHA!</span>'
+    f'<div class="stage l">{chat}</div><div class="stage r">{leaderboard}</div><div class="stage mid">{home}</div>'
+    '<div class="price"><b>$0 for life</b>for early adopters in the beta<small>Otherwise $5.99 once at launch. Never a subscription.</small></div>'
+    '<div class="tile-url">dexeontcg.com · now in beta</div></div>')
+open('marketing/poster.html', 'w').write(
+    f'<!doctype html>\n<html lang="en" data-theme="light"><head>{HEAD}<style>{POSTER_CSS}</style></head><body>{poster_body}</body></html>')
+srv = subprocess.Popen([sys.executable, '-m', 'http.server', '8765'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+time.sleep(1)
+try:
+    subprocess.run([CHROME, '--headless=new', '--disable-gpu', '--hide-scrollbars', '--force-device-scale-factor=1',
+                    '--window-size=1080,1080', '--virtual-time-budget=8000', '--screenshot=assets/social/dexeon-everything-1x1.png',
+                    'http://localhost:8765/marketing/poster.html'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    print('rendered poster 1080x1080 -> assets/social/dexeon-everything-1x1.png')
 finally:
     srv.terminate()
 
