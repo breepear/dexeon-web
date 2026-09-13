@@ -19,8 +19,6 @@
     background:var(--paper2);border:16px solid var(--ink);box-shadow:inset 0 0 0 12px var(--paper2), inset 0 0 0 20px var(--ink), 22px 22px 0 var(--ink)}
   svg{position:absolute;left:0;top:0}
   .d{font-family:"Anton","Impact",sans-serif;font-size:560px;text-anchor:middle;paint-order:stroke fill;stroke-linejoin:round}
-  .label{position:absolute;left:50%;bottom:190px;transform:translateX(-50%) rotate(-3deg);background:var(--red);color:#fff;
-    font-weight:900;font-size:44px;letter-spacing:.3em;padding:12px 34px 10px 40px;border:6px solid var(--ink);box-shadow:10px 10px 0 var(--ink)}
 </style>
 </head>
 <body>
@@ -28,12 +26,28 @@
   <div class="speed"></div>
   <div class="disc"></div>
   <svg width="1080" height="1080" viewBox="0 0 1080 1080" xmlns="http://www.w3.org/2000/svg">
-    <g transform="translate(540 500) skewX(-8) translate(-540 -500)">
-      <text class="d" x="566" y="686" fill="#121114" stroke="#121114" stroke-width="30">D</text>
-      <text class="d" x="540" y="660" fill="#C8322E" stroke="#121114" stroke-width="30">D</text>
-      <text class="d" x="540" y="660" fill="none" stroke="#F2F3EF" stroke-width="9">D</text>
+    <!-- A single trading card, tilted like a thrown card, with the site's ink
+         outline, paper inner rule and hard shadow. No letters anywhere. -->
+    <g transform="translate(540 520) rotate(-9)">
+      <rect x="-146" y="-206" width="300" height="420" rx="26" fill="#121114"/>
+      <rect x="-172" y="-232" width="300" height="420" rx="26" fill="#C8322E" stroke="#121114" stroke-width="16"/>
+      <rect x="-156" y="-216" width="268" height="388" rx="18" fill="none" stroke="#F2F3EF" stroke-width="7"/>
+      <!-- art window -->
+      <rect x="-126" y="-176" width="208" height="180" rx="12" fill="#F2F3EF" stroke="#121114" stroke-width="10"/>
+      <!-- halftone hills inside the art window -->
+      <path d="M-116 -20 C -70 -90, -20 -70, 20 -40 C 50 -20, 60 -60, 72 -70 L 72 -6 L -116 -6 Z" fill="#B9BCB5" opacity=".55"/>
+      <circle cx="30" cy="-120" r="26" fill="#F7C728" stroke="#121114" stroke-width="8"/>
+      <!-- text-less "lines" -->
+      <rect x="-126" y="36" width="150" height="22" rx="11" fill="#F2F3EF" stroke="#121114" stroke-width="8"/>
+      <rect x="-126" y="86" width="208" height="22" rx="11" fill="#F2F3EF" stroke="#121114" stroke-width="8"/>
+      <rect x="-126" y="136" width="120" height="22" rx="11" fill="#F2F3EF" stroke="#121114" stroke-width="8"/>
+    </g>
+    <!-- caught ring -->
+    <g transform="translate(730 690)">
+      <circle r="78" fill="#121114"/>
+      <circle cx="-10" cy="-10" r="78" fill="#2FA44F" stroke="#121114" stroke-width="14"/>
+      <path d="M-44 -6 l26 26 l52 -56" fill="none" stroke="#fff" stroke-width="22" stroke-linecap="round" stroke-linejoin="round" transform="translate(-10 -10)"/>
     </g>
   </svg>
-  <div class="label">ABOUT</div>
 </body>
 </html>
