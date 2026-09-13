@@ -196,7 +196,7 @@ SIZES = {
 }
 
 # Remove only generated pages; icon.html and icon-pokeball.html are hand-written sources.
-for f in glob.glob('marketing/iphone-*.html') + glob.glob('marketing/ipad-*.html') + glob.glob('marketing/instagram-*.html') + glob.glob('marketing/og.html') + glob.glob('marketing/poster.html'):
+for f in glob.glob('marketing/iphone-*.html') + glob.glob('marketing/ipad-*.html') + glob.glob('marketing/instagram-*.html') + glob.glob('marketing/og.html') + glob.glob('marketing/poster.html') + glob.glob('marketing/story-*.html'):
     os.remove(f)
 
 for sname, sz in SIZES.items():
@@ -237,6 +237,147 @@ try:
                 f'http://localhost:8765/marketing/{sname}-{name}.html',
             ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             print('rendered', sname, name)
+finally:
+    srv.terminate()
+
+# ── Instagram Stories: ten 1080 x 1920 frames, alternating light / dark ───────
+def grab_block(start):
+    """Lifts a non-phone block (fan, ticket, scan mock) from index.html by its opening tag."""
+    i = src.index(start)
+    depth = 0
+    j = i
+    for m in re.finditer(r'<div\b|</div>', src[i:]):
+        depth += 1 if m.group(0).startswith('<div') else -1
+        if depth == 0:
+            j = i + m.end()
+            break
+    return src[i:j].replace('src="assets/', 'src="../assets/').replace(' rv d1', '').replace(' rv', '')
+
+fan = grab_block('<div class="fan rv d1"')
+ticket = grab_block('<div class="ticket rv d1"')
+scanmock = grab_block('<div class="scan-mock"')
+
+STORY_CSS = """
+html,body{width:1080px;height:1920px}
+.kana-bg{font-size:520px;top:-40px;left:-30px}
+.tile-brand{position:absolute;top:130px;left:50%;transform:translateX(-50%);height:96px;width:auto;z-index:4}
+.head{left:60px;right:60px;top:290px;text-align:center}
+.head .eyebrow{font-size:24px;letter-spacing:.2em;gap:14px} .head .eyebrow::before{width:48px;height:6px}
+.head h1{font-size:150px;margin-top:24px;line-height:.9;text-shadow:7px 7px 0 var(--paper),13px 13px 0 var(--ink)}
+.head p{font-size:32px;max-width:900px;margin:30px auto 0}
+.speed{--cx:50%;--cy:74%}
+.stage{left:50%;transform-origin:top center;z-index:3}
+.stage.ph{top:820px;transform:translateX(-50%) scale(3)}
+.stage.fanwrap{top:860px;width:1000px;transform:translateX(-50%) scale(1.02)}
+.stage.fanwrap .fan{height:900px} .stage.fanwrap .fan figure{width:300px}
+.stage.fanwrap .fan .c1{left:0;top:18%} .stage.fanwrap .fan .c2{left:17%;top:6%} .stage.fanwrap .fan .c3{left:35%;top:0}
+.stage.fanwrap .fan .c4{left:53%;top:4%} .stage.fanwrap .fan .c5{left:70%;top:14%} .stage.fanwrap .fan .c6{left:28%;top:44%}
+.stage.fanwrap .fan .sfx{display:none}
+.stage.scanwrap{top:840px;width:880px;transform:translateX(-50%)}
+.stage.scanwrap .scan-mock{border:6px solid var(--ink);box-shadow:12px 12px 0 var(--ink)}
+.stage.scanwrap .scan-mock i{width:56px;height:56px;border-width:8px}
+.stage.scanwrap .scan-mock i:nth-child(1){top:26px;left:26px} .stage.scanwrap .scan-mock i:nth-child(2){top:26px;right:26px}
+.stage.scanwrap .scan-mock i:nth-child(3){bottom:26px;left:26px} .stage.scanwrap .scan-mock i:nth-child(4){bottom:26px;right:26px}
+.stage.scanwrap .scan-mock .match{font-size:30px;padding:14px 28px;bottom:34px;border-width:4px}
+.stage.ticketwrap{top:880px;width:760px;transform:translateX(-50%) scale(1.15)}
+.stage.ticketwrap .ticket{padding:44px 44px 40px;gap:26px} .stage.ticketwrap .ticket .lbl{font-size:15px}
+.stage.ticketwrap .ticket .lbl b{font-size:28px} .stage.ticketwrap .ticket .lbl span{font-size:18px;max-width:28ch}
+.stage.ticketwrap .ticket .price{font-size:96px} .stage.ticketwrap .ticket .price small{font-size:15px}
+.stage.ticketwrap .ticket .never{font-size:19px} .stage.ticketwrap .ticket .sfx{display:none}
+.steps-big{position:absolute;left:90px;right:90px;top:900px;display:grid;gap:26px;z-index:3}
+.steps-big div{display:grid;grid-template-columns:96px 1fr;gap:26px;align-items:center;background:var(--paper-2);border:5px solid var(--ink);box-shadow:10px 10px 0 var(--ink);padding:26px 30px}
+.steps-big div b{font-family:var(--display);font-weight:400;font-size:64px;line-height:1;color:var(--red);text-align:center}
+.steps-big div span{font-size:34px;font-weight:900;line-height:1.2}
+.steps-big div small{display:block;font-size:20px;font-weight:700;color:var(--ink-soft);margin-top:4px}
+.sfx{font-size:70px;padding:14px 32px 10px;border-width:7px;box-shadow:12px 12px 0 var(--ink)}
+.stat-tag{font-size:30px;padding:22px 30px;border-width:7px;box-shadow:12px 12px 0 var(--ink)} .stat-tag b{font-size:78px}
+.tile-url{position:absolute;left:50%;bottom:200px;transform:translateX(-50%);z-index:6;background:var(--ink);color:var(--paper);font-weight:900;font-size:26px;letter-spacing:.08em;padding:16px 32px;border:4px solid var(--paper);white-space:nowrap}
+"""
+
+STORIES = [
+    dict(theme='light', eyebrow='Now in beta · iPhone', h1='Track<br><span class="red">’Em All.</span>',
+         p='Every species, every card printing, every binder. One app for the whole collection.',
+         stage=f'<div class="stage ph">{home}</div>',
+         sfx=('sfx', 'GOTCHA!', 'right:50px;top:900px;transform:rotate(8deg)'),
+         tag=('<b>1025</b>species · Gen I–IX', 'left:50px;top:1360px;transform:rotate(-4deg)')),
+    dict(theme='dark', eyebrow='Every printing · Live prices', h1='Every card.<br><span class="red">Every price.</span>',
+         p='English and Japanese printings with TCGplayer market prices and 90-day trends.',
+         stage=f'<div class="stage ph">{carddetail}</div>',
+         sfx=('sfx y', 'ドン!', 'right:50px;top:860px;transform:rotate(7deg)'),
+         tag=('<b>Daily</b>market prices', 'left:50px;top:1380px;transform:rotate(-4deg)')),
+    dict(theme='light', eyebrow='Camera', h1='Point. Shoot.<br><span class="red">Matched.</span>',
+         p='Snap any card and Dexeon identifies the exact printing, then opens it to collect, chase or trade.',
+         stage=f'<div class="stage scanwrap">{scanmock}</div>',
+         sfx=('sfx', 'SNAP!', 'right:50px;top:800px;transform:rotate(7deg)'),
+         tag=('<b>1 tap</b>from photo to card page', 'left:50px;top:780px;transform:rotate(-4deg)')),
+    dict(theme='dark', eyebrow='Binders · 2×2 · 3×3 · 4×3', h1='Page like<br><span class="red">a binder.</span>',
+         p='Real pocket pages. Drag to swap, start from a whole set, share the link or print the PDF.',
+         stage=f'<div class="stage ph">{binder}</div>',
+         sfx=('sfx', 'SNAP!', 'right:50px;top:860px;transform:rotate(7deg)'),
+         tag=('<b>PDF</b>print or share a link', 'left:50px;top:1380px;transform:rotate(-4deg)')),
+    dict(theme='light', eyebrow='Japanese sets', h1='Every Japanese<br><span class="red">set, too.</span>',
+         p='The full JA catalog beside the English one, with a JA badge on every printing.',
+         stage=f'<div class="stage fanwrap">{fan}</div>',
+         sfx=('sfx y', '全部!', 'right:60px;top:800px;transform:rotate(7deg)'),
+         tag=('<b>EN + JA</b>one search, both catalogs', 'left:50px;top:780px;transform:rotate(-4deg)')),
+    dict(theme='dark', eyebrow='Gym Leaders', h1='Climb the<br><span class="red">leaderboard.</span>',
+         p='Every trainer on the app, ranked by Full Dex, sets completed, weekly catches or arcade score.',
+         stage=f'<div class="stage ph">{leaderboard}</div>',
+         sfx=('sfx', 'DEAL!', 'right:50px;top:860px;transform:rotate(7deg)'),
+         tag=('<b>#7</b>of 214 trainers', 'left:40px;top:1400px;transform:rotate(-4deg)')),
+    dict(theme='light', eyebrow='Direct messages', h1='Send the<br><span class="red">card itself.</span>',
+         p='Cards and binders travel as attachments that open in the app on tap, price and all.',
+         stage=f'<div class="stage ph">{chat}</div>',
+         sfx=('sfx y', 'やった!', 'right:50px;top:900px;transform:rotate(7deg)'),
+         tag=('<b>DM</b>cards &amp; binders', 'left:40px;top:1060px;transform:rotate(-4deg)')),
+    dict(theme='dark', eyebrow='Community trade board', h1='List it.<br><span class="red">Trade it.</span>',
+         p='Tap Trade on a card you own. Every trainer can see it, and one tap messages you.',
+         stage=f'<div class="stage ph">{trades}</div>',
+         sfx=('sfx', 'DEAL!', 'left:50px;top:860px;transform:rotate(-8deg)'),
+         tag=('<b>Wanted</b>badges on your chase list', 'right:50px;top:1400px;transform:rotate(4deg)')),
+    dict(theme='light', eyebrow='Pricing', h1='Free for life<br><span class="red">if you’re early.</span>',
+         p='A select group of beta early adopters never pay. Everyone else: $5.99 once at launch. Never a subscription.',
+         stage=f'<div class="stage ticketwrap">{ticket}</div>',
+         sfx=('sfx y', 'LIMITED!', 'right:60px;top:820px;transform:rotate(7deg)'),
+         tag=None),
+    dict(theme='dark', eyebrow='Beta open now', h1='Get in<br><span class="red">early.</span>',
+         p='The free-for-life window closes before public launch. Three taps and you’re in.',
+         stage=('<div class="steps-big">'
+                '<div><b>1</b><span>Tap the link in bio<small>dexeontcg.com</small></span></div>'
+                '<div><b>2</b><span>Drop your email<small>One note at launch, nothing else</small></span></div>'
+                '<div><b>3</b><span>TestFlight opens<small>Install the beta and start catching</small></span></div>'
+                '</div>'),
+         sfx=('sfx', 'GO!', 'right:70px;top:820px;transform:rotate(7deg)'),
+         tag=None),
+]
+
+os.makedirs('assets/social/stories', exist_ok=True)
+for f in glob.glob('marketing/story-*.html'):
+    os.remove(f)
+for n, st in enumerate(STORIES, 1):
+    brand = '../assets/logo/dexeon-wordmark-nav.png' if st['theme'] == 'light' else '../assets/logo/dexeon-wordmark-nav-dark.png'
+    sfx_cls, sfx_txt, sfx_pos = st['sfx']
+    tag_html = f'<div class="stat-tag" style="{st["tag"][1]}">{st["tag"][0]}</div>' if st['tag'] else ''
+    body = (
+        f'<div class="shot"><div class="halft"></div><div class="kana-bg" aria-hidden="true">デクセオン</div>'
+        f'<img class="tile-brand" src="{brand}" alt="">'
+        f'<div class="head"><span class="eyebrow">{st["eyebrow"]}</span><h1>{st["h1"]}</h1><p>{st["p"]}</p></div>'
+        f'<div class="speed"></div>'
+        f'<span class="{sfx_cls}" style="{sfx_pos}">{sfx_txt}</span>{tag_html}'
+        f'{st["stage"]}'
+        f'<div class="tile-url">dexeontcg.com · link in bio</div></div>')
+    open(f'marketing/story-{n:02d}.html', 'w').write(
+        f'<!doctype html>\n<html lang="en" data-theme="{st["theme"]}"><head>{HEAD}<style>{STORY_CSS}</style></head><body>{body}</body></html>')
+
+srv = subprocess.Popen([sys.executable, '-m', 'http.server', '8765'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+time.sleep(1)
+try:
+    for n in range(1, len(STORIES) + 1):
+        subprocess.run([CHROME, '--headless=new', '--disable-gpu', '--hide-scrollbars', '--force-device-scale-factor=1',
+                        '--window-size=1080,1920', '--virtual-time-budget=8000',
+                        f'--screenshot=assets/social/stories/story-{n:02d}.png',
+                        f'http://localhost:8765/marketing/story-{n:02d}.html'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        print('rendered story', n)
 finally:
     srv.terminate()
 
