@@ -37,6 +37,7 @@ home = grab_phone('Mockup 1:')
 binder = grab_phone('Mockup 3:')
 leaderboard = grab_phone('Mockup 5:')
 chat = grab_phone('Mockup 6:')
+trades = grab_phone('Mockup 7:')
 
 STATUS_LIGHT = '''<div class="status"><span>9:41</span><span class="r">
 <svg viewBox="0 0 14 11"><rect x="0" y="7" width="2.5" height="4"/><rect x="3.8" y="5" width="2.5" height="6"/><rect x="7.6" y="2.5" width="2.5" height="8.5"/><rect x="11.4" y="0" width="2.5" height="11"/></svg>
@@ -127,6 +128,11 @@ SCREENS = {
         h1='Send the<br><span class="red">card itself.</span>',
         p='Cards and binders travel as attachments that open in the app on tap, price and all.',
         sfx=('sfx y', 'やった!'), tag='<b>DM</b>cards &amp; binders', phone=chat),
+    'screen-6-trades': dict(
+        theme='light', eyebrow='Community trade board',
+        h1='List it.<br><span class="red">Trade it.</span>',
+        p='Tap Trade on a card you own and it\'s on the board for every trainer. Cards on your chase list wear a Wanted badge.',
+        sfx=('sfx', 'DEAL!'), tag='<b>1 tap</b>messages the owner', phone=trades),
 }
 
 # Per-size layout: canvas CSS plus (sticker, tag) positions for each screen.
@@ -145,6 +151,7 @@ SIZES = {
             'screen-3-binders': ('right:60px;top:870px;transform:rotate(7deg)', 'left:60px;top:2330px;transform:rotate(-4deg)'),
             'screen-4-social':  ('right:60px;top:870px;transform:rotate(7deg)', 'left:60px;top:2470px;transform:rotate(-4deg)'),
             'screen-5-messages':('right:60px;top:1010px;transform:rotate(7deg)', 'right:60px;top:2400px;transform:rotate(4deg)'),
+            'screen-6-trades':  ('right:60px;top:870px;transform:rotate(7deg)', 'left:60px;top:2330px;transform:rotate(-4deg)'),
         }),
     'ipad-13': dict(
         w=2064, h=2752, out='assets/appstore/ipad-13',
@@ -161,24 +168,52 @@ SIZES = {
             'screen-3-binders': ('right:40px;top:300px;transform:rotate(7deg)', 'left:120px;top:1560px;transform:rotate(-4deg)'),
             'screen-4-social':  ('right:40px;top:300px;transform:rotate(7deg)', 'left:120px;top:1560px;transform:rotate(-4deg)'),
             'screen-5-messages':('left:980px;top:560px;transform:rotate(-8deg)', 'left:120px;top:1560px;transform:rotate(-3deg)'),
+            'screen-6-trades':  ('right:40px;top:300px;transform:rotate(7deg)', 'left:120px;top:1560px;transform:rotate(-4deg)'),
+        }),
+    # Instagram 4:5 feed tiles: wordmark on top, headline, phone bleeding off the bottom, URL pill.
+    'instagram-4x5': dict(
+        w=1080, h=1350, out='assets/social', social=True,
+        css='''html,body{width:1080px;height:1350px}
+          .kana-bg{font-size:420px;top:-30px;left:-20px}
+          .tile-brand{position:absolute;top:44px;left:50%;transform:translateX(-50%);height:78px;width:auto;z-index:4}
+          .head{left:64px;right:64px;top:152px;text-align:center}
+          .head .eyebrow{font-size:22px;letter-spacing:.2em;gap:14px} .head .eyebrow::before{width:44px;height:5px}
+          .head h1{font-size:132px;margin-top:22px;text-shadow:6px 6px 0 var(--paper),11px 11px 0 var(--ink)}
+          .head p{font-size:28px;max-width:880px;margin:26px auto 0}
+          .stage{left:50%;top:660px;transform:translateX(-50%) scale(2.6);transform-origin:top center}
+          .speed{--cx:50%;--cy:78%}
+          .sfx{font-size:62px;padding:12px 28px 8px;border-width:6px;box-shadow:10px 10px 0 var(--ink)}
+          .stat-tag{font-size:26px;padding:18px 26px;border-width:6px;box-shadow:10px 10px 0 var(--ink)} .stat-tag b{font-size:66px}
+          .tile-url{position:absolute;left:50%;bottom:36px;transform:translateX(-50%);z-index:6;background:var(--ink);color:var(--paper);font-weight:900;font-size:22px;letter-spacing:.08em;padding:12px 26px;border:3px solid var(--paper);white-space:nowrap}''',
+        pos={
+            'screen-1-pokedex': ('right:36px;top:700px;transform:rotate(8deg)', 'left:36px;top:1040px;transform:rotate(-4deg)'),
+            'screen-2-cards':   ('right:36px;top:640px;transform:rotate(7deg)', 'right:36px;top:1020px;transform:rotate(4deg)'),
+            'screen-3-binders': ('right:36px;top:640px;transform:rotate(7deg)', 'left:36px;top:1060px;transform:rotate(-4deg)'),
+            'screen-4-social':  ('right:36px;top:640px;transform:rotate(7deg)', 'left:36px;top:590px;transform:rotate(-4deg)'),
+            'screen-5-messages':('right:36px;top:700px;transform:rotate(7deg)', 'left:36px;top:1080px;transform:rotate(-4deg)'),
+            'screen-6-trades':  ('left:36px;top:660px;transform:rotate(-8deg)', 'right:36px;top:1060px;transform:rotate(4deg)'),
         }),
 }
 
 # Remove only generated pages; icon.html and icon-pokeball.html are hand-written sources.
-for f in glob.glob('marketing/iphone-*.html') + glob.glob('marketing/ipad-*.html') + glob.glob('marketing/og.html'):
+for f in glob.glob('marketing/iphone-*.html') + glob.glob('marketing/ipad-*.html') + glob.glob('marketing/instagram-*.html') + glob.glob('marketing/og.html'):
     os.remove(f)
 
 for sname, sz in SIZES.items():
     os.makedirs(sz['out'], exist_ok=True)
     for name, sc in SCREENS.items():
         sfx_pos, tag_pos = sz['pos'][name]
+        social = sz.get('social', False)
+        brand = ('<img class="tile-brand" src="../assets/logo/dexeon-wordmark-nav.png" alt="">' if social and sc['theme'] == 'light'
+                 else '<img class="tile-brand" src="../assets/logo/dexeon-wordmark-nav-dark.png" alt="">' if social else '')
+        url = '<div class="tile-url">dexeontcg.com · now in beta</div>' if social else ''
         body = (
-            f'<div class="shot"><div class="halft"></div><div class="kana-bg" aria-hidden="true">デクセオン</div>'
+            f'<div class="shot"><div class="halft"></div><div class="kana-bg" aria-hidden="true">デクセオン</div>{brand}'
             f'<div class="head"><span class="eyebrow">{sc["eyebrow"]}</span><h1>{sc["h1"]}</h1><p>{sc["p"]}</p></div>'
             f'<div class="speed"></div>'
             f'<span class="{sc["sfx"][0]}" style="{sfx_pos}">{sc["sfx"][1]}</span>'
             f'<div class="stat-tag" style="{tag_pos}">{sc["tag"]}</div>'
-            f'<div class="stage">{sc["phone"]}</div></div>')
+            f'<div class="stage">{sc["phone"]}</div>{url}</div>')
         open(f'marketing/{sname}-{name}.html', 'w').write(
             f'<!doctype html>\n<html lang="en" data-theme="{sc["theme"]}"><head>{HEAD}'
             f'<style>{sz["css"]}</style></head><body>{body}</body></html>')

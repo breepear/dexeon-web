@@ -49,6 +49,8 @@ python3 marketing/build.py
 
 Edit the copy or sticker positions in `marketing/build.py` and re-run to regenerate.
 
+The same run also renders six 1080×1350 Instagram (4:5) tiles into `assets/social/`, one per feature, built from the landing page's phone mockups with the wordmark on top and a `dexeontcg.com` pill at the bottom.
+
 The same script also renders the social share image `assets/og.png` (1200×630) used by the Open Graph and Twitter card tags in `index.html`. Favicons (`assets/favicon.png`, `assets/favicon-32.png`, `assets/apple-touch-icon.png`) are downscaled from the dark D app icon (`assets/app-icon-dark.png`).
 
 ## Wordmark
