@@ -172,7 +172,7 @@ SIZES = {
         }),
     # Instagram 4:5 feed tiles: wordmark on top, headline, phone bleeding off the bottom, URL pill.
     'instagram-4x5': dict(
-        w=1080, h=1350, out='assets/social', social=True,
+        w=1080, h=1350, out='assets/social', social=True, themes={'screen-3-binders': 'light'},
         css='''html,body{width:1080px;height:1350px}
           .kana-bg{font-size:420px;top:-30px;left:-20px}
           .tile-brand{position:absolute;top:44px;left:50%;transform:translateX(-50%);height:78px;width:auto;z-index:4}
@@ -204,7 +204,8 @@ for sname, sz in SIZES.items():
     for name, sc in SCREENS.items():
         sfx_pos, tag_pos = sz['pos'][name]
         social = sz.get('social', False)
-        brand = ('<img class="tile-brand" src="../assets/logo/dexeon-wordmark-nav.png" alt="">' if social and sc['theme'] == 'light'
+        theme = sz.get('themes', {}).get(name, sc['theme'])
+        brand = ('<img class="tile-brand" src="../assets/logo/dexeon-wordmark-nav.png" alt="">' if social and theme == 'light'
                  else '<img class="tile-brand" src="../assets/logo/dexeon-wordmark-nav-dark.png" alt="">' if social else '')
         url = '<div class="tile-url">dexeontcg.com · now in beta</div>' if social else ''
         body = (
@@ -215,7 +216,7 @@ for sname, sz in SIZES.items():
             f'<div class="stat-tag" style="{tag_pos}">{sc["tag"]}</div>'
             f'<div class="stage">{sc["phone"]}</div>{url}</div>')
         open(f'marketing/{sname}-{name}.html', 'w').write(
-            f'<!doctype html>\n<html lang="en" data-theme="{sc["theme"]}"><head>{HEAD}'
+            f'<!doctype html>\n<html lang="en" data-theme="{theme}"><head>{HEAD}'
             f'<style>{sz["css"]}</style></head><body>{body}</body></html>')
 print('built html for', ', '.join(SIZES))
 
