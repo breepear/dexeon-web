@@ -196,7 +196,7 @@ SIZES = {
 }
 
 # Remove only generated pages; icon.html and icon-pokeball.html are hand-written sources.
-for f in glob.glob('marketing/iphone-*.html') + glob.glob('marketing/ipad-*.html') + glob.glob('marketing/instagram-*.html') + glob.glob('marketing/og.html') + glob.glob('marketing/poster.html') + glob.glob('marketing/story-*.html') + glob.glob('marketing/feed-*.html'):
+for f in glob.glob('marketing/iphone-*.html') + glob.glob('marketing/ipad-*.html') + glob.glob('marketing/instagram-*.html') + glob.glob('marketing/og.html') + glob.glob('marketing/poster.html') + glob.glob('marketing/story-*.html') + glob.glob('marketing/feed-*.html') + glob.glob('marketing/remix-*.html'):
     os.remove(f)
 
 for sname, sz in SIZES.items():
@@ -461,6 +461,9 @@ try:
         print('rendered feed', n)
 finally:
     srv.terminate()
+
+# ── Story remix (ten one-off layouts) lives in marketing/remix.py ──────────────
+exec(open(os.path.join('marketing', 'remix.py'), encoding='utf-8').read())
 
 # ── "Everything" poster: 1080 x 1080 square for Instagram ────────────────────
 POSTER_CSS = """
