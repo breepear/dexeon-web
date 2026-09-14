@@ -464,6 +464,7 @@ finally:
 
 # ── Story remix (ten one-off layouts) lives in marketing/remix.py ──────────────
 exec(open(os.path.join('marketing', 'remix.py'), encoding='utf-8').read())
+exec(open(os.path.join('marketing', 'about.py'), encoding='utf-8').read())
 
 # ── "Everything" poster: 1080 x 1080 square for Instagram ────────────────────
 POSTER_CSS = """
