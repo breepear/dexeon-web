@@ -120,11 +120,11 @@
   .logo .wm-dark{display:none}
   @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]) .logo .wm-light{display:none} :root:not([data-theme="light"]) .logo .wm-dark{display:block} }
   :root[data-theme="dark"] .logo .wm-light{display:none} :root[data-theme="dark"] .logo .wm-dark{display:block}
-  .nav nav{display:flex; gap:28px}
+  .nav nav{display:flex; gap:28px; flex:1; justify-content:center}
   .nav nav a{text-decoration:none; font-weight:800; font-size:14px; letter-spacing:.04em; text-transform:uppercase}
   .nav nav a:hover{color:var(--red)}
   .nav .btn{padding:10px 18px; font-size:14px}
-  .nav-ig{margin-left:auto; margin-right:14px; width:42px; height:42px; display:grid; place-items:center; border:3px solid var(--ink); background:var(--paper-2); box-shadow:3px 3px 0 var(--ink); color:var(--ink)} .nav-ig svg{width:20px; height:20px} .nav-ig:hover{color:var(--red)}
+  .nav-ig{margin-right:14px; width:42px; height:42px; display:grid; place-items:center; border:3px solid var(--ink); background:var(--paper-2); box-shadow:3px 3px 0 var(--ink); color:var(--ink)} .nav-ig svg{width:20px; height:20px} .nav-ig:hover{color:var(--red)}
   @media (max-width:820px){ .nav-ig{margin-left:auto} }
   @media (max-width:820px){ .nav nav{display:none} }
 
