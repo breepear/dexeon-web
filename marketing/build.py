@@ -196,7 +196,7 @@ SIZES = {
 }
 
 # Remove only generated pages; icon.html and icon-pokeball.html are hand-written sources.
-for f in glob.glob('marketing/iphone-*.html') + glob.glob('marketing/ipad-*.html') + glob.glob('marketing/instagram-*.html') + glob.glob('marketing/og.html') + glob.glob('marketing/poster.html') + glob.glob('marketing/story-*.html'):
+for f in glob.glob('marketing/iphone-*.html') + glob.glob('marketing/ipad-*.html') + glob.glob('marketing/instagram-*.html') + glob.glob('marketing/og.html') + glob.glob('marketing/poster.html') + glob.glob('marketing/story-*.html') + glob.glob('marketing/feed-*.html'):
     os.remove(f)
 
 for sname, sz in SIZES.items():
@@ -378,6 +378,87 @@ try:
                         f'--screenshot=assets/social/stories/story-{n:02d}.png',
                         f'http://localhost:8765/marketing/story-{n:02d}.html'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         print('rendered story', n)
+finally:
+    srv.terminate()
+
+# ── Instagram feed set: ten 1080 x 1350 (4:5) frames, mixed light / dark ───────
+FEED_CSS = """
+html,body{width:1080px;height:1350px}
+.kana-bg{font-size:420px;top:-30px;left:-20px}
+.tile-brand{position:absolute;top:44px;left:50%;transform:translateX(-50%);height:76px;width:auto;z-index:4}
+.head{left:64px;right:64px;top:150px;text-align:center}
+.head .eyebrow{font-size:21px;letter-spacing:.2em;gap:14px} .head .eyebrow::before{width:44px;height:5px}
+.head h1{font-size:122px;margin-top:20px;line-height:.9;text-shadow:6px 6px 0 var(--paper),11px 11px 0 var(--ink)}
+.head p{font-size:27px;max-width:880px;margin:22px auto 0}
+.speed{--cx:50%;--cy:78%}
+.stage{left:50%;transform-origin:top center;z-index:3}
+.stage.ph{top:640px;transform:translateX(-50%) scale(2.6)}
+.stage.fanwrap{top:640px;width:1000px;transform:translateX(-50%) scale(.98)}
+.stage.fanwrap .fan{height:620px} .stage.fanwrap .fan figure{width:250px}
+.stage.fanwrap .fan .c1{left:0;top:18%} .stage.fanwrap .fan .c2{left:17%;top:6%} .stage.fanwrap .fan .c3{left:35%;top:0}
+.stage.fanwrap .fan .c4{left:53%;top:4%} .stage.fanwrap .fan .c5{left:70%;top:14%} .stage.fanwrap .fan .c6{left:28%;top:44%}
+.stage.fanwrap .fan .sfx{display:none}
+.stage.scanwrap{top:640px;width:840px;transform:translateX(-50%)}
+.stage.scanwrap .scan-mock{border:6px solid var(--ink);box-shadow:12px 12px 0 var(--ink)}
+.stage.scanwrap .scan-mock i{width:52px;height:52px;border-width:8px}
+.stage.scanwrap .scan-mock i:nth-child(1){top:24px;left:24px} .stage.scanwrap .scan-mock i:nth-child(2){top:24px;right:24px}
+.stage.scanwrap .scan-mock i:nth-child(3){bottom:24px;left:24px} .stage.scanwrap .scan-mock i:nth-child(4){bottom:24px;right:24px}
+.stage.scanwrap .scan-mock .match{font-size:28px;padding:12px 26px;bottom:30px;border-width:4px}
+.stage.ticketwrap{top:640px;width:720px;transform:translateX(-50%) scale(1.02)}
+.stage.ticketwrap .ticket{padding:40px 40px 36px;gap:24px} .stage.ticketwrap .ticket .lbl{font-size:14px}
+.stage.ticketwrap .ticket .lbl b{font-size:26px} .stage.ticketwrap .ticket .lbl span{font-size:17px;max-width:28ch}
+.stage.ticketwrap .ticket .price{font-size:88px} .stage.ticketwrap .ticket .price small{font-size:14px}
+.stage.ticketwrap .ticket .never{font-size:18px} .stage.ticketwrap .ticket .sfx{display:none}
+.steps-big{position:absolute;left:80px;right:80px;top:660px;display:grid;gap:22px;z-index:3}
+.steps-big div{display:grid;grid-template-columns:88px 1fr;gap:22px;align-items:center;background:var(--paper-2);border:5px solid var(--ink);box-shadow:10px 10px 0 var(--ink);padding:22px 26px}
+.steps-big div b{font-family:var(--display);font-weight:400;font-size:58px;line-height:1;color:var(--red);text-align:center}
+.steps-big div span{font-size:31px;font-weight:900;line-height:1.2}
+.steps-big div small{display:block;font-size:19px;font-weight:700;color:var(--ink-soft);margin-top:4px}
+.sfx{font-size:62px;padding:12px 28px 8px;border-width:6px;box-shadow:10px 10px 0 var(--ink)}
+.stat-tag{font-size:26px;padding:18px 26px;border-width:6px;box-shadow:10px 10px 0 var(--ink)} .stat-tag b{font-size:66px}
+.tile-url{position:absolute;left:50%;bottom:36px;transform:translateX(-50%);z-index:6;background:var(--ink);color:var(--paper);font-weight:900;font-size:22px;letter-spacing:.08em;padding:12px 26px;border:3px solid var(--paper);white-space:nowrap}
+"""
+# Same ten stories, re-rhythmed for the grid (two lights, one dark, ...) and repositioned for 4:5.
+FEED_THEMES = ['light', 'dark', 'light', 'light', 'dark', 'light', 'dark', 'dark', 'light', 'dark']
+FEED_POS = [
+    ('right:36px;top:690px;transform:rotate(8deg)',  'left:36px;top:1040px;transform:rotate(-4deg)'),
+    ('right:36px;top:660px;transform:rotate(7deg)',  'left:36px;top:1020px;transform:rotate(-4deg)'),
+    ('right:36px;top:610px;transform:rotate(7deg)',  'left:36px;top:600px;transform:rotate(-4deg)'),
+    ('right:36px;top:660px;transform:rotate(7deg)',  'left:36px;top:1020px;transform:rotate(-4deg)'),
+    ('right:40px;top:600px;transform:rotate(7deg)',  'left:36px;top:548px;transform:rotate(-4deg)'),
+    ('right:36px;top:660px;transform:rotate(7deg)',  'left:30px;top:1040px;transform:rotate(-4deg)'),
+    ('right:36px;top:690px;transform:rotate(7deg)',  'right:30px;top:1170px;transform:rotate(4deg)'),
+    ('left:36px;top:660px;transform:rotate(-8deg)',  'right:36px;top:1040px;transform:rotate(4deg)'),
+    ('right:40px;top:610px;transform:rotate(7deg)',  None),
+    ('right:50px;top:600px;transform:rotate(7deg)',  None),
+]
+os.makedirs('assets/social/feed', exist_ok=True)
+for f in glob.glob('marketing/feed-*.html'):
+    os.remove(f)
+for n, (st, theme, (sfx_pos, tag_pos)) in enumerate(zip(STORIES, FEED_THEMES, FEED_POS), 1):
+    brand = '../assets/logo/dexeon-wordmark-nav.png' if theme == 'light' else '../assets/logo/dexeon-wordmark-nav-dark.png'
+    sfx_cls, sfx_txt, _ = st['sfx']
+    tag_html = f'<div class="stat-tag" style="{tag_pos}">{st["tag"][0]}</div>' if (st['tag'] and tag_pos) else ''
+    body = (
+        f'<div class="shot"><div class="halft"></div><div class="kana-bg" aria-hidden="true">デクセオン</div>'
+        f'<img class="tile-brand" src="{brand}" alt="">'
+        f'<div class="head"><span class="eyebrow">{st["eyebrow"]}</span><h1>{st["h1"]}</h1><p>{st["p"]}</p></div>'
+        f'<div class="speed"></div>'
+        f'<span class="{sfx_cls}" style="{sfx_pos}">{sfx_txt}</span>{tag_html}'
+        f'{st["stage"]}'
+        f'<div class="tile-url">dexeontcg.com · now in beta</div></div>')
+    open(f'marketing/feed-{n:02d}.html', 'w').write(
+        f'<!doctype html>\n<html lang="en" data-theme="{theme}"><head>{HEAD}<style>{FEED_CSS}</style></head><body>{body}</body></html>')
+
+srv = subprocess.Popen([sys.executable, '-m', 'http.server', '8765'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+time.sleep(1)
+try:
+    for n in range(1, len(STORIES) + 1):
+        subprocess.run([CHROME, '--headless=new', '--disable-gpu', '--hide-scrollbars', '--force-device-scale-factor=1',
+                        '--window-size=1080,1350', '--virtual-time-budget=8000',
+                        f'--screenshot=assets/social/feed/feed-{n:02d}.png',
+                        f'http://localhost:8765/marketing/feed-{n:02d}.html'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        print('rendered feed', n)
 finally:
     srv.terminate()
 

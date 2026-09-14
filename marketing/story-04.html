@@ -84,10 +84,12 @@
   .logo .wm-dark{display:none}
   @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]) .logo .wm-light{display:none} :root:not([data-theme="light"]) .logo .wm-dark{display:block} }
   :root[data-theme="dark"] .logo .wm-light{display:none} :root[data-theme="dark"] .logo .wm-dark{display:block}
-  .nav nav{display:flex; gap:28px}
+  .nav nav{display:flex; gap:28px; flex:1; justify-content:center}
   .nav nav a{text-decoration:none; font-weight:800; font-size:14px; letter-spacing:.04em; text-transform:uppercase}
   .nav nav a:hover{color:var(--red)}
   .nav .btn{padding:10px 18px; font-size:14px}
+  .nav-ig{margin-right:14px; width:42px; height:42px; display:grid; place-items:center; border:3px solid var(--ink); background:var(--paper-2); box-shadow:3px 3px 0 var(--ink); color:var(--ink)} .nav-ig svg{width:20px; height:20px} .nav-ig:hover{color:var(--red)}
+  @media (max-width:820px){ .nav-ig{margin-left:auto} }
   @media (max-width:820px){ .nav nav{display:none} }
 
   /* ───────────── Hero ───────────── */
@@ -359,6 +361,7 @@
   footer .fl{display:flex; gap:22px; justify-content:flex-end; flex-wrap:wrap; font-weight:800; text-transform:uppercase; letter-spacing:.08em; font-size:12px}
   footer .fl a{text-decoration:none; color:var(--paper)} footer .fl a:hover{color:var(--yellow)}
   footer .mark{font-family:var(--display); font-size:22px; letter-spacing:.04em; margin-bottom:10px}
+  footer .fl .ig{display:inline-flex; align-items:center; gap:6px; color:var(--yellow)} footer .fl .ig svg{width:16px; height:16px}
   @media (max-width:820px){ footer .wrap{grid-template-columns:1fr} footer .fl{justify-content:flex-start} }
 
   /* ───────────── Beta form ───────────── */
