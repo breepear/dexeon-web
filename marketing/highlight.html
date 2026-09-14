@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>Dexeon highlight covers</title>
 <script>
-  // Pick the glyph with ?v=about | binders | trades | beta (default: about).
+  // Pick the glyph with ?v=about | binders | trades | beta | scan | prices | leaders (default: about).
   var v = (location.search.match(/v=(\w+)/) || [])[1] || 'about';
   document.documentElement.dataset.v = v;
 </script>
@@ -27,6 +27,9 @@
   :root[data-v="binders"] g.binders{display:block}
   :root[data-v="trades"]  g.trades{display:block}
   :root[data-v="beta"]    g.beta{display:block}
+  :root[data-v="scan"]    g.scan{display:block}
+  :root[data-v="prices"]  g.prices{display:block}
+  :root[data-v="leaders"] g.leaders{display:block}
 </style>
 </head>
 <body>
@@ -138,6 +141,111 @@
         <path d="M-200 40 L200 -60 L-40 160 Z" fill="#F2F3EF" stroke="#121114" stroke-width="16" stroke-linejoin="round"/>
         <path d="M-200 40 L200 -60 L-30 60 Z" fill="#C8322E" stroke="#121114" stroke-width="16" stroke-linejoin="round"/>
         <path d="M-30 60 L-40 160 L10 90 Z" fill="#B9BCB5" stroke="#121114" stroke-width="12" stroke-linejoin="round"/>
+      </g>
+    </g>
+
+    <!-- SCAN: a card inside a camera viewfinder, corner brackets + a red scan line -->
+    <g class="v scan">
+      <!-- the card, slightly tilted -->
+      <g transform="translate(540 540) rotate(-8)">
+        <rect x="-126" y="-176" width="260" height="360" rx="22" fill="#121114"/>
+        <rect x="-146" y="-196" width="260" height="360" rx="22" fill="#C8322E" stroke="#121114" stroke-width="14"/>
+        <rect x="-132" y="-182" width="232" height="332" rx="16" fill="none" stroke="#F2F3EF" stroke-width="6"/>
+        <rect x="-106" y="-150" width="180" height="150" rx="10" fill="#F2F3EF" stroke="#121114" stroke-width="8"/>
+        <path d="M-96 -30 C -60 -90, -20 -70, 10 -40 C 40 -20, 50 -60, 64 -70 L 64 -10 L -96 -10 Z" fill="#B9BCB5" opacity=".55"/>
+        <circle cx="30" cy="-100" r="22" fill="#F7C728" stroke="#121114" stroke-width="7"/>
+        <rect x="-106" y="26" width="130" height="18" rx="9" fill="#F2F3EF" stroke="#121114" stroke-width="7"/>
+        <rect x="-106" y="70" width="180" height="18" rx="9" fill="#F2F3EF" stroke="#121114" stroke-width="7"/>
+        <rect x="-106" y="114" width="100" height="18" rx="9" fill="#F2F3EF" stroke="#121114" stroke-width="7"/>
+      </g>
+      <!-- viewfinder brackets -->
+      <g fill="none" stroke="#121114" stroke-width="30" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M300 400 L300 300 L400 300"/>
+        <path d="M680 300 L780 300 L780 400"/>
+        <path d="M780 680 L780 780 L680 780"/>
+        <path d="M400 780 L300 780 L300 680"/>
+      </g>
+      <g fill="none" stroke="#F7C728" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M300 400 L300 300 L400 300"/>
+        <path d="M680 300 L780 300 L780 400"/>
+        <path d="M780 680 L780 780 L680 780"/>
+        <path d="M400 780 L300 780 L300 680"/>
+      </g>
+      <!-- scan line -->
+      <rect x="250" y="520" width="580" height="30" rx="15" fill="#121114" transform="translate(10 10)"/>
+      <rect x="250" y="520" width="580" height="30" rx="15" fill="#2FA44F" stroke="#121114" stroke-width="10"/>
+      <!-- match tick -->
+      <g transform="translate(760 760)">
+        <circle r="66" fill="#121114"/>
+        <circle cx="-8" cy="-8" r="66" fill="#2FA44F" stroke="#121114" stroke-width="12"/>
+        <path d="M-36 -4 l22 22 l44 -48" fill="none" stroke="#fff" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" transform="translate(-8 -8)"/>
+      </g>
+    </g>
+
+    <!-- PRICES: a card with a chart line climbing off it, price tag on top -->
+    <g class="v prices">
+      <!-- card, lying back-left -->
+      <g transform="translate(430 600) rotate(-12)">
+        <rect x="-116" y="-156" width="240" height="330" rx="20" fill="#121114"/>
+        <rect x="-136" y="-176" width="240" height="330" rx="20" fill="#2E5AAC" stroke="#121114" stroke-width="14"/>
+        <rect x="-122" y="-162" width="212" height="302" rx="14" fill="none" stroke="#F2F3EF" stroke-width="6"/>
+        <rect x="-98" y="-134" width="164" height="134" rx="10" fill="#F2F3EF" stroke="#121114" stroke-width="8"/>
+        <rect x="-98" y="24" width="120" height="18" rx="9" fill="#F2F3EF" stroke="#121114" stroke-width="7"/>
+        <rect x="-98" y="66" width="164" height="18" rx="9" fill="#F2F3EF" stroke="#121114" stroke-width="7"/>
+      </g>
+      <!-- chart bars behind the line -->
+      <g stroke="#121114" stroke-width="10">
+        <rect x="560" y="640" width="70" height="140" rx="10" fill="#B9BCB5"/>
+        <rect x="650" y="560" width="70" height="220" rx="10" fill="#B9BCB5"/>
+        <rect x="740" y="480" width="70" height="300" rx="10" fill="#F7C728"/>
+      </g>
+      <!-- climbing line with arrow head -->
+      <path d="M330 720 L470 640 L560 680 L660 540 L770 470" fill="none" stroke="#121114" stroke-width="34" stroke-linecap="round" stroke-linejoin="round" transform="translate(8 8)"/>
+      <path d="M330 720 L470 640 L560 680 L660 540 L770 470" fill="none" stroke="#2FA44F" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+      <g transform="translate(778 466) rotate(-32.5)">
+        <path d="M-34 -44 L58 0 L-34 44 Z" fill="#121114" transform="translate(8 8)"/>
+        <path d="M-34 -44 L58 0 L-34 44 Z" fill="#2FA44F" stroke="#121114" stroke-width="12" stroke-linejoin="round"/>
+      </g>
+      <!-- hanging price tag (blank) -->
+      <g transform="translate(690 330) rotate(14)">
+        <path d="M-90 -50 L40 -50 L110 0 L40 50 L-90 50 Z" fill="#121114" transform="translate(12 12)"/>
+        <path d="M-90 -50 L40 -50 L110 0 L40 50 L-90 50 Z" fill="#C8322E" stroke="#121114" stroke-width="12" stroke-linejoin="round"/>
+        <circle cx="52" cy="0" r="14" fill="#F2F3EF" stroke="#121114" stroke-width="8"/>
+        <rect x="-70" y="-10" width="96" height="20" rx="10" fill="#F2F3EF" stroke="#121114" stroke-width="7"/>
+      </g>
+    </g>
+
+    <!-- LEADERS: a trophy on the top step of a three-step podium -->
+    <g class="v leaders">
+      <!-- podium -->
+      <g stroke="#121114" stroke-width="14" stroke-linejoin="round">
+        <rect x="266" y="620" width="180" height="180" rx="16" fill="#121114" transform="translate(14 14)"/>
+        <rect x="266" y="620" width="180" height="180" rx="16" fill="#B9BCB5"/>
+        <rect x="634" y="670" width="180" height="130" rx="16" fill="#121114" transform="translate(14 14)"/>
+        <rect x="634" y="670" width="180" height="130" rx="16" fill="#F2F3EF"/>
+        <rect x="446" y="540" width="188" height="260" rx="16" fill="#121114" transform="translate(14 14)"/>
+        <rect x="446" y="540" width="188" height="260" rx="16" fill="#C8322E"/>
+      </g>
+      <!-- laurel dots on the steps -->
+      <g fill="#F2F3EF" stroke="#121114" stroke-width="8">
+        <circle cx="356" cy="710" r="26"/><circle cx="724" cy="735" r="26"/>
+      </g>
+      <circle cx="540" cy="670" r="34" fill="#F7C728" stroke="#121114" stroke-width="10"/>
+      <!-- trophy -->
+      <g transform="translate(540 380)">
+        <path d="M-96 -110 L96 -110 L84 20 C 70 80, 40 110, 0 120 C -40 110, -70 80, -84 20 Z" fill="#121114" transform="translate(14 14)"/>
+        <path d="M-96 -110 L96 -110 L84 20 C 70 80, 40 110, 0 120 C -40 110, -70 80, -84 20 Z" fill="#F7C728" stroke="#121114" stroke-width="14" stroke-linejoin="round"/>
+        <path d="M-96 -80 C -170 -80, -170 30, -80 40" fill="none" stroke="#121114" stroke-width="30" stroke-linecap="round"/>
+        <path d="M96 -80 C 170 -80, 170 30, 80 40" fill="none" stroke="#121114" stroke-width="30" stroke-linecap="round"/>
+        <path d="M-96 -80 C -170 -80, -170 30, -80 40" fill="none" stroke="#F7C728" stroke-width="14" stroke-linecap="round"/>
+        <path d="M96 -80 C 170 -80, 170 30, 80 40" fill="none" stroke="#F7C728" stroke-width="14" stroke-linecap="round"/>
+        <rect x="-22" y="118" width="44" height="40" fill="#121114"/>
+        <rect x="-70" y="152" width="140" height="34" rx="8" fill="#121114" transform="translate(10 10)"/>
+        <rect x="-70" y="152" width="140" height="34" rx="8" fill="#F2F3EF" stroke="#121114" stroke-width="12"/>
+        <!-- shine -->
+        <path d="M-56 -78 L-46 -10" stroke="#F2F3EF" stroke-width="12" stroke-linecap="round"/>
+        <!-- sparkle burst -->
+        <path d="M150 -170 L162 -130 L202 -118 L162 -106 L150 -66 L138 -106 L98 -118 L138 -130 Z" fill="#F2F3EF" stroke="#121114" stroke-width="10" stroke-linejoin="round"/>
       </g>
     </g>
   </svg>
