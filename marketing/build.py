@@ -56,7 +56,7 @@ carddetail = f'''<div class="phone">
   <div class="cd-price mp">
     <small class="sec">Market Price</small>
     <div class="cd-big">$178.43</div>
-    <small class="sec">Holofoil · TCGplayer</small>
+    <small class="sec">Holofoil · Market</small>
     <div class="cd-row"><div><small class="sec">Low</small><b>$150.00</b></div><div><small class="sec">Mid</small><b>$180.00</b></div><div><small class="sec">High</small><b>$349.99</b></div></div>
   </div>
   <div class="cd-actions">
@@ -65,7 +65,7 @@ carddetail = f'''<div class="phone">
     <span class="on o"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.6 7 .9-5.2 4.9 1.4 7.1L12 18l-6.2 3.5 1.4-7.1L2 9.5l7-.9z"/></svg>Showcasing</span>
     <span class="k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13l-3-3M20 16H7l3 3"/></svg>Trade</span>
   </div>
-  <div class="cd-link sec">↗ View on TCGplayer</div>
+  <div class="cd-link sec">↗ Price history · 90 days</div>
 </div>
 <div class="home-bar"></div>
 </div>
@@ -84,7 +84,7 @@ body{background:var(--paper);position:relative;font-family:var(--body)}
 .head .eyebrow::before{width:70px;height:8px}
 .head h1{font-family:var(--display);font-weight:400;text-transform:uppercase;line-height:.9;margin:40px 0 0;transform:skewX(-6deg);text-shadow:10px 10px 0 var(--paper),18px 18px 0 var(--ink)}
 .head h1 .red{color:var(--red)}
-.head p{font-size:46px;line-height:1.3;color:var(--ink-soft);font-weight:700}
+.head p{font-size:46px;line-height:1.3;color:var(--ink-soft);font-weight:700;text-wrap:balance}
 .stage{position:absolute;z-index:2}
 .speed{position:absolute;inset:0;pointer-events:none;z-index:1;opacity:.3;
   background:repeating-conic-gradient(from 0deg at var(--cx) var(--cy), var(--ink) 0deg .35deg, transparent .35deg 3deg);
@@ -111,8 +111,8 @@ SCREENS = {
     'screen-2-cards': dict(
         theme='light', eyebrow='Every printing · Live prices',
         h1='Every card.<br><span class="red">Every price.</span>',
-        p='Every card ever printed for a species, with TCGplayer market pricing. Collect it, chase it, trade it, or showcase it.',
-        sfx=('sfx y', 'ドン!'), tag='<b>Daily</b>TCGplayer market prices', phone=carddetail),
+        p='Every card ever printed for a species, with live market pricing. Collect it, chase it, trade it, or showcase it.',
+        sfx=('sfx y', 'ドン!'), tag='<b>Daily</b>market price updates', phone=carddetail),
     'screen-3-binders': dict(
         theme='dark', eyebrow='Binders · 2×2 or 3×3',
         h1='Page like<br><span class="red">a binder.</span>',
@@ -143,7 +143,7 @@ SIZES = {
           .kana-bg{font-size:560px;top:-40px;left:-30px}
           .head{left:80px;right:80px;top:170px;text-align:center}
           .head h1{font-size:196px} .head p{max-width:1000px;margin:56px auto 0}
-          .stage{left:50%;top:900px;transform:translateX(-50%) scale(3);transform-origin:top center}
+          .stage{left:50%;top:860px;transform:translateX(-50%) scale(2.85);transform-origin:top center}
           .speed{--cx:50%;--cy:70%}''',
         pos={
             'screen-1-pokedex': ('right:60px;top:1010px;transform:rotate(8deg)', 'left:60px;top:2200px;transform:rotate(-4deg)'),
@@ -180,7 +180,7 @@ SIZES = {
           .head .eyebrow{font-size:22px;letter-spacing:.2em;gap:14px} .head .eyebrow::before{width:44px;height:5px}
           .head h1{font-size:132px;margin-top:22px;text-shadow:6px 6px 0 var(--paper),11px 11px 0 var(--ink)}
           .head p{font-size:28px;max-width:880px;margin:26px auto 0}
-          .stage{left:50%;top:660px;transform:translateX(-50%) scale(2.6);transform-origin:top center}
+          .stage{left:50%;top:620px;transform:translateX(-50%) scale(2.35);transform-origin:top center}
           .speed{--cx:50%;--cy:78%}
           .sfx{font-size:62px;padding:12px 28px 8px;border-width:6px;box-shadow:10px 10px 0 var(--ink)}
           .stat-tag{font-size:26px;padding:18px 26px;border-width:6px;box-shadow:10px 10px 0 var(--ink)} .stat-tag b{font-size:66px}
@@ -263,11 +263,11 @@ html,body{width:1080px;height:1920px}
 .tile-brand{position:absolute;top:130px;left:50%;transform:translateX(-50%);height:96px;width:auto;z-index:4}
 .head{left:60px;right:60px;top:290px;text-align:center}
 .head .eyebrow{font-size:24px;letter-spacing:.2em;gap:14px} .head .eyebrow::before{width:48px;height:6px}
-.head h1{font-size:150px;margin-top:24px;line-height:.9;text-shadow:7px 7px 0 var(--paper),13px 13px 0 var(--ink)}
-.head p{font-size:32px;max-width:900px;margin:30px auto 0}
+.head h1{font-size:138px;margin-top:22px;line-height:.9;text-shadow:7px 7px 0 var(--paper),13px 13px 0 var(--ink)}
+.head p{font-size:31px;max-width:820px;margin:26px auto 0}
 .speed{--cx:50%;--cy:74%}
 .stage{left:50%;transform-origin:top center;z-index:3}
-.stage.ph{top:820px;transform:translateX(-50%) scale(3)}
+.stage.ph{top:760px;transform:translateX(-50%) scale(2.7)}
 .stage.fanwrap{top:860px;width:1000px;transform:translateX(-50%) scale(1.02)}
 .stage.fanwrap .fan{height:900px} .stage.fanwrap .fan figure{width:300px}
 .stage.fanwrap .fan .c1{left:0;top:18%} .stage.fanwrap .fan .c2{left:17%;top:6%} .stage.fanwrap .fan .c3{left:35%;top:0}
@@ -301,7 +301,7 @@ STORIES = [
          sfx=('sfx', 'GOTCHA!', 'right:50px;top:900px;transform:rotate(8deg)'),
          tag=('<b>1025</b>species · Gen I–IX', 'left:50px;top:1360px;transform:rotate(-4deg)')),
     dict(theme='dark', eyebrow='Every printing · Live prices', h1='Every card.<br><span class="red">Every price.</span>',
-         p='English and Japanese printings with TCGplayer market prices and 90-day trends.',
+         p='English and Japanese printings with live market prices and 90-day price trends.',
          stage=f'<div class="stage ph">{carddetail}</div>',
          sfx=('sfx y', 'ドン!', 'right:50px;top:860px;transform:rotate(7deg)'),
          tag=('<b>Daily</b>market prices', 'left:50px;top:1380px;transform:rotate(-4deg)')),
@@ -309,7 +309,7 @@ STORIES = [
          p='Snap any card and Dexeon identifies the exact printing, then opens it to collect, chase or trade.',
          stage=f'<div class="stage scanwrap">{scanmock}</div>',
          sfx=('sfx', 'SNAP!', 'right:50px;top:800px;transform:rotate(7deg)'),
-         tag=('<b>1 tap</b>from photo to card page', 'left:50px;top:780px;transform:rotate(-4deg)')),
+         tag=('<b>Snap</b>match the exact printing', 'left:50px;top:780px;transform:rotate(-4deg)')),
     dict(theme='dark', eyebrow='Binders · 2×2 · 3×3 · 4×3', h1='Page like<br><span class="red">a binder.</span>',
          p='Real pocket pages. Drag to swap, start from a whole set, share the link or print the PDF.',
          stage=f'<div class="stage ph">{binder}</div>',
@@ -388,11 +388,11 @@ html,body{width:1080px;height:1350px}
 .tile-brand{position:absolute;top:44px;left:50%;transform:translateX(-50%);height:76px;width:auto;z-index:4}
 .head{left:64px;right:64px;top:150px;text-align:center}
 .head .eyebrow{font-size:21px;letter-spacing:.2em;gap:14px} .head .eyebrow::before{width:44px;height:5px}
-.head h1{font-size:122px;margin-top:20px;line-height:.9;text-shadow:6px 6px 0 var(--paper),11px 11px 0 var(--ink)}
-.head p{font-size:27px;max-width:880px;margin:22px auto 0}
+.head h1{font-size:112px;margin-top:18px;line-height:.9;text-shadow:6px 6px 0 var(--paper),11px 11px 0 var(--ink)}
+.head p{font-size:26px;max-width:780px;margin:20px auto 0}
 .speed{--cx:50%;--cy:78%}
 .stage{left:50%;transform-origin:top center;z-index:3}
-.stage.ph{top:640px;transform:translateX(-50%) scale(2.6)}
+.stage.ph{top:590px;transform:translateX(-50%) scale(2.3)}
 .stage.fanwrap{top:640px;width:1000px;transform:translateX(-50%) scale(.98)}
 .stage.fanwrap .fan{height:620px} .stage.fanwrap .fan figure{width:250px}
 .stage.fanwrap .fan .c1{left:0;top:18%} .stage.fanwrap .fan .c2{left:17%;top:6%} .stage.fanwrap .fan .c3{left:35%;top:0}
@@ -486,7 +486,7 @@ html,body{width:1080px;height:1080px}
 .price b{display:block;font-family:var(--display);font-weight:400;font-size:40px;color:var(--green);letter-spacing:.01em}
 .price small{display:block;font-weight:700;color:var(--ink-soft);font-size:13px;margin-top:4px}
 """
-row1 = [('', '1025 species · Full Dex', '-2deg'), ('', 'Every printing · EN + JA', '1.5deg'), ('', 'Live TCGplayer prices', '-1deg')]
+row1 = [('', '1025 species · Full Dex', '-2deg'), ('', 'Every printing · EN + JA', '1.5deg'), ('', 'Live market prices', '-1deg')]
 row2 = [('y', 'Scan a card to identify it', '1.5deg'), ('b', 'Trade board · DMs · Gym Leaders', '-1.5deg'), ('', 'Binders · share &amp; print', '2deg')]
 def chips(items):
     return ''.join(f'<span class="chip {c}" style="transform:rotate({r})"><i></i>{t}</span>' for c, t, r in items)
