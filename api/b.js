@@ -151,9 +151,9 @@ module.exports = async (req, res) => {
   .nav{position:sticky; top:0; z-index:50; background:var(--paper); border-bottom:3px solid var(--ink)}
   .nav .wrap{display:flex; align-items:center; justify-content:space-between; height:64px; gap:16px}
   .logo{display:flex; align-items:center; gap:11px; text-decoration:none}
-  .logo img{width:36px; height:36px; border-radius:9px; border:2px solid var(--ink)}
-  .logo b{font-family:var(--display); font-weight:400; font-size:24px; line-height:1}
-  .logo small{display:block; font-size:9px; font-weight:900; letter-spacing:.3em; color:var(--red); line-height:1; margin-top:2px}
+  .logo .wm{height:40px; width:auto; display:block}
+  .logo .wm-dark{display:none}
+  @media (prefers-color-scheme:dark){ .logo .wm-light{display:none} .logo .wm-dark{display:block} }
   .btn{display:inline-flex; align-items:center; gap:8px; text-decoration:none; font-weight:900; font-size:14px; letter-spacing:.02em; padding:10px 18px; border:3px solid var(--ink); background:var(--red); color:#fff; box-shadow:var(--shadow-ink-sm); transition:transform .12s ease, box-shadow .12s ease; cursor:pointer}
   .btn:hover{transform:translate(-2px,-2px); box-shadow:6px 6px 0 var(--ink)}
   .btn.ghost{background:var(--paper-2); color:var(--ink)}
@@ -196,8 +196,8 @@ module.exports = async (req, res) => {
   <header class="nav">
     <div class="wrap">
       <a class="logo" href="${SITE}" aria-label="Dexeon home">
-        <img src="/assets/icon.png" alt="" width="36" height="36"/>
-        <span><b>DEXEON</b><small>デクセオン</small></span>
+        <img class="wm wm-light" src="/assets/logo/dexeon-wordmark-nav.png" alt="Dexeon" height="40"/>
+        <img class="wm wm-dark" src="/assets/logo/dexeon-wordmark-nav-dark.png" alt="Dexeon" height="40"/>
       </a>
       <a class="btn" href="${SITE}">Get Dexeon</a>
     </div>
