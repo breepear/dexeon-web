@@ -191,7 +191,7 @@ ABOUT = [
     f'<img class="brand tl" src="{WM_D}" alt="">'
     + chapter(4, 'やくそく', 'Promise') +
     '<div style="position:absolute;left:80px;width:860px;top:280px"><span class="eyebrow">The promise</span>'
-    '<h1 class="big" style="font-size:96px;margin:18px 0 0">One price.<br><span class="red">Never a subscription.</span></h1></div>'
+    '<h1 class="big" style="font-size:96px;margin:18px 0 0">One price.<br><span class="red">Everything included.</span></h1></div>'
     '<div class="rows"><div class="row"><i class="bx"></i><span>No ads.</span></div><div class="row"><i class="bx"></i><span>No tracking.</span></div>'
     '<div class="row"><i class="bx"></i><span>No “pro” tier.</span></div></div>'
     '<div class="yes"><h1 class="big">Buy once.<br><span class="red">It\'s yours.</span></h1></div>'

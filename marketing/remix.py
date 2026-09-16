@@ -191,7 +191,7 @@ REMIX = [
     '<div style="position:absolute;left:80px;right:80px;top:280px;text-align:center"><span class="eyebrow" style="justify-content:center">Beta open now</span></div>'
     '<div class="bubble"><h1 class="big" style="font-size:150px;margin:0">Get in<br><span class="red">early.</span></h1>'
     '<p class="copy" style="margin:30px auto 0;max-width:760px">A select group of early adopters gets Dexeon free for life. The window closes before public launch.</p>'
-    '<p style="margin:26px 0 0;font-size:26px;font-weight:900;color:var(--ink)">Otherwise $5.99 once at launch. Never a subscription.</p></div>'
+    '<p style="margin:26px 0 0;font-size:26px;font-weight:900;color:var(--ink)">Otherwise $5.99 once at launch. Every feature included.</p></div>'
     '<div class="steps"><div><b>1</b><span>Link in bio</span></div><div><b>2</b><span>Drop your email</span></div><div><b>3</b><span>TestFlight opens</span></div></div>'
     '<span class="sfx" style="right:60px;top:440px;transform:rotate(7deg)">GO!</span>'
     '<div class="url" style="bottom:130px">dexeontcg.com · link in bio</div>')),

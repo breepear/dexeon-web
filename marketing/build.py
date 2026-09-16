@@ -340,7 +340,7 @@ STORIES = [
          sfx=('sfx', 'DEAL!', 'left:50px;top:860px;transform:rotate(-8deg)'),
          tag=('<b>Wanted</b>badges on your chase list', 'right:50px;top:1400px;transform:rotate(4deg)')),
     dict(theme='light', eyebrow='Pricing', h1='Free for life<br><span class="red">if you’re early.</span>',
-         p='A select group of beta early adopters never pay. Everyone else: $5.99 once at launch. Never a subscription.',
+         p='A select group of beta early adopters never pay. Everyone else: $5.99 once at launch, every feature included.',
          stage=f'<div class="stage ticketwrap">{ticket}</div>',
          sfx=('sfx y', 'LIMITED!', 'right:60px;top:820px;transform:rotate(7deg)'),
          tag=None),
@@ -509,7 +509,7 @@ poster_body = (
     f'<div class="chips-row" style="top:506px">{chips(row2)}</div>'
     '<span class="sfx" style="right:44px;top:900px;transform:rotate(7deg)">GOTCHA!</span>'
     f'<div class="stage l">{chat}</div><div class="stage r">{leaderboard}</div><div class="stage mid">{home}</div>'
-    '<div class="price"><b>$0 for life</b>for early adopters in the beta<small>Otherwise $5.99 once at launch. Never a subscription.</small></div>'
+    '<div class="price"><b>$0 for life</b>for early adopters in the beta<small>Otherwise $5.99 once at launch. Every feature included.</small></div>'
     '<div class="tile-url">dexeontcg.com · now in beta</div></div>')
 open('marketing/poster.html', 'w').write(
     f'<!doctype html>\n<html lang="en" data-theme="light"><head>{HEAD}<style>{POSTER_CSS}</style></head><body>{poster_body}</body></html>')
