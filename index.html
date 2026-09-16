@@ -457,6 +457,7 @@
   /* Real device captures. `.screen` as an <img> keeps the same inset/radius as the
      illustrated version, so the phone frame, side buttons and island still apply. */
   img.screen{width:calc(100% - 20px); height:calc(100% - 20px); object-fit:cover; object-position:top center; display:block; background:#F2F3EF}
+  .phone.shot{aspect-ratio:300/629}   /* screen = 280 x 608.8 = the real 402:874 */
 
   /* iPad Pro 13" frame (1032 x 1376 pt). */
   .tablet{position:relative; width:min(430px, 72vw); aspect-ratio:1032/1376; flex:none;
@@ -473,14 +474,14 @@
   .dev-list span{font-size:15px; color:var(--ink-soft); font-weight:500}
   .dev-stage{position:relative; display:flex; justify-content:center; align-items:flex-end; min-height:560px}
   .dev-stage .tablet{transform:rotate(-3deg)}
-  .dev-stage .phone{position:absolute; right:0; bottom:-18px; width:168px; transform:rotate(6deg); z-index:3}
+  .dev-stage .phone{position:absolute; right:10px; bottom:0; transform:rotate(6deg) scale(.5); transform-origin:bottom right; z-index:3}
   .dev-stage .sfx{position:absolute; left:-10px; top:10px; transform:rotate(-8deg); z-index:4}
   @media (max-width:960px){
     .dev-wrap{grid-template-columns:1fr}
     .dev-stage{min-height:0; margin-top:40px}
   }
   @media (max-width:640px){
-    .dev-stage .phone{width:132px; right:-6px; bottom:-10px}
+    .dev-stage .phone{right:16px; bottom:-6px; transform:rotate(6deg) scale(.4)}
     .dev-stage .sfx{left:-6px; top:0}
   }
   .status{height:44px; display:flex; align-items:center; justify-content:space-between; padding:14px 22px 0; font-size:11px; font-weight:800}
@@ -716,7 +717,7 @@
       <div class="stat-tag" aria-hidden="true"><b>1025</b>species · Gen I–IX</div>
 
       <!-- ───── Home / Full Dex — real iPhone capture ───── -->
-      <div class="phone" id="heroPhone" role="img" aria-label="Dexeon's home screen on iPhone: collection progress, filters, and a grid of card tiles">
+      <div class="phone shot" id="heroPhone" role="img" aria-label="Dexeon's home screen on iPhone: collection progress, filters, and a grid of card tiles">
         <div class="island"></div>
         <img class="screen" src="assets/shots/iphone/home.jpg" width="760" height="1652" alt="" decoding="async">
       </div>
@@ -851,94 +852,22 @@
       <span class="sfx s1" aria-hidden="true">DEAL!</span>
       <span class="sfx y s2" aria-hidden="true">やった!</span>
 
-      <!-- ───── Mockup 6: Direct messages (light) ───── -->
-      <div class="phone p-left" role="img" aria-label="A Dexeon chat thread with text messages, a shared card, and a shared binder">
+      <!-- ───── Direct messages — real iPhone capture ───── -->
+      <div class="phone shot p-left" role="img" aria-label="A Dexeon chat thread on iPhone: a message, a shared card with its market price, and an accepted trade">
         <div class="island"></div>
-        <div class="screen">
-          <div class="status"><span>9:41</span><span class="r">
-            <svg viewBox="0 0 14 11"><rect x="0" y="7" width="2.5" height="4"/><rect x="3.8" y="5" width="2.5" height="6"/><rect x="7.6" y="2.5" width="2.5" height="8.5"/><rect x="11.4" y="0" width="2.5" height="11"/></svg>
-            <svg viewBox="0 0 24 11"><rect class="bat" x="0.5" y="0.5" width="20" height="10" rx="3"/><rect x="2" y="2" width="16" height="7" rx="1.5"/><rect x="21.5" y="3.5" width="2" height="4" rx="1"/></svg>
-          </span></div>
-          <div class="navbar">
-            <span class="acc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>Messages</span>
-            <span class="t">Maple</span>
-            <span class="acc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="7.5" cy="12" r="1.2" fill="currentColor"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/><circle cx="16.5" cy="12" r="1.2" fill="currentColor"/></svg></span>
-          </div>
-          <div class="chat">
-            <span class="when">Today</span>
-            <div class="msg them">still hunting that 151 charizard SIR?</div>
-            <div class="msg me">Every day of my life. Got one?</div>
-            <div class="att"><img src="assets/cards/sv3pt5-199.jpg" alt=""><div><b>Charizard ex</b><small>$178.43</small><span class="sub" style="font-size:8.5px;display:block">Tap to open</span></div></div>
-            <div class="msg me">ok that's the one. Mew ex + something from my trade binder?</div>
-            <div class="att me"><div class="bth"><img src="assets/cards/sv4pt5-232.jpg" alt=""></div><div><b>Trade Bait</b><span class="sub" style="font-size:8.5px;display:block">Shared a binder</span></div><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M9 5l7 7-7 7"/></svg></div>
-            <div class="msg them">deal 🤝 the Gengar too and we're square</div>
-          </div>
-          <div class="composer">
-            <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="11"/><path d="M12 7v10M7 12h10" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg>
-            <div class="field mp thin flat">Message</div>
-            <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="11"/><path d="M12 17V8M8 12l4-4 4 4" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="home-bar"></div>
-        </div>
+        <img class="screen" src="assets/shots/iphone/messages.jpg" width="760" height="1652" alt="" loading="lazy" decoding="async">
       </div>
 
-      <!-- ───── Mockup 5: Gym Leaders leaderboard (light) ───── -->
-      <div class="phone p-mid" role="img" aria-label="Dexeon Gym Leaders leaderboard with a podium of the top three trainers and a ranked list">
+      <!-- ───── Gym Leaders leaderboard — real iPhone capture ───── -->
+      <div class="phone shot p-mid" role="img" aria-label="The Dexeon Gym Leaders leaderboard on iPhone: a podium of the top three trainers and a ranked list">
         <div class="island"></div>
-        <div class="screen">
-          <div class="status"><span>9:41</span><span class="r">
-            <svg viewBox="0 0 14 11"><rect x="0" y="7" width="2.5" height="4"/><rect x="3.8" y="5" width="2.5" height="6"/><rect x="7.6" y="2.5" width="2.5" height="8.5"/><rect x="11.4" y="0" width="2.5" height="11"/></svg>
-            <svg viewBox="0 0 24 11"><rect class="bat" x="0.5" y="0.5" width="20" height="10" rx="3"/><rect x="2" y="2" width="16" height="7" rx="1.5"/><rect x="21.5" y="3.5" width="2" height="4" rx="1"/></svg>
-          </span></div>
-          <div class="navbar">
-            <span class="acc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>Profile</span>
-            <span class="wordmark">DEXEON</span>
-            <span style="width:40px"></span>
-          </div>
-          <div class="segbar"><span class="on">Full Dex</span><span>Sets</span><span>🥚</span><span>Week</span></div>
-          <div class="podium">
-            <div class="pcol second silver"><svg class="trophy" viewBox="0 0 24 24" fill="currentColor"><path d="M6 3h12v3h3v3a5 5 0 0 1-5 5h-.4A5 5 0 0 1 13 17v2h3v2H8v-2h3v-2a5 5 0 0 1-2.6-3H8a5 5 0 0 1-5-5V6h3V3z"/></svg><div class="av" style="background:#2E5AAC">H</div><span class="n">holo_hannah</span><span class="v">81%</span><div class="ped">2</div></div>
-            <div class="pcol first gold"><svg class="trophy" viewBox="0 0 24 24" fill="currentColor"><path d="M6 3h12v3h3v3a5 5 0 0 1-5 5h-.4A5 5 0 0 1 13 17v2h3v2H8v-2h3v-2a5 5 0 0 1-2.6-3H8a5 5 0 0 1-5-5V6h3V3z"/></svg><div class="av" style="background:#2FA44F">M</div><span class="n">maplecollects</span><span class="v">94%</span><div class="ped">1</div></div>
-            <div class="pcol third bronze"><svg class="trophy" viewBox="0 0 24 24" fill="currentColor"><path d="M6 3h12v3h3v3a5 5 0 0 1-5 5h-.4A5 5 0 0 1 13 17v2h3v2H8v-2h3v-2a5 5 0 0 1-2.6-3H8a5 5 0 0 1-5-5V6h3V3z"/></svg><div class="av" style="background:#735198">D</div><span class="n">dexrunner</span><span class="v">77%</span><div class="ped">3</div></div>
-          </div>
-          <div class="ranks">
-            <div class="rank mp thin flat"><span class="no">4</span><div class="av" style="background:#E09C41">B</div><div><b>binderbrandon</b><small>72%</small></div></div>
-            <div class="rank mp thin flat"><span class="no">5</span><div class="av" style="background:#5185C5">S</div><div><b>sleevedup</b><small>69%</small></div></div>
-            <div class="rank mp thin flat"><span class="no">6</span><div class="av" style="background:#DD6B7B">P</div><div><b>pullrate_pete</b><small>66%</small></div></div>
-            <div class="rank mp thin flat me"><span class="no">7</span><div class="av" style="background:#AC322F">BP</div><div><b>You</b><small>42%</small></div></div>
-            <div class="rank mp thin flat"><span class="no">8</span><div class="av" style="background:#66A946">K</div><div><b>kelseycollects</b><small>39%</small></div></div>
-          </div>
-          <div class="fade"></div>
-          <div class="youpill"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="4" r="2"/><path d="M10 7h4l1 6h-1.5v8h-3v-8H9z"/></svg>You're #7 of 214</div>
-          <div class="home-bar"></div>
-        </div>
+        <img class="screen" src="assets/shots/iphone/leaderboard.jpg" width="760" height="1652" alt="" loading="lazy" decoding="async">
       </div>
 
-      <!-- ───── Mockup 7: Community trade board (light) ───── -->
-      <div class="phone p-right" role="img" aria-label="Dexeon community trade board: a grid of cards other trainers have listed for trade">
+      <!-- ───── Community trade board — real iPhone capture ───── -->
+      <div class="phone shot p-right" role="img" aria-label="The Dexeon community trade board on iPhone: cards other collectors have listed for trade, with prices and conditions">
         <div class="island"></div>
-        <div class="screen">
-          <div class="status"><span>9:41</span><span class="r">
-            <svg viewBox="0 0 14 11"><rect x="0" y="7" width="2.5" height="4"/><rect x="3.8" y="5" width="2.5" height="6"/><rect x="7.6" y="2.5" width="2.5" height="8.5"/><rect x="11.4" y="0" width="2.5" height="11"/></svg>
-            <svg viewBox="0 0 24 11"><rect class="bat" x="0.5" y="0.5" width="20" height="10" rx="3"/><rect x="2" y="2" width="16" height="7" rx="1.5"/><rect x="21.5" y="3.5" width="2" height="4" rx="1"/></svg>
-          </span></div>
-          <div class="navbar">
-            <span class="acc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>Profile</span>
-            <span class="t">Community Trades</span>
-            <span style="width:40px"></span>
-          </div>
-          <div class="sfield mp thin flat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>Search card or @username</div>
-          <div class="tgrid">
-            <div class="ttile"><div class="card-img"><img src="assets/cards/sv3-223.jpg" alt=""></div><b>Charizard ex</b><span class="pr">$89.10</span><span class="own"><span class="av" style="background:#2FA44F">M</span>@maplecollects</span></div>
-            <div class="ttile"><div class="card-img"><img src="assets/cards/base1-58.jpg" alt=""><span class="want">◎ WANTED</span></div><b>Pikachu</b><span class="pr">$45.00</span><span class="own"><span class="av" style="background:#2E5AAC">H</span>@holo_hannah</span></div>
-            <div class="ttile"><div class="card-img"><img src="assets/cards/sv1-245.jpg" alt=""></div><b>Gardevoir ex</b><span class="pr">$61.25</span><span class="own"><span class="av" style="background:#E09C41">B</span>@binderbrandon</span></div>
-            <div class="ttile"><div class="card-img"><img src="assets/cards/ja/SV2a-208.jpg" alt=""><span class="want">◎ WANTED</span></div><b>Mew ex · JA</b><span class="pr">$120.00</span><span class="own"><span class="av" style="background:#735198">D</span>@dexrunner</span></div>
-            <div class="ttile"><div class="card-img"><img src="assets/cards/base2-12.jpg" alt=""></div><b>Vaporeon</b><span class="pr">$38.50</span><span class="own"><span class="av" style="background:#5185C5">S</span>@sleevedup</span></div>
-            <div class="ttile"><div class="card-img"><img src="assets/cards/neo1-9.jpg" alt=""></div><b>Lugia</b><span class="pr">$210.00</span><span class="own"><span class="av" style="background:#DD6B7B">P</span>@pullrate_pete</span></div>
-          </div>
-          <div class="fade"></div>
-          <div class="home-bar"></div>
-        </div>
+        <img class="screen" src="assets/shots/iphone/trades.jpg" width="760" height="1652" alt="" loading="lazy" decoding="async">
       </div>
     </div>
 
@@ -991,13 +920,13 @@
       <span class="sfx" aria-hidden="true">SNAP!</span>
 
       <!-- ───── Profile — real iPhone capture ───── -->
-      <div class="phone back" role="img" aria-label="Dexeon's profile screen on iPhone: Gym Leaders and Trainers tiles, Community Trades, and chase cards">
+      <div class="phone shot back" role="img" aria-label="Dexeon's profile screen on iPhone: Gym Leaders and Trainers tiles, Community Trades, and chase cards">
         <div class="island"></div>
         <img class="screen" src="assets/shots/iphone/profile.jpg" width="760" height="1652" alt="" loading="lazy" decoding="async">
       </div>
 
       <!-- ───── Binder page, dark mode — real iPhone capture ───── -->
-      <div class="phone front" role="img" aria-label="A Dexeon binder page on iPhone in dark mode: a full nine-pocket page of cards">
+      <div class="phone shot front" role="img" aria-label="A Dexeon binder page on iPhone in dark mode: a full nine-pocket page of cards">
         <div class="island"></div>
         <img class="screen" src="assets/shots/iphone/binder-dark.jpg" width="760" height="1652" alt="" loading="lazy" decoding="async">
       </div>
@@ -1026,7 +955,7 @@
       <div class="tablet" role="img" aria-label="Dexeon on iPad: a binder page with a full nine-pocket grid of cards">
         <img src="assets/shots/ipad/binder-base.jpg" width="900" height="1200" alt="" loading="lazy" decoding="async">
       </div>
-      <div class="phone" role="img" aria-label="Dexeon on iPhone: a card's detail sheet with market price and 90-day history">
+      <div class="phone shot" role="img" aria-label="Dexeon on iPhone: a card's detail sheet with market price and 90-day history">
         <div class="island"></div>
         <img class="screen" src="assets/shots/iphone/card-price.jpg" width="760" height="1652" alt="" loading="lazy" decoding="async">
       </div>

@@ -51,9 +51,10 @@ Island are still CSS and only the screen is a photo. Full-resolution PNG origina
 The illustrated mockups those three frames replaced were moved to `marketing/mockups.html`. That
 file is not served to visitors; `build.py`, `screens-story.py`, `origin-story.py` and
 `live-story.py` append it to `index.html` before lifting `Mockup 1/2/3`, so every generator that
-depends on those blocks still resolves. The social trio (`Mockup 5/6/7` — messages, leaderboard,
-trade board) is still illustrated in `index.html` on purpose: real captures of those screens show
-other beta testers' names, photos and messages.
+depends on those blocks still resolves. All six mockups (`Mockup 1/2/3` and the social trio
+`Mockup 5/6/7`) now live there; the social three were shot from a test account, so the chat thread
+is a conversation between two accounts Bree owns. The leaderboard and trade board are global
+boards, so they do show other beta testers' display names, handles and photos.
 
 To re-shoot a screen: capture it on the simulator, then
 

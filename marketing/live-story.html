@@ -424,6 +424,7 @@
   /* Real device captures. `.screen` as an <img> keeps the same inset/radius as the
      illustrated version, so the phone frame, side buttons and island still apply. */
   img.screen{width:calc(100% - 20px); height:calc(100% - 20px); object-fit:cover; object-position:top center; display:block; background:#F2F3EF}
+  .phone.shot{aspect-ratio:300/629}   /* screen = 280 x 608.8 = the real 402:874 */
 
   /* iPad Pro 13" frame (1032 x 1376 pt). */
   .tablet{position:relative; width:min(430px, 72vw); aspect-ratio:1032/1376; flex:none;
@@ -440,14 +441,14 @@
   .dev-list span{font-size:15px; color:var(--ink-soft); font-weight:500}
   .dev-stage{position:relative; display:flex; justify-content:center; align-items:flex-end; min-height:560px}
   .dev-stage .tablet{transform:rotate(-3deg)}
-  .dev-stage .phone{position:absolute; right:0; bottom:-18px; width:168px; transform:rotate(6deg); z-index:3}
+  .dev-stage .phone{position:absolute; right:10px; bottom:0; transform:rotate(6deg) scale(.5); transform-origin:bottom right; z-index:3}
   .dev-stage .sfx{position:absolute; left:-10px; top:10px; transform:rotate(-8deg); z-index:4}
   @media (max-width:960px){
     .dev-wrap{grid-template-columns:1fr}
     .dev-stage{min-height:0; margin-top:40px}
   }
   @media (max-width:640px){
-    .dev-stage .phone{width:132px; right:-6px; bottom:-10px}
+    .dev-stage .phone{right:16px; bottom:-6px; transform:rotate(6deg) scale(.4)}
     .dev-stage .sfx{left:-6px; top:0}
   }
   .status{height:44px; display:flex; align-items:center; justify-content:space-between; padding:14px 22px 0; font-size:11px; font-weight:800}
