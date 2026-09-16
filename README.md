@@ -39,9 +39,34 @@ To read the list later, open the Firebase console → Firestore → `beta_signup
 
 Dexeon is a fan-made project and is not affiliated with Nintendo, Game Freak, Creatures Inc., or The Pokémon Company. Card data, images and pricing courtesy of Scrydex and TCGplayer.
 
+## Screenshots on the site
+
+`assets/shots/iphone/` and `assets/shots/ipad/` hold real captures taken from the iOS Simulator
+(iPhone 17 Pro and iPad Pro 13-inch) with `xcrun simctl io <udid> screenshot`, exported to JPEG
+for the web. The hero, the binders section and the "One app. Both screens." section use them
+inside the page's own `.phone` / `.tablet` frames, so the device bezel, side buttons and Dynamic
+Island are still CSS and only the screen is a photo. Full-resolution PNG originals live in
+`marketing/shots/` (iPhone) and `marketing/shots/ipad/`.
+
+The illustrated mockups those three frames replaced were moved to `marketing/mockups.html`. That
+file is not served to visitors; `build.py`, `screens-story.py`, `origin-story.py` and
+`live-story.py` append it to `index.html` before lifting `Mockup 1/2/3`, so every generator that
+depends on those blocks still resolves. The social trio (`Mockup 5/6/7` — messages, leaderboard,
+trade board) is still illustrated in `index.html` on purpose: real captures of those screens show
+other beta testers' names, photos and messages.
+
+To re-shoot a screen: capture it on the simulator, then
+
+```bash
+sips -s format jpeg -s formatOptions 68 --resampleWidth 760 marketing/shots/home.png --out assets/shots/iphone/home.jpg
+```
+
+(use `--resampleWidth 900` for iPad) and keep the `width`/`height` attributes on the `<img>` in
+sync with the exported pixel size.
+
 ## App Store screenshots
 
-`assets/appstore/` holds five 1242×2688 marketing screens (iPhone 6.5" size: Full Dex, cards & prices, binders, social/leaderboard, messages) and `assets/appstore/ipad-13/` holds the same five at 2064×2752 (iPad 13" size). They are generated from the landing page's own CSS and phone mockups:
+`assets/appstore/` holds five 1242×2688 marketing screens (iPhone 6.5" size: Full Dex, cards & prices, binders, social/leaderboard, messages) and `assets/appstore/ipad-13/` holds the same five at 2064×2752 (iPad 13" size). They are generated from the landing page's own CSS and phone mockups (see "Screenshots on the site" below for where those mockups now live):
 
 ```bash
 python3 marketing/build.py

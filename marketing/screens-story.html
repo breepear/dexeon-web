@@ -420,6 +420,36 @@
   }
   .screen.dark{--p:#131316; --p2:#1B1B1F; --i:#F1F0EA; --is:#B8B6BE; --t2:#2A2A2F; --r:#E0463F; --g:#43C06A; --b:#5B86D6}
   .island{position:absolute; top:10px; left:50%; transform:translateX(-50%); width:82px; height:24px; background:#0d0d0f; border-radius:14px; z-index:6}
+
+  /* Real device captures. `.screen` as an <img> keeps the same inset/radius as the
+     illustrated version, so the phone frame, side buttons and island still apply. */
+  img.screen{width:calc(100% - 20px); height:calc(100% - 20px); object-fit:cover; object-position:top center; display:block; background:#F2F3EF}
+
+  /* iPad Pro 13" frame (1032 x 1376 pt). */
+  .tablet{position:relative; width:min(430px, 72vw); aspect-ratio:1032/1376; flex:none;
+    background:#0d0d0f; border-radius:34px; padding:12px;
+    box-shadow:0 40px 80px -30px rgba(0,0,0,.55), 0 0 0 2px #2b2b30 inset, 0 0 0 3px #121114}
+  .tablet img{position:absolute; top:12px; left:12px; width:calc(100% - 24px); height:calc(100% - 24px);
+    border-radius:23px; object-fit:cover; object-position:top center; display:block; background:#F2F3EF}
+
+  /* Both-screens section */
+  .dev-wrap{display:grid; grid-template-columns:1fr 1fr; gap:clamp(28px,4vw,64px); align-items:center}
+  .dev-list{list-style:none; margin:26px 0 0; padding:0; display:grid; gap:14px}
+  .dev-list li{display:grid; gap:3px}
+  .dev-list b{font-size:16px}
+  .dev-list span{font-size:15px; color:var(--ink-soft); font-weight:500}
+  .dev-stage{position:relative; display:flex; justify-content:center; align-items:flex-end; min-height:560px}
+  .dev-stage .tablet{transform:rotate(-3deg)}
+  .dev-stage .phone{position:absolute; right:0; bottom:-18px; width:168px; transform:rotate(6deg); z-index:3}
+  .dev-stage .sfx{position:absolute; left:-10px; top:10px; transform:rotate(-8deg); z-index:4}
+  @media (max-width:960px){
+    .dev-wrap{grid-template-columns:1fr}
+    .dev-stage{min-height:0; margin-top:40px}
+  }
+  @media (max-width:640px){
+    .dev-stage .phone{width:132px; right:-6px; bottom:-10px}
+    .dev-stage .sfx{left:-6px; top:0}
+  }
   .status{height:44px; display:flex; align-items:center; justify-content:space-between; padding:14px 22px 0; font-size:11px; font-weight:800}
   .status .r{display:flex; gap:5px; align-items:center}
   .status svg{width:14px; height:11px; fill:var(--i)}

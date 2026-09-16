@@ -8,7 +8,11 @@ import re, os
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.chdir(ROOT)
-src = open('index.html').read()
+# The live page now shows real simulator captures, so the illustrated phone
+# mockups it used to carry were moved to marketing/mockups.html. Appending that
+# file keeps `Mockup 1/2/3` (and the grid2 / page blocks inside them) findable,
+# while `style` still comes from index.html's first <style> block.
+src = open('index.html').read() + open(os.path.join('marketing', 'mockups.html'), encoding='utf-8').read()
 style = re.search(r'<style>(.*?)</style>', src, re.S).group(1)
 
 def grab_phone(marker):
