@@ -67,6 +67,25 @@ sync with the exported pixel size.
 
 ## App Store screenshots
 
+`assets/appstore/v2/` holds the current ten 1242×2688 screens, built from real
+simulator captures of both an iPhone 17 Pro and an iPad Pro 13" in their device
+frames. Light and dark alternate, and the captures match the design: light screens
+show the app in light mode, dark screens show it in dark mode. The dark captures
+live in `marketing/shots/dark/` and `marketing/shots/ipad/dark/`.
+
+```bash
+python3 marketing/appstore-devices.py             # write + render all ten
+python3 marketing/appstore-devices.py --no-render # HTML only
+```
+
+To re-shoot, flip the app's theme on the simulator, relaunch, and capture:
+
+```bash
+xcrun simctl spawn booted defaults write com.dexeon.Dexeon isDarkMode -bool YES
+```
+
+## App Store screenshots (v1, illustrated)
+
 `assets/appstore/` holds five 1242×2688 marketing screens (iPhone 6.5" size: Full Dex, cards & prices, binders, social/leaderboard, messages) and `assets/appstore/ipad-13/` holds the same five at 2064×2752 (iPad 13" size). They are generated from the landing page's own CSS and phone mockups (see "Screenshots on the site" below for where those mockups now live):
 
 ```bash
